@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.web.json",
+  "compilerOptions": {
+    "composite": true,
+    "lib": ["esnext", "DOM", "DOM.Iterable"],
+    "types": ["node", "jsdom", "unplugin-vue-macros/macros-global", "vitest/globals"],
+    "skipLibCheck": true
+  },
+  "include": ["packages", "vitest.setup.ts", "typings/env.d.ts"]
+}

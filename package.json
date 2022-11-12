@@ -1,0 +1,47 @@
+{
+  "name": "pizza-ui-monorepo",
+  "version": "1.0.0",
+  "description": "It's a useless UI Library",
+  "packageManager": "pnpm@7.5.1",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky install",
+    "test": "vitest",
+    "gen-comp": "tsx scripts/generateNewComponent.ts",
+    "lint": "echo \"Maybe we need eslint\""
+  },
+  "keywords": [
+    "pizza-ui",
+    "vue",
+    "component library",
+    "ui"
+  ],
+  "author": "sword-x-shield",
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@types/fs-extra": "^9.0.13",
+    "@vitejs/plugin-vue": "^3.2.0",
+    "@vue/test-utils": "^2.2.1",
+    "chalk": "^5.1.2",
+    "fs-extra": "^10.1.0",
+    "husky": "^8.0.1",
+    "lerna": "~6.0.3",
+    "lint-staged": "^13.0.3",
+    "tsx": "^3.12.0",
+    "typescript": "~4.8.3",
+    "unplugin-vue-macros": "^0.16.3",
+    "uppercamelcase": "^3.0.0",
+    "vite": "^3.2.3",
+    "vitest": "^0.25.1",
+    "vue": "^3.2.39"
+  },
+  "lint-staged": {
+    "*.{vue,ts,tsx}": [
+      "pnpm run lint",
+      "git add"
+    ]
+  }
+}
