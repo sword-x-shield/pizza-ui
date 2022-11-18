@@ -1,0 +1,40 @@
+{
+  "name": "@pizza/site-parser",
+  "version": "0.0.1",
+  "description": "site parser for pizza ui",
+  "directories": {
+    "test": "test"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "unbuild --stub",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "site",
+    "parser"
+  ],
+  "author": "sword-x-shield",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^10.1.0",
+    "gray-matter": "^4.0.3",
+    "marked": "^4.2.2",
+    "uppercamelcase": "^3.0.0"
+  },
+  "devDependencies": {
+    "unbuild": "^1.0.1"
+  }
+}
