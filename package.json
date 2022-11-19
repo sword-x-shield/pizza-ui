@@ -19,7 +19,7 @@
     "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx,.md,.json --fix"
   },
   "devDependencies": {
-    "@chuhoman/eslint-config-vue": "^0.0.3",
+    "@chuhoman/eslint-config-vue": "^0.0.4",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
     "@types/fs-extra": "^9.0.13",
