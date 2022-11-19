@@ -6,5 +6,5 @@ module.exports = {
     'no-console': 'off',
     // for script setup marco
     'no-undef': 'off',
-  }
+  },
 };

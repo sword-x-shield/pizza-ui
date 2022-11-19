@@ -16,7 +16,7 @@
     "prepare": "husky install",
     "test": "vitest",
     "gen-comp": "tsx scripts/generateNewComponent.ts",
-    "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx,.md,.json --fix"
+    "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx,.md,.json --fix --cache"
   },
   "devDependencies": {
     "@chuhoman/eslint-config-vue": "^0.0.4",
