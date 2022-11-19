@@ -1,31 +1,33 @@
 {
   "name": "pizza-ui-monorepo",
   "version": "1.0.0",
-  "description": "It's a useless UI Library",
-  "packageManager": "pnpm@7.5.1",
   "private": true,
-  "main": "index.js",
-  "scripts": {
-    "prepare": "husky install",
-    "test": "vitest",
-    "gen-comp": "tsx scripts/generateNewComponent.ts",
-    "lint": "echo \"Maybe we need eslint\""
-  },
+  "description": "It's a useless UI Library",
+  "author": "sword-x-shield",
+  "license": "MIT",
   "keywords": [
     "pizza-ui",
     "vue",
     "component library",
     "ui"
   ],
-  "author": "sword-x-shield",
-  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky install",
+    "test": "vitest",
+    "gen-comp": "tsx scripts/generateNewComponent.ts",
+    "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx,.md,.json --fix"
+  },
   "devDependencies": {
+    "@chuhoman/eslint-config-vue": "^0.0.3",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
     "@types/fs-extra": "^9.0.13",
     "@vitejs/plugin-vue": "^3.2.0",
     "@vue/test-utils": "^2.2.1",
     "chalk": "^5.1.2",
+    "eslint": "^8.28.0",
+    "eslint-define-config": "^1.12.0",
     "fs-extra": "^10.1.0",
     "husky": "^8.0.1",
     "lerna": "~6.0.3",
