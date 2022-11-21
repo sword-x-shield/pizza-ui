@@ -6,23 +6,23 @@ async function getContentOfExample(code) {
     scriptContent: await fetchCode(code, 'scriptContent'),
     style: await fetchCode(code, 'style'),
     docs: await fetchCode(code, 'docs'),
-  }
+  };
 }
 
-async function parserExample(code, id) {
-  console.log(await getContentOfExample(code))
+async function parserExample(code) {
+  console.log(await getContentOfExample(code));
 }
 
 export function genExample() {
   return {
     name: 'pizza:vite-plugin-gen-example',
-    transform: async (code, id)=>{
+    transform: async (code, id) => {
       if (id.endsWith('.example.vue')) {
         return {
-          code: await parserExample(code, id),
+          code: await parserExample(code),
           map: null,
-        }
+        };
       }
     },
-  }
+  };
 }

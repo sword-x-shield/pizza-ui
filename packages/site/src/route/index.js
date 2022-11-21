@@ -1,12 +1,12 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
 
-export const loadingBarApiRef = {}
+export const loadingBarApiRef = {};
 
-export default function createDemoRouter (app, routes) {
+export default function createDemoRouter(app, routes) {
   const router = createRouter({
     history: createWebHistory(),
-    routes
-  })
+    routes,
+  });
 
-  return router
+  return router;
 }
