@@ -1,3 +1,4 @@
+import path from 'path';
 import { defineConfig } from 'vite';
 import createVuePlugin from '@vitejs/plugin-vue';
 import { genEntry as genEntryPlugin, genExample as genExamplePlugin } from '@pizza/site-parser';
@@ -14,4 +15,10 @@ export default defineConfig({
     genExample,
     vuePlugin,
   ],
+  resolve: {
+    alias: [
+      { find: '@/views', replacement: path.resolve('./src/views') },
+      { find: '@/components', replacement: path.resolve('./src/components') },
+    ],
+  },
 });

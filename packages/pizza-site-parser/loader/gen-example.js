@@ -10,7 +10,10 @@ async function getContentOfExample(code) {
 }
 
 async function parserExample(code) {
-  console.log(await getContentOfExample(code));
+  // TODO 后续嵌套在 ExampleTemplate.vue 模板中，加入复制、跳转playground等功能
+  const { template,script,style } = await getContentOfExample(code);
+  // 先返回最初始的解析
+  return `${template}\n\n${script}\n\n${style}`;
 }
 
 export function genExample() {

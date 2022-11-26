@@ -1,5 +1,5 @@
 <template>
-  <component-demo
+  <component-example
     demo-file-name="<!--DEMO_FILE_NAME-->"
     relative-url="<!--URL-->"
     title="<!--TITLE_SLOT-->"
@@ -18,7 +18,7 @@
         <!-- DEMO_SLOT -->
       </div>
     </template>
-  </component-demo>
+  </component-example>
 </template>
 
 <!-- SCRIPT_SLOT -->

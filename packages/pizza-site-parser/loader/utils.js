@@ -27,12 +27,12 @@ export function createRenderer(wrapCodeWithCard = true) {
     table(header, body) {
       if (body) body = `<tbody>${body}</tbody>`;
       return (
-        '<div class="md-table-wrapper"><n-table single-column class="md-table">\n'
+        '<div class="md-table-wrapper"><p-table single-column class="md-table">\n'
         + `<thead>\n${
           header
         }</thead>\n${
           body
-        }</n-table>\n`
+        }</p-table>\n`
         + '</div>'
       );
     },
@@ -58,48 +58,48 @@ export function createRenderer(wrapCodeWithCard = true) {
         throw new Error(`MdRendererError: ${language} is not valid for code - ${code}`);
 
       const highlighted = hljs.highlight(code, { language }).value;
-      const content = `<n-code><pre v-pre>${highlighted}</pre></n-code>`;
+      const content = `<p-code><pre v-pre>${highlighted}</pre></p-code>`;
       return wrapCodeWithCard
-        ? `<n-card embedded :bordered="false" class="md-card" content-style="padding: 0;">
-            <n-scrollbar x-scrollable content-style="padding: 16px;">
+        ? `<p-card embedded :bordered="false" class="md-card" content-style="padding: 0;">
+            <p-scrollbar x-scrollable content-style="padding: 16px;">
               ${content}
-            </n-scrollbar>
-          </n-card>`
+            </p-scrollbar>
+          </p-card>`
         : content;
     },
     heading: (text, level) => {
       const id = text.replace(/ /g, '-');
-      return `<n-h${level} id="${id}">${text}</n-h${level}>`;
+      return `<p-h${level} id="${id}">${text}</p-h${level}>`;
     },
     blockquote: (quote) => {
-      return `<n-blockquote>${quote}</n-blockquote>`;
+      return `<p-blockquote>${quote}</p-blockquote>`;
     },
-    hr: () => '<n-hr />',
+    hr: () => '<p-hr />',
     paragraph: (text) => {
-      return `<n-p>${text}</n-p>`;
+      return `<p-p>${text}</p-p>`;
     },
     link(href, title, text) {
       if (/^(http:|https:)/.test(href))
-        return `<n-a href="${href}" target="_blank">${text}</n-a>`;
+        return `<p-a href="${href}" target="_blank">${text}</p-a>`;
 
-      return `<router-link to="${href}" #="{ navigate, href }" custom><n-a :href="href" @click="navigate">${text}</n-a></router-link>`;
+      return `<router-link to="${href}" #="{ navigate, href }" custom><p-a :href="href" @click="navigate">${text}</p-a></router-link>`;
     },
     list(body, ordered, start) {
-      const type = ordered ? 'n-ol' : 'n-ul';
+      const type = ordered ? 'p-ol' : 'p-ul';
       const startatt = ordered && start !== 1 ? ` start="${start}"` : '';
       return `<${type}${startatt}>\n${body}</${type}>\n`;
     },
     listitem(text) {
-      return `<n-li>${text}</n-li>`;
+      return `<p-li>${text}</p-li>`;
     },
     codespan(code) {
-      return `<n-text code>${code}</n-text>`;
+      return `<p-text code>${code}</p-text>`;
     },
     strong(text) {
-      return `<n-text strong>${text}</n-text>`;
+      return `<p-text strong>${text}</p-text>`;
     },
     checkbox(checked) {
-      return `<n-checkbox :checked="${checked}" style="vertical-align: -2px; margin-right: 8px;" />`;
+      return `<p-checkbox :checked="${checked}" style="vertical-align: -2px; margin-right: 8px;" />`;
     },
   };
 

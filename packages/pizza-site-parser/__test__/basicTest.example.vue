@@ -1,6 +1,5 @@
 <docs>
 ---
-order: 0
 title: 我是测试标题
 ---
 
@@ -13,6 +12,15 @@ title: 我是测试标题
 There are `primary` button, `default` button, `dashed` button, `text` button and `link` button in antd.
 </docs>
 
+<script setup>
+function onClick() {
+  window.alert('我点击了------');
+}
+</script>
+
 <template>
   <div>简单测试</div>
+  <button @click="onClick">
+    1111
+  </button>
 </template>

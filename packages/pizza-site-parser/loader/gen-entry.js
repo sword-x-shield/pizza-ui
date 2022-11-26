@@ -41,7 +41,6 @@ async function parserExampleList(code, url) {
     });
   }
 
-  // console.log(formatList,'---')
   return formatList;
 }
 
@@ -80,7 +79,7 @@ function genTemplate(tokens) {
     gfm: true,
     renderer: mdRenderer,
   });
-  console.log(docMainTemplate, 'doc');
+
   const template = `
   <template>
     <div
