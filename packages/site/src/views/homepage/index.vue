@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
-import siteFooterVue from '@/components/siteFooter.vue';
+import siteFooter from '@/components/siteFooter.vue';
 const router = useRouter();
 function goToUse() {
   router.push('/components');
@@ -18,7 +18,7 @@ function goToUse() {
       Go to use ->
     </button>
   </div>
-  <siteFooterVue />
+  <site-footer />
 </template>
 
 <style scoped>

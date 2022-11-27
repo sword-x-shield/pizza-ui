@@ -9,7 +9,7 @@ import siteFooter from './siteFooter.vue';
     </div>
     <div class="site-layout__content">
       <router-view />
-      <siteFooter />
+      <site-footer />
     </div>
   </div>
 </template>
