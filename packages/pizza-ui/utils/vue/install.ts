@@ -1,11 +1,11 @@
-import { Plugin, Component } from "vue";
+import { Component, Plugin } from 'vue';
 
-export const withInstall = <T extends Component, E extends Record<string, any>>(
-    main: T
+export const withInstall = <T extends Component>(
+  main: T,
 ) => {
-    ;(main as T & Plugin).install = (app): void => {
-        app.component(main.name, main)
-    }
+  (main as T & Plugin).install = (app): void => {
+    app.component(main.name!, main);
+  };
 
-    return main as T & Plugin
-}
+  return main as T & Plugin;
+};
