@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import Header from '@/components/siteHeader.vue';
+import siteHeader from '@/components/siteHeader.vue';
 </script>
 
 <template>
-  <Header />
+  <site-header />
   <router-view />
 </template>
