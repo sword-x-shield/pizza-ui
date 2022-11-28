@@ -20,7 +20,7 @@
     "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx,.md,.json --fix --cache"
   },
   "devDependencies": {
-    "@chuhoman/eslint-config-vue": "^0.0.4",
+    "@chuhoman/eslint-config-vue": "^0.0.7",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
     "@types/fs-extra": "^9.0.13",
