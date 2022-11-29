@@ -1,30 +1,30 @@
 {
   "name": "@pizza/example-block",
+  "type": "module",
   "version": "0.0.1",
   "description": "pizza example container",
   "author": "sword-x-shield",
   "license": "ISC",
-  "type": "module",
-  "types": "./dist/index.d.ts",
-  "main": "./dist/pizza-example-block.umd.cjs",
-  "module": "./dist/pizza-example-block.js",
-  "exports": {
-    ".": {
-      "import": "./dist/pizza-example-block.js",
-      "require": "./dist/pizza-example-block.umd.cjs"
-    },
-    "./dist/style.css": "./dist/style.css"
-  },
-  "scripts": {
-    "build": "vite build"
-  },
   "keywords": [
     "ui",
     "block"
   ],
+  "exports": {
+    ".": {
+      "require": "./dist/pizza-example-block.umd.cjs",
+      "import": "./dist/pizza-example-block.js"
+    },
+    "./dist/style.css": "./dist/style.css"
+  },
+  "main": "./dist/pizza-example-block.umd.cjs",
+  "module": "./dist/pizza-example-block.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
+  "scripts": {
+    "build": "vite build"
+  },
   "peerDependencies": {
     "vue": "^3.2.25"
   },
