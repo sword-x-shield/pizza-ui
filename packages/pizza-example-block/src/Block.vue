@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import copySvg from './Icons/copy.vue';
-import codeSvg from './Icons/code.vue';
-import SfcPlayground from './SfcPlayground.vue';
+import { highlight, languages } from 'prismjs';
+import copySvg from './icons/copy.vue';
+import codeSvg from './icons/code.vue';
+import playgroundSvg from './icons/playground.vue';
 import { useCopyCode } from './useCopyCode';
 
 const props = withDefaults(
@@ -24,33 +25,52 @@ const props = withDefaults(
     importMap: () => ({}),
   },
 );
+function createCodeHtml(language: string, code: string, trim?: boolean) {
+  if (!(language && languages[language]))
+    return '';
 
-const decodedCode = computed(() => decodeURIComponent(props.code));
+  try {
+    return highlight(trim ? code.trim() : code, languages[language], language);
+  }
+  catch (err) {}
+}
+
+const decodedCode = computed(() => decodeURIComponent(props.highlightedCode));
 
 const { showTip, copyCode } = useCopyCode(decodedCode.value);
 
 const decodedHighlightedCode = computed(() =>
-  decodeURIComponent(props.highlightedCode));
+  createCodeHtml('html', decodeURIComponent(props.highlightedCode)));
 
 const expand = ref(props.defaultExpand);
 const toggleExpand = () => (expand.value = !expand.value);
+
+const contentRef = ref<HTMLElement>();
+const style = computed(() => {
+  if (expand.value) {
+    const height = contentRef?.value?.firstElementChild?.clientHeight;
+    return { height: height ? `${height}px` : 'auto' };
+  }
+  return { height: 0 };
+});
 </script>
 
 <template>
   <div class="example-block">
     <div class="example-slot vp-raw">
-      <slot />
+      <slot name="example" />
     </div>
 
     <div v-show="title || desc" class="example-title-desc">
       <span class="example-title">{{ title }}</span>
-      <span class="example-desc">{{ desc }}</span>
+      <slot name="content" />
     </div>
 
     <div class="example-actions">
       <div class="example-platforms">
-        <sfc-playground :content="decodedCode" :import-map="importMap" />
+        <playgroundSvg />
       </div>
+
       <div class="example-buttons">
         <div class="example-actions-copy">
           <span v-show="showTip" class="example-actions-tip">复制成功!</span>
@@ -64,14 +84,19 @@ const toggleExpand = () => (expand.value = !expand.value);
       </div>
     </div>
     <div
-      v-show="expand"
-      :class="`language-${lang} extra-class`"
-      v-html="decodedHighlightedCode"
-    />
+      ref="contentRef"
+      :class="`language-${lang}`"
+      :style="style"
+    >
+      <pre :class="`language-${lang}`">
+        <code :class="`language-${lang}`" v-html="decodedHighlightedCode" />
+        </pre>
+    </div>
   </div>
 </template>
 
-<style scoped>
+<style>
+@import './index.css';
 .example-block {
   --example-border-color: #ebedf1;
   --example-bg: #ffffff;
@@ -95,15 +120,27 @@ const toggleExpand = () => (expand.value = !expand.value);
 
 div[class*='language-'] {
   border-radius: 0px;
+  background-color: #f9fafb;
   margin: 0 !important;
   line-height: 1.5 !important;
+  transition: height .2s;
+  overflow: hidden;
 }
 
 [class*='language-'] pre {
+  display: flex;
   padding: 0;
+  z-index: 1;
+  overflow-x: auto;
+  margin: 0px;
+  background: transparent;
 }
 
 [class*='language-'] code {
+  display: block;
+  box-sizing: border-box;
+  width: fit-content;
+  min-width: 100%;
   padding: 1em;
 }
 
