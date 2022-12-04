@@ -15,7 +15,7 @@ async function getExampleContentByFile(fileName, filePath) {
 
   const { data } = matter(fetchCode(exampleCode, 'docs').trim());
 
-  return data;
+  return { ...data };
 }
 
 async function parserExampleList(code, url) {
@@ -30,12 +30,12 @@ async function parserExampleList(code, url) {
       fileName = `${id}.example.md`;
 
     const variable = `${uppercamelcase(id)}Example`;
-    const exampleContent = await getExampleContentByFile(fileName, url);
+    const { title } = await getExampleContentByFile(fileName, url);
 
     formatList.push({
       id,
       variable,
-      title: exampleContent.title,
+      title,
       tag: `<${variable} />`,
       fileName,
     });
@@ -67,7 +67,10 @@ function genScript(demoInfos, components = []) {
       ${componentStmts}
     },
     setup () {
-
+      return {
+        wrapperStyle: 'display: flex; flex-wrap: nowrap; padding: 20px',
+        contentStyle: '',
+      }
     }
   }
   </script>`;
