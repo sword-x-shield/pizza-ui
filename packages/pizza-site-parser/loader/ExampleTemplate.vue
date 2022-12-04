@@ -1,6 +1,6 @@
 <template>
   <example-block
-    demo-file-name="<!--DEMO_FILE_NAME-->"
+    file-name="<!--FILE_NAME-->"
     relative-url="<!--URL-->"
     title="<!--TITLE_SLOT-->"
     highlighted-code="<!--CODE_SLOT-->"

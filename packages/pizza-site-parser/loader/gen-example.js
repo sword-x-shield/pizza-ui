@@ -4,7 +4,13 @@ import { createRenderer, fetchCode, genVueComponent } from './utils';
 
 const mdRenderer = createRenderer();
 
-async function getContentOfExample(code, fileName) {
+function getFileName(filePath) {
+  const dirs = filePath.split('/');
+  const fileNameWithExtension = dirs[dirs.length - 1];
+  return fileNameWithExtension.split('.')[0];
+}
+
+async function getContentOfExample(code, filePath) {
   // get content
   const { data, content: matterContent } = await matter(await fetchCode(code, 'docs').trim());
   const tokens = marked.lexer(matterContent);
@@ -33,7 +39,7 @@ async function getContentOfExample(code, fileName) {
   return {
     title: data.title,
     language: languageType,
-    fileName,
+    fileName: await getFileName(filePath),
     template: templateContent,
     script,
     style,
@@ -42,10 +48,9 @@ async function getContentOfExample(code, fileName) {
   };
 }
 
-async function parserExample(code, fileName) {
-  // TODO 后续嵌套在 ExampleTemplate.vue 模板中，加入复制、跳转playground等功能
-  const genParts = await getContentOfExample(code);
-  const example = genVueComponent(genParts, fileName);
+async function parserExample(code, filePath) {
+  const genParts = await getContentOfExample(code, filePath);
+  const example = genVueComponent(genParts);
   return example;
 }
 

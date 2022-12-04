@@ -115,7 +115,7 @@ export function createRenderer(wrapCodeWithCard = true) {
 }
 
 export function genVueComponent(parts, fileName, relativeUrl = '') {
-  const demoFileNameReg = /<!--DEMO_FILE_NAME-->/g;
+  const fileNameReg = /<!--FILE_NAME-->/g;
   const relativeUrlReg = /<!--URL-->/g;
   const titleReg = /<!--TITLE_SLOT-->/g;
   const codeReg = /<!--CODE_SLOT-->/;
@@ -125,8 +125,11 @@ export function genVueComponent(parts, fileName, relativeUrl = '') {
   const exampleReg = /<!-- EXAMPLE_SLOT -->/;
   const languageTypeReg = /<!--LANGUAGE_TYPE_SLOT-->/;
   let src = demoBlock;
-  src = src.replace(demoFileNameReg, fileName);
   src = src.replace(relativeUrlReg, relativeUrl);
+
+  if (parts.fileName)
+    src = src.replace(fileNameReg, parts.fileName);
+
   if (parts.content)
     src = src.replace(contentReg, parts.content);
 

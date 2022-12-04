@@ -11,8 +11,8 @@ const props = withDefaults(
     /**
      * @zh 源码字符串(需经过encodeURIComponent处理)
      */
-    code: string
     highlightedCode: string
+    fileName: string
     title?: string
     desc?: string
     lang?: string
@@ -56,8 +56,8 @@ const style = computed(() => {
 </script>
 
 <template>
-  <div class="example-block">
-    <div class="example-slot vp-raw">
+  <div :id="fileName" class="example-block">
+    <div class="example-slot">
       <slot name="example" />
     </div>
 
