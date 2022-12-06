@@ -1,16 +1,17 @@
 import matter from 'gray-matter';
 import { marked } from 'marked';
 import { createRenderer, fetchCode, genVueComponent } from './utils';
+import type { ComponentPartsType } from './type';
 
 const mdRenderer = createRenderer();
 
-function getFileName(filePath) {
+function getFileName(filePath: string) {
   const dirs = filePath.split('/');
   const fileNameWithExtension = dirs[dirs.length - 1];
   return fileNameWithExtension.split('.')[0];
 }
 
-async function getContentOfExample(code, filePath) {
+async function getContentOfExample(code: string, filePath: string): Promise<ComponentPartsType> {
   // get content
   const { data, content: matterContent } = await matter(await fetchCode(code, 'docs').trim());
   const tokens = marked.lexer(matterContent);
@@ -48,22 +49,8 @@ async function getContentOfExample(code, filePath) {
   };
 }
 
-async function parserExample(code, filePath) {
+export async function parserExample(code: string, filePath: string) {
   const genParts = await getContentOfExample(code, filePath);
   const example = genVueComponent(genParts);
   return example;
-}
-
-export function genExample() {
-  return {
-    name: 'pizza:vite-plugin-gen-example',
-    transform: async (code, id) => {
-      if (id.endsWith('.example.vue')) {
-        return {
-          code: await parserExample(code, id),
-          map: null,
-        };
-      }
-    },
-  };
 }
