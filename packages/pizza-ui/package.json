@@ -7,8 +7,10 @@
   "keywords": [],
   "main": "dist/pizza-ui.js",
   "module": "dist/pizza-ui.esm.js",
+  "types": "es/index.d.ts",
   "scripts": {
-    "build": "npx tsc -b --force ./tsconfig.esm.json && rollup -c --bundleConfigAsCjs",
+    "build": "tsc --build --clean ./tsconfig.esm.json && tsc --build --clean ./tsconfig.cjs.json  && rollup -c --bundleConfigAsCjs",
+    "dev": "rollup -c --watch --bundleConfigAsCjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
@@ -16,6 +18,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
+    "@rollup/plugin-alias": "^4.0.2",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^23.0.4",
     "@rollup/plugin-node-resolve": "^15.0.1",
@@ -25,6 +28,7 @@
     "rollup": "^3.6.0",
     "rollup-plugin-esbuild": "^5.0.0",
     "rollup-plugin-vue": "^6.0.0",
+    "tslib": "^2.4.1",
     "typescript": "~4.8.3"
   }
 }

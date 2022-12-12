@@ -4,6 +4,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
 import { babel } from '@rollup/plugin-babel';
+import alias from '@rollup/plugin-alias';
 import vuePlugin from 'rollup-plugin-vue';
 import _esbuild from 'rollup-plugin-esbuild';
 const esbuild = _esbuild.default || _esbuild;
@@ -11,6 +12,9 @@ const esbuild = _esbuild.default || _esbuild;
 const extensions = ['.mjs', '.js', '.json', '.ts'];
 const commonPlugins = [
   resolve({ extensions }),
+  alias({
+    entries: [{ find: '@pizza-ui', replacement: path.resolve(__dirname, '.') }],
+  }),
   vuePlugin(),
   esbuild({
     tsconfig: path.resolve(__dirname, '../../tsconfig.json'),

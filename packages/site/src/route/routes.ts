@@ -2,7 +2,7 @@ import { RouteRecordRaw } from 'vue-router';
 export const baseRoute: Array<RouteRecordRaw> = [{
   name: 'homePage',
   path: '/',
-  component: () => import('@/views/homePage/index.vue'),
+  component: () => import('@/views/homepage/index.vue'),
 }, {
   name: 'components',
   path: '/components',
@@ -15,4 +15,5 @@ export const baseRoute: Array<RouteRecordRaw> = [{
       component: () => import('../../../pizza-site-parser/__test__/index.demo-entry.md'),
     },
   ],
-}];
+},
+];

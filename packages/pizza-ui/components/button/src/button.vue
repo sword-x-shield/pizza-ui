@@ -1,5 +1,6 @@
-<script lang='ts' setup>
-defineOptions({
+<script lang='ts'>
+import { defineComponent } from 'vue';
+export default defineComponent({
   name: 'PButton',
 });
 </script>

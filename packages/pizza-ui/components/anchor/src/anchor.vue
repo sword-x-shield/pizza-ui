@@ -1,6 +1,7 @@
-<script lang='ts' setup>
-defineOptions({
-  name: 'PAnchor',
+<script lang='ts'>
+import { defineComponent } from 'vue';
+export default defineComponent({
+  name: 'Anchor',
 });
 </script>
 
