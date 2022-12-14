@@ -1,5 +1,5 @@
 {
-  "name": "pizza-ui",
+  "name": "@pizza/ui",
   "version": "0.0.1",
   "description": "It's a useless UI Library",
   "author": "sword-x-shield",
@@ -7,7 +7,7 @@
   "keywords": [],
   "main": "dist/pizza-ui.js",
   "module": "dist/pizza-ui.esm.js",
-  "types": "es/index.d.ts",
+  "types": "es/src/index.d.ts",
   "scripts": {
     "build": "tsc --build --clean ./tsconfig.esm.json && tsc --build --clean ./tsconfig.cjs.json  && rollup -c --bundleConfigAsCjs",
     "dev": "rollup -c --watch --bundleConfigAsCjs",

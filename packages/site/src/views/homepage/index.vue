@@ -18,7 +18,6 @@ function goToUse() {
       Go to use ->
     </button>
   </div>
-  <p-anchor />
   <site-footer />
 </template>
 

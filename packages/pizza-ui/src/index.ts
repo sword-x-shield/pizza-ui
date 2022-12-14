@@ -1,3 +1,4 @@
-export { install } from './preset';
+export { default } from './preset';
 
-export * from './components';
+export { PAnchor } from './components/anchor';
+export type { AnchorInstance } from './components/anchor';

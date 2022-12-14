@@ -4,6 +4,6 @@ import Anchor from './src/anchor.vue';
 
 export const PAnchor = withInstall(Anchor);
 
-export type PAnchorType = InstanceType<typeof Anchor>;
+export type AnchorInstance = InstanceType<typeof Anchor>;
 
 export default PAnchor;

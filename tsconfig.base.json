@@ -20,7 +20,8 @@
     "baseUrl": ".",
     "rootDir": ".",
     "paths": {
-      "@pizza-ui/*": ["packages/pizza-ui/*"]
+      "@pizza-ui/*": ["packages/pizza-ui/*"],
+      "@pizza/ui": ["packages/pizza-ui/src"],
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
