@@ -14,6 +14,11 @@ export const baseRoute: Array<RouteRecordRaw> = [{
       path: 'test',
       component: () => import('../../../pizza-site-parser/__test__/index.demo-entry.md'),
     },
+    {
+      name: 'anchor',
+      path: 'anchor',
+      component: () => import('../../../pizza-ui/src/components/anchor/example/index.entry.md'),
+    },
   ],
 },
 ];

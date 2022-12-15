@@ -1,0 +1,39 @@
+# 侧边导航栏 Anchor
+
+侧边导航栏，你懂的，顾名思义就是在旁边帮你找路的
+
+## 演示
+
+```example
+basic.vue
+```
+
+## API
+
+### Anchor Props
+
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| attr-type | `'button' \| 'submit' \| 'reset'` | `'button'` | 按钮的 DOM 的 `type` 属性 |  |
+| block | `boolean` | `false` | 按钮是否显示为块级 |  |
+| bordered | `boolean` | `true` | 按钮是否显示 border |  |
+| circle | `boolean` | `false` | 按钮是否为圆形 |  |
+| color | `string` | `undefined` | 按钮颜色（支持形如 `#FFF`， `#FFFFFF`， `yellow`，`rgb(0, 0, 0)` 的颜色） |  |
+| dashed | `boolean` | `false` | 按钮边框是否为虚线 |  |
+| disabled | `boolean` | `false` | 按钮是否禁用 |  |
+| focusable | `boolean` | `true` | 按钮是否可以被聚焦 |  |
+| ghost | `boolean` | `false` | 按钮是否透明 |  |
+| icon-placement | `'left' \| 'right'` | `'left'` | 按钮中图标的位置 |  |
+| keyboard | `boolean` | `true` | 是否支持键盘操作 |  |
+| loading | `boolean` | `false` | 按钮是否显示加载状态 |  |
+| quaternary | `boolean` | `false` | 是否是四级按钮 |  |
+| render-icon | `() => VNodeChild` | `undefined` | 按钮图标的渲染函数 | NEXT_VERSION |
+| round | `boolean` | `false` | 按钮是否显示圆角 |  |
+| size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 按钮的尺寸 |  |
+| secondary | `boolean` | `false` | 是否是次要按钮 |  |
+| strong | `boolean` | `false` | 按钮文字是否加粗 |  |
+| tertiary | `boolean` | `false` | 是否是三级按钮 |  |
+| text | `boolean` | `false` | 是否显示为文本按钮 |  |
+| text-color | `string` | `undefined` | 按钮文字颜色（支持形如 `#FFF`， `#FFFFFF`， `yellow`，`rgb(0, 0, 0)` 的颜色） |  |
+| type | `'default' \| 'tertiary' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | 按钮的类型 |  |
+| tag | `string` | `'button'` | 按钮需要被渲染为什么标签 |  |
