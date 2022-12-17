@@ -21,7 +21,7 @@
     "rootDir": ".",
     "paths": {
       "@pizza-ui/*": ["packages/pizza-ui/*"],
-      "@pizza/ui": ["packages/pizza-ui/src"],
+      "@pizza/ui": ["packages/pizza-ui/components"],
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },

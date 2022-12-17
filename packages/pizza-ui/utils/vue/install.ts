@@ -1,4 +1,4 @@
-import { Component, Plugin } from 'vue';
+import type { Component, Plugin } from 'vue';
 import { getComponentPrefix } from '../global-config';
 
 export const withInstall = <T extends Component>(

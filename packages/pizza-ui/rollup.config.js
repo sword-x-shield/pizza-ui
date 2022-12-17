@@ -38,7 +38,7 @@ const commonPlugins = [
 
 function bundleUmd() {
   return {
-    input: path.resolve('./src/index.ts'),
+    input: path.resolve('./components/index.ts'),
     output: {
       file: 'dist/pizza-ui.js',
       format: 'umd',
@@ -55,7 +55,7 @@ function bundleUmd() {
 
 function bundleEsm() {
   return {
-    input: path.resolve('./src/index.ts'),
+    input: path.resolve('./components/index.ts'),
     output: {
       file: 'dist/pizza-ui.esm.js',
       format: 'esm',

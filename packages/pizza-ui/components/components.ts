@@ -1,4 +1,4 @@
-export * from './components/anchor';
+export * from './anchor';
 
 declare module 'vue' {
   export interface GlobalComponents {
