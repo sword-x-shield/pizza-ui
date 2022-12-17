@@ -17,13 +17,16 @@ import siteFooter from './siteFooter.vue';
 <style scoped>
 .site-layout {
   display: flex;
+
 }
 
 .site-layout__menu {
   width: 250px;
-  background: gray;
+  background: var(--pizza-color-bg-1);
 }
 .site-layout__content {
   width: 100%;
+  background-color: var(--pizza-color-bg-0);
+  color: var(--pizza-color-text-0);
 }
 </style>
