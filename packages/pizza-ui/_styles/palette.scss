@@ -44,6 +44,15 @@ body {
     --pizza-green-8: rgb(1, 144, 44);
     --pizza-green-9: rgb(0, 110, 37);
     --pizza-green-10: rgb(0, 77, 28);
+
+    --pizza-gray-1: rgb(245, 245, 245);
+    --pizza-gray-2: rgb(224, 224, 224);
+    --pizza-gray-3: rgb(204, 204, 204);
+    --pizza-gray-4: rgb(163, 163, 163);
+    --pizza-gray-5: rgb(133, 133, 133);
+    --pizza-gray-6: rgb(102, 102, 102);
+    --pizza-gray-7: rgb(83, 83, 83);
+    --pizza-gray-8: rgb(40, 40, 40);
 }
 
 body[#{$dark-mode-attr}] {
@@ -90,4 +99,13 @@ body[#{$dark-mode-attr}] {
     --pizza-green-8: rgb(135, 237, 148);
     --pizza-green-9: rgb(184, 246, 190);
     --pizza-green-10: rgb(237, 255, 239);
+
+    --pizza-gray-1: rgb(23, 23, 23);
+    --pizza-gray-2: rgb(46, 46, 46);
+    --pizza-gray-3: rgb(126, 123, 123);
+    --pizza-gray-4: rgb(133, 133, 133);
+    --pizza-gray-5: rgb(167, 167, 167);
+    --pizza-gray-6: rgb(194, 190, 190);
+    --pizza-gray-7: rgb(210, 210, 210);
+    --pizza-gray-8: rgb(245, 245, 245);
 }
