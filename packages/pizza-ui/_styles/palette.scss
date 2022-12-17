@@ -1,0 +1,93 @@
+@import './variables/index.scss';
+
+body {
+    --pizza-primary-1: rgb(255, 253, 232);
+    --pizza-primary-2: rgb(255, 247, 187);
+    --pizza-primary-3: rgb(255, 238, 142);
+    --pizza-primary-4: rgb(255, 226, 96);
+    --pizza-primary-5: rgb(255, 211, 51);
+    --pizza-primary-6: rgb(255, 193, 6);
+    --pizza-primary-7: rgb(210, 152, 4);
+    --pizza-primary-8: rgb(166, 114, 2);
+    --pizza-primary-9: rgb(121, 79, 1);
+    --pizza-primary-10: rgb(77, 47, 0);
+
+    --pizza-orange-1: rgb(255, 247, 232);
+    --pizza-orange-2: rgb(253, 228, 184);
+    --pizza-orange-3: rgb(251, 205, 137);
+    --pizza-orange-4: rgb(249, 180, 91);
+    --pizza-orange-5: rgb(247, 153, 45);
+    --pizza-orange-6: rgb(245, 124, 0);
+    --pizza-orange-7: rgb(203, 95, 0);
+    --pizza-orange-8: rgb(161, 70, 0);
+    --pizza-orange-9: rgb(119, 47, 0);
+    --pizza-orange-10: rgb(77, 28, 0);
+
+    --pizza-danger-1: rgb(255, 237, 232);
+    --pizza-danger-2: rgb(254, 213, 202);
+    --pizza-danger-3: rgb(254, 186, 172);
+    --pizza-danger-4: rgb(253, 158, 143);
+    --pizza-danger-5: rgb(253, 127, 113);
+    --pizza-danger-6: rgb(252, 94, 84);
+    --pizza-danger-7: rgb(208, 57, 52);
+    --pizza-danger-8: rgb(164, 27, 27);
+    --pizza-danger-9: rgb(120, 10, 14);
+    --pizza-danger-10: rgb(77, 0, 5);
+
+    --pizza-green-1: rgb(232, 255, 234);
+    --pizza-green-2: rgb(180, 246, 186);
+    --pizza-green-3: rgb(131, 237, 145);
+    --pizza-green-4: rgb(85, 229, 109);
+    --pizza-green-5: rgb(42, 220, 77);
+    --pizza-green-6: rgb(2, 211, 52);
+    --pizza-green-7: rgb(1, 177, 48);
+    --pizza-green-8: rgb(1, 144, 44);
+    --pizza-green-9: rgb(0, 110, 37);
+    --pizza-green-10: rgb(0, 77, 28);
+}
+
+body[#{$dark-mode-attr}] {
+    --pizza-primary-1: rgb(77, 47, 0);
+    --pizza-primary-2: rgb(121, 79, 2);
+    --pizza-primary-3: rgb(166, 116, 9);
+    --pizza-primary-4: rgb(210, 156, 20);
+    --pizza-primary-5: rgb(255, 200, 34);
+    --pizza-primary-6: rgb(255, 210, 44);
+    --pizza-primary-7: rgb(255, 225, 93);
+    --pizza-primary-8: rgb(255, 238, 141);
+    --pizza-primary-9: rgb(255, 247, 190);
+    --pizza-primary-10: rgb(255, 254, 238);
+
+    --pizza-orange-1: rgb(77, 28, 0);
+    --pizza-orange-2: rgb(119, 49, 4);
+    --pizza-orange-3: rgb(161, 75, 10);
+    --pizza-orange-4: rgb(203, 105, 18);
+    --pizza-orange-5: rgb(245, 139, 29);
+    --pizza-orange-6: rgb(247, 149, 37);
+    --pizza-orange-7: rgb(249, 177, 85);
+    --pizza-orange-8: rgb(251, 203, 133);
+    --pizza-orange-9: rgb(253, 227, 182);
+    --pizza-orange-10: rgb(255, 247, 232);
+
+    --pizza-danger-1: rgb(77, 0, 5);
+    --pizza-danger-2: rgb(120, 10, 14);
+    --pizza-danger-3: rgb(164, 30, 30);
+    --pizza-danger-4: rgb(208, 64, 59);
+    --pizza-danger-5: rgb(252, 106, 97);
+    --pizza-danger-6: rgb(253, 135, 122);
+    --pizza-danger-7: rgb(253, 164, 150);
+    --pizza-danger-8: rgb(254, 192, 179);
+    --pizza-danger-9: rgb(254, 217, 207);
+    --pizza-danger-10: rgb(255, 240, 235);
+
+    --pizza-green-1: rgb(0, 77, 28);
+    --pizza-green-2: rgb(1, 110, 38);
+    --pizza-green-3: rgb(9, 144, 49);
+    --pizza-green-4: rgb(19, 177, 61);
+    --pizza-green-5: rgb(34, 211, 76);
+    --pizza-green-6: rgb(46, 220, 80);
+    --pizza-green-7: rgb(89, 229, 112);
+    --pizza-green-8: rgb(135, 237, 148);
+    --pizza-green-9: rgb(184, 246, 190);
+    --pizza-green-10: rgb(237, 255, 239);
+}
