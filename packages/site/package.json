@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@pizza/example-block": "workspace:^0.0.1",
-    "pizza-ui": "workspace:^0.0.1",
+    "@pizza/ui": "workspace:^0.0.1",
     "vue": "^3.2.41",
     "vue-router": "^4.1.6"
   },
