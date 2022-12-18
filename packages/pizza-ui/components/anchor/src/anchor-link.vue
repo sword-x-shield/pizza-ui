@@ -1,38 +1,24 @@
 <script lang='ts'>
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
+import { getClsPrefix } from '@pizza-ui/utils';
 export default defineComponent({
   name: 'AnchorLink',
   props: {
-    showRail: {
-      type: Boolean,
-      default: true,
-    },
-    showBackground: {
-      type: Boolean,
-      default: true,
-    },
-    size: {
-      type: String,
-      default: 'default',
-    },
+    title: String,
   },
   setup() {
-    const cls = ref('');
+    const clsPrefix = getClsPrefix('anchor');
+    const linkCls = `${clsPrefix}-link`;
     return {
-      cls,
+      linkCls,
     };
   },
 });
 </script>
 
 <template>
-  <div :class="cls">
-    <div v-if="showBackground" class="anchor-background" />
-    <div class="anchor-rail">
-      1
-    </div>
-    <ul>
-      <slot />
-    </ul>
-  </div>
+  <li :class="`${linkCls}-item`">
+    <a href="" :class="linkCls">{{ title }}</a>
+    <slot />
+  </li>
 </template>

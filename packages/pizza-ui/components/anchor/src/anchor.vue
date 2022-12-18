@@ -29,10 +29,8 @@ export default defineComponent({
 <template>
   <div :class="`${clsPrefix}`">
     <div v-if="showBackground" :class="`${clsPrefix}-background`" />
-    <div :class="`${clsPrefix}-rail`">
-      1
-    </div>
-    <ul>
+    <div :class="`${clsPrefix}-rail`" />
+    <ul :class="`${clsPrefix}-wrap`">
       <slot />
     </ul>
   </div>

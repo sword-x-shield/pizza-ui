@@ -9,6 +9,9 @@ title: 简单运用
 </docs>
 
 <template>
-  <p-anchor />
+  <p-anchor>
+    <p-anchor-link title="链接1" />
+    <p-anchor-link title="链接2" />
+  </p-anchor>
 </template>
 
