@@ -1,12 +1,12 @@
-@import '../../../_styles/theme/index.scss';
+@import '../../../_styles/variables/index.scss';
 
 $anchor-prefix-cls: #{$prefix}-anchor;
 
 .#{$anchor-prefix-cls} {
   &-background {
-    background-color: yellow;
+    background-color: var(--pizza-primary-6);
   }
   &-rail {
-    background-color: green;
+    background-color: var(--pizza-green-6);
   }
 }

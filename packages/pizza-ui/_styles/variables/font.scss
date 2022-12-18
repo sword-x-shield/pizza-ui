@@ -1,0 +1,34 @@
+$font-family-regular: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue',
+    Helvetica, Arial, sans-serif;
+/*** size ***/
+// 第一字阶
+$font-size-small: 12px; // 小文本字号
+$font-size-regular: 14px; // 常规文本字号
+$font-size-large: 16px; // 大文字字号
+// 第二字阶
+$font-size-4: 20px;
+$font-size-5: 24px;
+$font-size-6: 28px;
+$font-size-7: 36px;
+$font-size-8: 48px;
+$font-size-9: 64px;
+
+$font-size-title-small: $font-size-regular;
+$font-size-title-medium: $font-size-large;
+$font-size-title-large: $font-size-4;
+
+$font-size-body-small: $font-size-small;
+$font-size-body-medium: $font-size-regular;
+$font-size-body-large: $font-size-large;
+
+$font-size-head-small: $font-size-5;
+$font-size-head-medium: $font-size-6;
+$font-size-head-large: $font-size-7;
+
+/***  weight ***/
+// 常规字重
+$font-weight-regular: 400; 
+// 重字重
+$font-weight-bold: 600;
+

@@ -29,7 +29,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(250, 250, 252);
+  background-color: var(--pizza-color-bg-2);
+  color: var(--pizza-color-text-0);
 }
 
 .site-footer__link {
