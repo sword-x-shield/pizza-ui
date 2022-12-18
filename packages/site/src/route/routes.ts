@@ -17,7 +17,7 @@ export const baseRoute: Array<RouteRecordRaw> = [{
     {
       name: 'anchor',
       path: 'anchor',
-      component: () => import('../../../pizza-ui/components/anchor/example/index.entry.md'),
+      component: () => import('pizza-ui/components/anchor/example/index.entry.md'),
     },
   ],
 },

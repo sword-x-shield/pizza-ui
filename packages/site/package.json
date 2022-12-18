@@ -4,13 +4,13 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "pnpm run --parallel --filter '@pizza/*' build && vite",
+    "dev": "pnpm run --parallel --filter '@pizza/*' --filter pizza-ui build && vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@pizza/example-block": "workspace:^0.0.1",
-    "@pizza/ui": "workspace:^0.0.1",
+    "pizza-ui": "workspace:*",
     "vue": "^3.2.41",
     "vue-router": "^4.1.6"
   },
