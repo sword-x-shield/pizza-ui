@@ -1,21 +1,19 @@
 @import './variables/index.scss';
 // font-size 统一使用，与 line-height 绑定
-@for $size from 1 through 9 {
-    .#{$prefix}-font-size-#{$size} {
+@mixin font-size($size) {
+    $_size: $size * 2 + 10;
+    @if $size < 4 {
         $_size: $size * 2 + 10;
-        @if $size < 4 {
-            $_size: $size * 2 + 10;
-        } @else if $size < 7 {
-            $_size: $size * 4 + 4;
-        } @else if $size == 7 {
-            $_size: 36; 
-        } @else if $size == 8 {
-            $_size: 48;
-        } @else if $size == 9 {
-            $_size: 64;
-        }
-        font-size: $_size + px;
-        line-height: $_size + 8px;
-        font-family: $font-family-regular;
+    } @else if $size < 7 {
+        $_size: $size * 4 + 4;
+    } @else if $size == 7 {
+        $_size: 36; 
+    } @else if $size == 8 {
+        $_size: 48;
+    } @else if $size == 9 {
+        $_size: 64;
     }
+    font-size: $_size + px;
+    line-height: $_size + 8px;
+    font-family: $font-family-regular;
 }
