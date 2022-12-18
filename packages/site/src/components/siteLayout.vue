@@ -22,11 +22,11 @@ import siteFooter from './siteFooter.vue';
 
 .site-layout__menu {
   width: 250px;
-  background: var(--pizza-color-bg-1);
+  background: var(--p-color-bg-1);
 }
 .site-layout__content {
   width: 100%;
-  background-color: var(--pizza-color-bg-0);
-  color: var(--pizza-color-text-0);
+  background-color: var(--p-color-bg-0);
+  color: var(--p-color-text-0);
 }
 </style>

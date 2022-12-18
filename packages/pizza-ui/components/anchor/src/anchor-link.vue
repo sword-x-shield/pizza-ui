@@ -1,24 +1,42 @@
 <script lang='ts'>
-import { defineComponent } from 'vue';
+import { defineComponent, inject, onMounted, ref } from 'vue';
 import { getClsPrefix } from '@pizza-ui/utils';
+import { anchorInjectionKey } from './context';
 export default defineComponent({
   name: 'AnchorLink',
   props: {
     title: String,
+    href: String,
   },
-  setup() {
+  setup(props) {
     const clsPrefix = getClsPrefix('anchor');
     const linkCls = `${clsPrefix}-link`;
+    const linkRef = ref<HTMLElement>();
+
+    const context = inject(anchorInjectionKey, undefined);
+
+    onMounted(() => {
+      if (props.href && linkRef.value)
+        context?.addLink(props.href, linkRef.value);
+    });
+
     return {
       linkCls,
+      context,
     };
   },
 });
 </script>
 
 <template>
-  <li :class="`${linkCls}-item`">
-    <a href="" :class="linkCls">{{ title }}</a>
+  <li ref="linkRef" :class="`${linkCls}-item`">
+    <a
+      :href="href"
+      :class="[linkCls, { [`${linkCls}-active`]: context?.currentLink === href }]"
+      @click="context?.handleClick($event, href)"
+    >
+      {{ title }}
+    </a>
     <slot />
   </li>
 </template>

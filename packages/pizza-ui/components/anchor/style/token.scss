@@ -1,3 +1,17 @@
-$pizza-anchor-rail-color: rgb(219, 219, 223);
-$pizza-anchor-rail-width: 4px;
-$pizza-anchor-rail-bezier: cubic-bezier(0.4, 0, 0.2, 1);
+@import '../../../_styles/variables/index.scss';
+
+body {
+  --p-rail-width: 4px;
+}
+
+$pizza-anchor-bezier: var(--p-cubic-bezier-ease-in-out);
+
+$pizza-anchor-background-color: var(--p-primary-4);
+$pizza-anchor-background-radius: var(--p-border-radius-large);
+
+$pizza-anchor-rail-color: var(--p-color-bg-2);
+$pizza-anchor-rail-width: var(--p-rail-width);
+
+$pizza-anchor-link-hover-color: var(--p-primary-6);
+
+$pizza-anchor-item-inner-margin-left: $spacing-7;

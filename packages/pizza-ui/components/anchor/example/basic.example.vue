@@ -9,8 +9,11 @@ title: 简单运用
 </docs>
 
 <template>
-  <p-anchor>
-    <p-anchor-link title="链接1" />
+  <p-anchor :smooth="true">
+    <p-anchor-link title="链接1" href="#basic">
+      <p-anchor-link title="链接3" />
+      <p-anchor-link title="链接4" />
+    </p-anchor-link>
     <p-anchor-link title="链接2" />
   </p-anchor>
 </template>

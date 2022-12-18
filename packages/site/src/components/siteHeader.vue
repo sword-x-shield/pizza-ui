@@ -53,13 +53,13 @@ button {
   padding: 5px;
 }
 .site-header__container{
-  border-bottom: 1px solid rgb(var(--pizza-gray-2));
+  border-bottom: 1px solid rgb(var(--p-gray-2));
   display: grid;
   grid-template-columns: calc(272px - 32px) 1fr auto;
   align-items: center;
   padding: 0 32px;
-  background-color: var(--pizza-color-bg-0);
-  color: var(--pizza-color-text-0);
+  background-color: var(--p-color-bg-0);
+  color: var(--p-color-text-0);
 }
 
 .site-header__logo {
