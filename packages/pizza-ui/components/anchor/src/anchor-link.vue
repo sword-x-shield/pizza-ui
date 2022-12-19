@@ -20,9 +20,12 @@ export default defineComponent({
         context?.addLink(props.href, linkRef.value);
     });
 
+    const handleClick = (e: MouseEvent) => context?.handleClick(e, props.href);
+
     return {
       linkCls,
       context,
+      handleClick,
     };
   },
 });
@@ -33,7 +36,7 @@ export default defineComponent({
     <a
       :href="href"
       :class="[linkCls, { [`${linkCls}-active`]: context?.currentLink === href }]"
-      @click="context?.handleClick($event, href)"
+      @click="handleClick"
     >
       {{ title }}
     </a>

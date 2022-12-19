@@ -1,5 +1,6 @@
 <script lang='ts'>
 import { defineComponent, nextTick, onMounted, provide, reactive, ref } from 'vue';
+import { throttle } from 'lodash-es';
 import { getClsPrefix } from '@pizza-ui/utils';
 import { anchorInjectionKey } from './context';
 export default defineComponent({
@@ -19,7 +20,7 @@ export default defineComponent({
     },
     smooth: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   setup(props, { emit }) {
@@ -27,21 +28,21 @@ export default defineComponent({
     const currentLink = ref('');
     const links = reactive<Record<string, HTMLElement>>({});
 
-    function scrollIntoView(hash: string): void {
+    const scrollIntoView = (hash: string) => {
       const selector = hash[0] === '#' ? `[id='${hash.slice(1)}']` : hash;
       const element = document.querySelector(selector) ?? undefined;
       if (!element) return;
       element.scrollIntoView({
         behavior: props.smooth ? 'smooth' : 'auto',
       });
-    }
+    };
 
-    function handleAnchorChange(hash: string) {
+    const handleAnchorChange = (hash: string) => {
       if (hash !== currentLink.value) currentLink.value = hash;
       nextTick(() => {
         emit('change', hash);
       });
-    }
+    };
 
     const addLink = (hash: string, node: HTMLElement) => {
       if (!hash) return;
@@ -55,6 +56,18 @@ export default defineComponent({
       }
       emit('select', hash, currentLink.value);
     };
+
+    // const getFirstInViewportEle = () => {
+
+    // };
+
+    // const handleScroll = throttle(() => {
+    //   const element = getFirstInViewportEle();
+    //   if (element && element.id) {
+    //     const hash = `#${element.id}`;
+    //     handleAnchorChange(hash);
+    //   }
+    // });
 
     onMounted(() => {
       const hash = decodeURIComponent(window.location.hash);

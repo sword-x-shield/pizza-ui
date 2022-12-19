@@ -42,7 +42,7 @@ $anchor-prefix-cls: #{$prefix}-anchor;
       display: block;
       margin-bottom: 5px;
       overflow: hidden;
-      color: black;
+      color: $pizza-anchor-link-color;
       font-size: $font-size-regular;
       line-height: $line-height-base;
       white-space: nowrap;
