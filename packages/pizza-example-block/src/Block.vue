@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { highlight, languages } from 'prismjs';
-import copySvg from './icons/copy.vue';
-import codeSvg from './icons/code.vue';
+import { VueLivePreview } from 'vue-live';
+import copySvg from './Icons/copy.vue';
+import codeSvg from './Icons/code.vue';
+import refreshSvg from './Icons/refresh.vue';
 import playgroundSvg from './icons/playground.vue';
-import { useCopyCode } from './useCopyCode';
+import MonacoEditor from './components/monaco-editor/index';
+import { useCopyCode, useError } from './composables';
 
 const props = withDefaults(
   defineProps<{
@@ -25,34 +27,43 @@ const props = withDefaults(
     importMap: () => ({}),
   },
 );
-function createCodeHtml(language: string, code: string, trim?: boolean) {
-  if (!(language && languages[language]))
-    return '';
 
-  try {
-    return highlight(trim ? code.trim() : code, languages[language], language);
-  }
-  catch (err) {}
-}
+const decodedCode = ref(decodeURIComponent(props.highlightedCode));
 
-const decodedCode = computed(() => decodeURIComponent(props.highlightedCode));
-
-const { showTip, copyCode } = useCopyCode(decodedCode.value);
-
-const decodedHighlightedCode = computed(() =>
-  createCodeHtml('html', decodeURIComponent(props.highlightedCode)));
+const { showTip, copyCode } = useCopyCode(decodedCode);
 
 const expand = ref(props.defaultExpand);
-const toggleExpand = () => (expand.value = !expand.value);
+const toggleExpand = () => {
+  expand.value = !expand.value;
+};
 
-const contentRef = ref<HTMLElement>();
+const editor = ref<InstanceType<typeof MonacoEditor> | null>();
+const EDITOR_MAX_HEIGHT = 500;
 const style = computed(() => {
   if (expand.value) {
-    const height = contentRef?.value?.firstElementChild?.clientHeight;
-    return { height: height ? `${height}px` : 'auto' };
+    const height = Math.min(EDITOR_MAX_HEIGHT, editor.value?.getEditor()?.getContentHeight());
+    return {
+      height: height ? `${height}px` : 'auto',
+    };
   }
   return { height: 0 };
 });
+
+function resetCode() {
+  decodedCode.value = decodeURIComponent(props.highlightedCode);
+}
+
+const showEditorToolbar = ref(false);
+function handleMouseEnter() {
+  showEditorToolbar.value = true;
+}
+
+function handleMouseLeave() {
+  showEditorToolbar.value = false;
+}
+
+const { cleanError, handleError, errMsg } = useError();
+// TODO css 预处理器提前解析
 </script>
 
 <template>
@@ -63,7 +74,14 @@ const style = computed(() => {
     </div>
 
     <div class="example-slot">
-      <slot name="example" />
+      <vue-live-preview
+        :code="decodedCode"
+        class="editor-preview"
+        :check-variable-availability="false"
+        @success="cleanError"
+        @error="handleError"
+      />
+      <code v-show="errMsg" class="editor__error">{{ errMsg }}</code>
     </div>
 
     <div class="example-actions">
@@ -76,6 +94,7 @@ const style = computed(() => {
           <span v-show="showTip" class="example-actions-tip">复制成功!</span>
           <copySvg v-show="!showTip" title="复制" @click="copyCode" />
         </div>
+        <refreshSvg title="重置" @click="resetCode" />
         <codeSvg
           class="example-actions-expand"
           title="展开"
@@ -84,13 +103,32 @@ const style = computed(() => {
       </div>
     </div>
     <div
-      ref="contentRef"
       :class="`language-${lang}`"
       :style="style"
+      @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeave"
     >
-      <pre :class="`language-${lang}`">
-        <code :class="`language-${lang}`" v-html="decodedHighlightedCode" />
-        </pre>
+      <monaco-editor
+        ref="editor"
+        v-model="decodedCode"
+        language="html"
+        style="height: 100%;"
+        :options="{
+          automaticLayout: true,
+          scrollBeyondLastLine: false,
+          minimap: {
+            autohide: true,
+          },
+        }"
+      />
+
+      <Transition name="editor-toolbar">
+        <div v-show="showEditorToolbar" class="editor-toolbar">
+          <div class="editor-tag">
+            可实时编辑
+          </div>
+        </div>
+      </Transition>
     </div>
   </div>
 </template>
@@ -110,6 +148,22 @@ const style = computed(() => {
   --example-text-1: rgba(255, 255, 255, .87);
 }
 
+@mixin svg-icon() {
+  & svg {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+
+    &:not(:last-of-type) {
+      margin-left: 16px
+    }
+
+    &:hover {
+      color: var(--pizza-primary-4);
+    }
+  }
+}
+
 .example-block {
   border: 1px solid var(--example-border-color);
   border-radius: 1px;
@@ -126,23 +180,21 @@ div[class*='language-'] {
   line-height: 1.5 !important;
   transition: height .2s;
   overflow: hidden;
-}
+  position: relative;
 
-[class*='language-'] pre {
-  display: flex;
-  padding: 0;
-  z-index: 1;
-  overflow-x: auto;
-  margin: 0px;
-  background: transparent;
-}
+  .editor-toolbar {
+    position: absolute;
+    top: 0px;
+    right: 16px;
 
-[class*='language-'] code {
-  display: block;
-  box-sizing: border-box;
-  width: fit-content;
-  min-width: 100%;
-  padding: 1em;
+    .editor-tag {
+      @include font-size(1);
+      color: var(--pizza-color-text-1);
+      background-color: var(--pizza-color-bg-2);
+      padding: 4px 8px;
+      border-radius: var(--p-border-radius-small);
+    }
+  }
 }
 
 .example-slot {
@@ -161,6 +213,8 @@ div[class*='language-'] {
 .example-buttons {
   display: flex;
   align-items: center;
+
+  @include svg-icon()
 }
 
 .example-actions-expand,
@@ -182,6 +236,8 @@ div[class*='language-'] {
 .example-platforms {
   display: flex;
   align-items: center;
+
+  @include svg-icon()
 }
 
 .example-title-desc {
@@ -200,5 +256,26 @@ div[class*='language-'] {
   background: var(--example-bg);
   font-weight: 600;
   font-size: 16px;
+}
+
+.editor {
+  &__error {
+    background-color: var(--pizza-danger-6);
+    color: var(--pizza-danger-1);
+  }
+}
+
+.editor-toolbar-enter-active,
+.editor-toolbar-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.editor-toolbar-enter-from,
+.editor-toolbar-leave-to {
+  opacity: 0;
+}
+
+.VueLive-error {
+  display: none;
 }
 </style>
