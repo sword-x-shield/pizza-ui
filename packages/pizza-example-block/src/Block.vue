@@ -57,13 +57,13 @@ const style = computed(() => {
 
 <template>
   <div :id="fileName" class="example-block">
-    <div class="example-slot">
-      <slot name="example" />
-    </div>
-
     <div v-show="title || desc" class="example-title-desc">
       <span class="example-title">{{ title }}</span>
       <slot name="content" />
+    </div>
+
+    <div class="example-slot">
+      <slot name="example" />
     </div>
 
     <div class="example-actions">
@@ -95,15 +95,16 @@ const style = computed(() => {
   </div>
 </template>
 
-<style>
-@import './index.css';
+<style lang="scss">
+@import './styles/index.scss';
+
 .example-block {
   --example-border-color: #ebedf1;
   --example-bg: #ffffff;
   --example-text-1: #213547;
 }
 
-.dark .example-block {
+[#{$dark-mode-attr}] .example-block {
   --example-border-color: #6b6c6d;
   --example-bg: #242424;
   --example-text-1: rgba(255, 255, 255, .87);
@@ -184,7 +185,7 @@ div[class*='language-'] {
 }
 
 .example-title-desc {
-  border-top: 1px dashed var(--example-border-color);
+  border-bottom: 1px dashed var(--example-border-color);
   padding: 1.2em 1em 1em;
   color: var(--example-text-1);
   position: relative;
@@ -197,6 +198,7 @@ div[class*='language-'] {
   left: 1em;
   transform: translateY(-50%);
   background: var(--example-bg);
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 16px;
 }
 </style>
