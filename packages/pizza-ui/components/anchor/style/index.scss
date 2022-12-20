@@ -25,6 +25,19 @@ $anchor-prefix-cls: #{$prefix}-anchor;
     overflow: hidden;
     transition: background-color .3s $pizza-anchor-bezier;
     background-color: $pizza-anchor-rail-color;
+
+    &-bar {
+      position: absolute;
+      left: 0;
+      width: $pizza-anchor-rail-width;
+      height: 21px;
+      background-color: $pizza-anchor-rail-color;
+      transition: top .15s $pizza-anchor-bezier, background-color .3s $pizza-anchor-bezier;
+
+      &-active {
+        background-color: $pizza-anchor-rail-bar-color;
+      }
+    }
   }
 
   &-wrap {

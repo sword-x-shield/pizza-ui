@@ -16,8 +16,7 @@ export default defineComponent({
     const context = inject(anchorInjectionKey, undefined);
 
     onMounted(() => {
-      if (props.href && linkRef.value)
-        context?.addLink(props.href, linkRef.value);
+      if (props.href && linkRef.value) context?.addLink(props.href, linkRef.value);
     });
 
     const handleClick = (e: MouseEvent) => context?.handleClick(e, props.href);
@@ -25,6 +24,7 @@ export default defineComponent({
     return {
       linkCls,
       context,
+      linkRef,
       handleClick,
     };
   },
