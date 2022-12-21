@@ -1,20 +1,18 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
-import { ref } from 'vue';
 
-type ThemeMode = 'light' | 'dark'
+withDefaults(defineProps<{
+  mode: 'light' | 'dark'
+}>(), {
+  mode: 'light',
+});
+
+const emit = defineEmits(['toggle-mode']);
 
 const router = useRouter();
 
 function goToGithub() {
   window.open('https://github.com/sword-x-shield/pizza-ui');
-}
-
-const mode = ref<ThemeMode>('light');
-function handleToggleMode() {
-  mode.value = mode.value === 'light' ? 'dark' : 'light';
-  const body = document.body;
-  body.setAttribute('pizza-theme', mode.value);
 }
 </script>
 
@@ -39,7 +37,7 @@ function handleToggleMode() {
         Playground
       </button>
       <div>0.0.1</div>
-      <div class="mode__trigger" @click="handleToggleMode">
+      <div class="mode__trigger" @click="emit('toggle-mode')">
         {{ mode === 'dark' ? '🌛' : '🌝' }}
       </div>
     </div>
@@ -59,8 +57,8 @@ button {
   grid-template-columns: calc(272px - 32px) 1fr auto;
   align-items: center;
   padding: 0 32px;
-  background-color: var(--pizza-color-bg-0);
-  color: var(--pizza-color-text-0);
+  background-color: var(--p-color-bg-0);
+  color: var(--p-color-text-0);
   @include font-size(3);
 }
 

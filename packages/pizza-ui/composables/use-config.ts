@@ -4,8 +4,11 @@ import { injectKey } from '../components/config-provider/context';
 export const defaultClsPrefix = 'p';
 
 export function useConfig() {
-  const PConfigProvider = inject(injectKey, undefined);
-  return {
-    clsPrefix: PConfigProvider?.clsPrefix ?? defaultClsPrefix,
+  const defaultProvide = {
+    clsPrefix: defaultClsPrefix,
+    mode: 'light',
   };
+  const PConfigProvider = inject(injectKey, defaultProvide);
+
+  return PConfigProvider;
 }

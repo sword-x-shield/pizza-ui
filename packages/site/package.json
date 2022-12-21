@@ -4,12 +4,12 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "pnpm run --parallel --filter '@pizza/*' --filter pizza-ui build && vite",
+    "dev": "pnpm run --parallel --filter '@pizza/*' --filter pizza-ui --filter=!@pizza/example-block build && vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@pizza/example-block": "workspace:^0.0.1",
+    "@pizza/example-block": "workspace:*",
     "pizza-ui": "workspace:*",
     "vue": "^3.2.41",
     "vue-router": "^4.1.6"
@@ -17,7 +17,6 @@
   "devDependencies": {
     "@pizza/site-parser": "workspace:^0.0.1",
     "@vitejs/plugin-vue": "^3.2.0",
-    "typescript": "~4.8.3",
-    "vite": "^3.2.3"
+    "vite": "^4.0.2"
   }
 }
