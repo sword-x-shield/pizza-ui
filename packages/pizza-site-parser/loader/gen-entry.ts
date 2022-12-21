@@ -71,7 +71,7 @@ function genScript(demoInfos: ExampleListType, components = [], forceShowAnchor:
     setup () {
       return {
         wrapperStyle: 'display: flex; flex-wrap: nowrap; padding: 20px',
-        contentStyle: '',
+        contentStyle: 'flex: 1;',
       }
     }
   }

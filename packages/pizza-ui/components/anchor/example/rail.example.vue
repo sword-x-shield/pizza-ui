@@ -5,11 +5,11 @@ title: 选择是否需要背景
 
 ## zh-CN
 
-使用 `showBackground` 这个参数能帮助你把背景干掉
+使用 `showRail` 这个参数能帮助你把轨道干掉
 </docs>
 
 <template>
-  <p-anchor :show-background="false">
+  <p-anchor :show-rail="false" :show-background="false">
     <p-anchor-link title="链接1" href="#basic">
       <p-anchor-link title="链接3" />
       <p-anchor-link title="链接4" />
@@ -18,4 +18,3 @@ title: 选择是否需要背景
     <p-anchor-link title="链接5" href="#rail" />
   </p-anchor>
 </template>
-

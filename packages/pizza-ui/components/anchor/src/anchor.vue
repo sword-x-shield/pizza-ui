@@ -33,6 +33,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const clsPrefix = getClsPrefix('anchor');
     const currentLink = ref('');
+    const isScrolling = ref(false);
     const links = reactive<Record<string, HTMLElement>>({});
     const scrollContainerEle = ref<HTMLElement>();
     const barRef = ref<HTMLElement>();
@@ -41,9 +42,11 @@ export default defineComponent({
     const scrollIntoView = (hash: string) => {
       const element = getElement(hash);
       if (!element) return;
+      isScrolling.value = true;
       element.scrollIntoView({
         behavior: props.smooth ? 'smooth' : 'auto',
       });
+      isScrolling.value = false;
     };
 
     const handleAnchorChange = (hash: string) => {
@@ -92,6 +95,7 @@ export default defineComponent({
     };
 
     const handleScroll = throttle(() => {
+      if (isScrolling.value) return;
       const element = getFirstInViewportEle();
       if (element && element.id) {
         const hash = `#${element.id}`;
@@ -162,7 +166,7 @@ export default defineComponent({
 <template>
   <div ref="selfRef" :class="`${clsPrefix}`">
     <div v-if="showBackground" ref="backgroundRef" :class="`${clsPrefix}-background`" />
-    <div :class="`${clsPrefix}-rail`">
+    <div v-if="showRail" :class="`${clsPrefix}-rail`">
       <div
         ref="barRef"
         :class="[`${clsPrefix}-rail-bar`, currentLink !== null && `${clsPrefix}-rail-bar-active`]"

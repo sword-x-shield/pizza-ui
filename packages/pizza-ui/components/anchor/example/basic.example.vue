@@ -15,6 +15,7 @@ title: 简单运用
       <p-anchor-link title="链接4" />
     </p-anchor-link>
     <p-anchor-link title="链接2" href="#background" />
+    <p-anchor-link title="链接5" href="#rail" />
   </p-anchor>
 </template>
 
