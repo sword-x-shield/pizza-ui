@@ -31,7 +31,9 @@
   },
   "dependencies": {
     "monaco-editor": "^0.34.1",
+    "monaco-themes": "^0.4.3",
     "nano-assign": "^1.0.1",
+    "pizza-ui": "workspace:*",
     "vue-live": "^2.3.2"
   },
   "devDependencies": {

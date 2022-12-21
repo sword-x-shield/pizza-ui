@@ -6,6 +6,8 @@ title: 选择是否需要背景
 ## zh-CN
 
 使用 `showBackground` 这个参数能帮助你把背景干掉
+
+## en-US
 </docs>
 
 <template>

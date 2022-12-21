@@ -1,6 +1,5 @@
 import { createApp } from 'vue';
 import ExampleBlock from '@pizza/example-block';
-// import '@pizza/example-block/dist/style.css';
 import pizza from 'pizza-ui';
 import 'pizza-ui/components/index.scss';
 import 'pizza-ui/_styles/index.scss';

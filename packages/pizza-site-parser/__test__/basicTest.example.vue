@@ -21,8 +21,16 @@ function onClick() {
 </script>
 
 <template>
-  <div>简单测试</div>
-  <button @click="onClick">
+  <div>
+    简单测试
+  </div>
+  <button class="test-text" @click="onClick">
     1111
   </button>
 </template>
+
+<style scoped>
+.test-text {
+  color: red;
+}
+</style>

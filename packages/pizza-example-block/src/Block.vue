@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { VueLivePreview } from 'vue-live';
+import { useConfig } from 'pizza-ui';
 import copySvg from './Icons/copy.vue';
 import codeSvg from './Icons/code.vue';
 import refreshSvg from './Icons/refresh.vue';
@@ -27,6 +28,10 @@ const props = withDefaults(
     importMap: () => ({}),
   },
 );
+
+const config = useConfig();
+
+const { cleanError, handleError, errMsg } = useError();
 
 const decodedCode = ref(decodeURIComponent(props.highlightedCode));
 
@@ -61,9 +66,9 @@ function handleMouseEnter() {
 function handleMouseLeave() {
   showEditorToolbar.value = false;
 }
-
-const { cleanError, handleError, errMsg } = useError();
-// TODO css 预处理器提前解析
+const editorTheme = computed(() => {
+  return config.mode === 'light' ? 'vs' : 'github-dark';
+});
 </script>
 
 <template>
@@ -112,6 +117,7 @@ const { cleanError, handleError, errMsg } = useError();
         ref="editor"
         v-model="decodedCode"
         language="html"
+        :theme="editorTheme"
         style="height: 100%;"
         :options="{
           automaticLayout: true,
@@ -159,7 +165,7 @@ const { cleanError, handleError, errMsg } = useError();
     }
 
     &:hover {
-      color: var(--pizza-primary-4);
+      color: var(--p-primary-4);
     }
   }
 }
@@ -189,8 +195,8 @@ div[class*='language-'] {
 
     .editor-tag {
       @include font-size(1);
-      color: var(--pizza-color-text-1);
-      background-color: var(--pizza-color-bg-2);
+      color: var(--p-color-text-1);
+      background-color: var(--p-color-bg-2);
       padding: 4px 8px;
       border-radius: var(--p-border-radius-small);
     }
@@ -260,8 +266,8 @@ div[class*='language-'] {
 
 .editor {
   &__error {
-    background-color: var(--pizza-danger-6);
-    color: var(--pizza-danger-1);
+    background-color: var(--p-danger-6);
+    color: var(--p-danger-1);
   }
 }
 

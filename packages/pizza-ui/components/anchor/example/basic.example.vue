@@ -5,7 +5,11 @@ title: 简单运用
 
 ## zh-CN
 
-引入组件，就是这么见到那
+引入组件，就是这么见到
+
+## en-US
+
+use component, that's how you see it
 </docs>
 
 <template>
