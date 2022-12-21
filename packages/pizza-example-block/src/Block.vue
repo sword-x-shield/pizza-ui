@@ -67,7 +67,7 @@ function handleMouseLeave() {
   showEditorToolbar.value = false;
 }
 const editorTheme = computed(() => {
-  return config.mode === 'light' ? 'vs' : 'github-dark';
+  return config.mode === 'light' ? 'github-light' : 'github-dark';
 });
 </script>
 

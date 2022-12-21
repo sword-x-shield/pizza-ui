@@ -15,7 +15,7 @@ function toggleMode() {
 
 <template>
   <p-config-provider :mode="mode">
-    <site-header @toggle-mode="toggleMode" />
+    <site-header :mode="mode" @toggle-mode="toggleMode" />
     <router-view />
   </p-config-provider>
 </template>

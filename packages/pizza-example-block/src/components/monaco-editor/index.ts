@@ -1,140 +1,162 @@
 import * as monaco from 'monaco-editor';
+import { editor } from 'monaco-editor';
 import assign from 'nano-assign';
-import { defineComponent, h } from 'vue';
+import { PropType, defineComponent, getCurrentInstance, h, nextTick, onBeforeMount, onMounted, shallowRef, watch } from 'vue';
 import './monacoEditor';
+
+type MonacoEditor = typeof monaco
 
 export default defineComponent({
   name: 'MonacoEditor',
 
   props: {
+    /**
+     * diffEditor 时的初始绑定值
+     */
     original: String,
+    /**
+     * 绑定值
+     */
     modelValue: {
       type: String,
       required: true,
     },
+    /**
+     * 主题
+     */
     theme: {
       type: String,
       default: 'vs',
     },
+    /**
+     * 语言 options.language
+     */
     language: String,
-    options: Object,
+    /**
+     * editor 配置
+     */
+    options: Object as PropType<editor.IStandaloneEditorConstructionOptions>,
+    /**
+     * 是否 diff editor
+     */
     diffEditor: {
       type: Boolean,
       default: false,
     },
   },
+  emits: ['editor-will-mount', 'editor-did-mount', 'update:modelValue'],
+  setup(props, { emit, expose }) {
+    const editorRef = shallowRef<any>();
+    const monacoEditor = shallowRef<MonacoEditor>();
+    const instance = getCurrentInstance()!;
 
-  setup() {
-    return () => h('div');
-  },
+    function getModifiedEditor() {
+      return props.diffEditor ? editorRef.value!.getModifiedEditor() : editorRef.value;
+    }
 
-  watch: {
-    options: {
-      deep: true,
-      handler(options: Record<string, any>) {
-        if (this.editor) {
-          const editor = this.getModifiedEditor();
-          editor.updateOptions(options);
-        }
-      },
-    },
+    function getOriginalEditor() {
+      return props.diffEditor ? editorRef.value!.getOriginalEditor() : editorRef.value;
+    }
 
-    modelValue(newValue: string) {
-      if (this.editor) {
-        const editor = this.getModifiedEditor();
-        if (newValue !== editor.getValue())
-          editor.setValue(newValue);
-      }
-    },
-
-    original(newValue: string) {
-      if (this.editor && this.diffEditor) {
-        const editor = this.getOriginalEditor();
-        if (newValue !== editor.getValue())
-          editor.setValue(newValue);
-      }
-    },
-
-    language(newVal: string) {
-      if (this.editor) {
-        const editor = this.getModifiedEditor();
-        this.monaco.editor.setModelLanguage(editor.getModel(), newVal);
-      }
-    },
-
-    theme(newVal: string) {
-      if (this.editor)
-        this.monaco.editor.setTheme(newVal);
-    },
-  },
-
-  mounted() {
-    this.monaco = monaco;
-    this.$nextTick(() => {
-      this.initMonaco(monaco);
-    });
-  },
-
-  beforeUnmount() {
-    this.editor && this.editor.dispose();
-  },
-
-  methods: {
-    initMonaco(monaco: any) {
-      this.$emit('editorWillMount', this.monaco);
+    function initMonaco(monaco: MonacoEditor) {
+      emit('editor-will-mount', monaco);
 
       const options = assign(
         {
-          value: this.modelValue,
-          theme: this.theme,
-          language: this.language,
+          value: props.modelValue,
+          theme: props.theme,
+          language: props.language,
         },
-        this.options,
+        props.options,
       );
 
-      if (this.diffEditor) {
-        this.editor = monaco.editor.createDiffEditor(this.$el, options);
+      if (props.diffEditor) {
+        editorRef.value = monaco.editor.createDiffEditor(instance.proxy!.$el, options);
         const originalModel = monaco.editor.createModel(
-          this.original,
-          this.language,
+          props.original!,
+          props.language,
         );
         const modifiedModel = monaco.editor.createModel(
-          this.modelValue,
-          this.language,
+          props.modelValue,
+          props.language,
         );
-        this.editor.setModel({
+        editorRef.value.setModel({
           original: originalModel,
           modified: modifiedModel,
         });
       }
       else {
-        this.editor = monaco.editor.create(this.$el, options);
+        editorRef.value = monaco.editor.create(instance.proxy!.$el, options);
       }
 
-      const editor = this.getModifiedEditor();
-      editor.onDidChangeModelContent((event) => {
+      const editor = getModifiedEditor();
+      editor.onDidChangeModelContent((event: any) => {
         const value = editor.getValue();
-        if (this.modelValue !== value)
-          this.$emit('update:modelValue', value, event);
+        if (props.modelValue !== value)
+          emit('update:modelValue', value, event);
       });
 
-      this.$emit('editorDidMount', this.editor);
-    },
+      emit('editor-did-mount', editorRef.value);
+    }
 
-    getEditor() {
-      return this.editor;
-    },
+    watch(() => props.options!, (options: editor.IStandaloneEditorConstructionOptions) => {
+      if (editorRef.value) {
+        const editor = getModifiedEditor();
+        editor.updateOptions(options);
+      }
+    }, {
+      deep: true,
+    });
 
-    getModifiedEditor() {
-      return this.diffEditor ? this.editor.getModifiedEditor() : this.editor;
-    },
+    watch(() => props.modelValue, (newValue: string) => {
+      if (editorRef.value) {
+        const editor = getModifiedEditor();
+        if (newValue !== editor.getValue())
+          editor.setValue(newValue);
+      }
+    });
 
-    getOriginalEditor() {
-      return this.diffEditor ? this.editor.getOriginalEditor() : this.editor;
-    },
+    watch(() => props.original, (newValue) => {
+      if (editorRef.value && props.diffEditor) {
+        const editor = getOriginalEditor();
+        if (newValue !== editor.getValue())
+          editor.setValue(newValue);
+      }
+    });
 
-    focus() {
-      this.editor.focus();
-    },
+    watch(() => props.language, (newValue) => {
+      if (editorRef.value) {
+        const editor = getModifiedEditor();
+        monacoEditor.value!.editor.setModelLanguage(editor.getModel(), newValue!);
+      }
+    });
+
+    watch(() => props.theme, (newVal) => {
+      if (editorRef.value)
+        monacoEditor.value!.editor.setTheme(newVal);
+    });
+
+    onMounted(() => {
+      monacoEditor.value = monaco;
+      nextTick(() => {
+        initMonaco(monacoEditor.value!);
+      });
+    });
+
+    onBeforeMount(() => {
+      editorRef.value && editorRef.value.dispose();
+    });
+
+    expose({
+      getEditor() {
+        return editorRef.value;
+      },
+      getOriginalEditor,
+      focus() {
+        editorRef.value && editorRef.value.focus();
+      },
+    });
+
+    return () => h('div');
   },
 });
