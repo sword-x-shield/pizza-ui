@@ -6,6 +6,7 @@
 
 ```example
 basic.vue
+background.vue
 ```
 
 ## API

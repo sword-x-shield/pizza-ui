@@ -1,12 +1,80 @@
-@import '../../../_styles/variables/index.scss';
+@import './token.scss';
 
 $anchor-prefix-cls: #{$prefix}-anchor;
 
 .#{$anchor-prefix-cls} {
+  position: relative;
+
   &-background {
-    background-color: var(--pizza-primary-6);
+    position: absolute;
+    width: 100%;
+    max-width: 0;
+    background-color: $pizza-anchor-background-color;
+    border-top-right-radius: $pizza-anchor-background-radius;
+    border-bottom-right-radius: $pizza-anchor-background-radius;
+    transition: top .15s $pizza-anchor-bezier, max-width .15s $pizza-anchor-bezier, background-color .3s $pizza-anchor-bezier;
   }
+
   &-rail {
-    background-color: var(--pizza-green-6);
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: $pizza-anchor-rail-width;
+    border-radius: calc($pizza-anchor-rail-width / 2);
+    overflow: hidden;
+    transition: background-color .3s $pizza-anchor-bezier;
+    background-color: $pizza-anchor-rail-color;
+
+    &-bar {
+      position: absolute;
+      left: 0;
+      width: $pizza-anchor-rail-width;
+      height: 21px;
+      background-color: $pizza-anchor-rail-color;
+      transition: top .15s $pizza-anchor-bezier, background-color .3s $pizza-anchor-bezier;
+
+      &-active {
+        background-color: $pizza-anchor-rail-bar-color;
+      }
+    }
+  }
+
+  &-wrap {
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+    margin-left: calc($pizza-anchor-rail-width * 3);
+  }
+
+  &-link-item {
+    list-style-type: none;
+    .#{$anchor-prefix-cls}-link {
+      display: block;
+      margin-bottom: 5px;
+      overflow: hidden;
+      color: $pizza-anchor-link-color;
+      font-size: $font-size-regular;
+      line-height: $line-height-base;
+      white-space: nowrap;
+      text-decoration: none;
+      text-overflow: ellipsis;
+      cursor: pointer;
+
+      &:hover {
+        color: $pizza-anchor-link-hover-color;
+        font-weight: 500;
+      }
+
+      &-active {
+        color: $pizza-anchor-link-hover-color;
+      }
+    }
+  }
+
+  &-link-item &-link-item {
+    margin-left: $pizza-anchor-item-inner-margin-left;
   }
 }

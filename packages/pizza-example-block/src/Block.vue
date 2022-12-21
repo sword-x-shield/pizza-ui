@@ -97,13 +97,13 @@ const style = computed(() => {
 
 <style>
 @import './index.css';
-.example-block {
+body {
   --example-border-color: #ebedf1;
   --example-bg: #ffffff;
   --example-text-1: #213547;
 }
 
-.dark .example-block {
+body[pizza-theme="dark"] {
   --example-border-color: #6b6c6d;
   --example-bg: #242424;
   --example-text-1: rgba(255, 255, 255, .87);
