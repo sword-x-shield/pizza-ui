@@ -1,12 +1,12 @@
-import { reactive, toRefs } from 'vue';
+import { Ref, reactive, toRefs } from 'vue';
 
-export function useCopyCode(code: string) {
+export function useCopyCode(code: Ref<string>) {
   const state = reactive({
     showTip: false,
   });
 
   function copyCode() {
-    navigator.clipboard.writeText(code);
+    navigator.clipboard.writeText(code.value);
     state.showTip = true;
     setTimeout(() => {
       state.showTip = false;
