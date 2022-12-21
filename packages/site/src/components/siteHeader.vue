@@ -19,7 +19,7 @@ function handleToggleMode() {
 </script>
 
 <template>
-  <div class="site-header__container p-font-size-3">
+  <div class="site-header__container">
     <div tag="div" class="site-header__logo" @click="router.push('/')">
       <img src="../assets/Pizza.png" width="35" height="35" style="padding: 5px;">
       <span>Pizza UI</span>
@@ -49,6 +49,7 @@ function handleToggleMode() {
 <style scoped lang="scss">
 @import '../style/index.css';
 @import 'pizza-ui/_styles/variables/index.scss';
+@import 'pizza-ui/_styles/font.scss';
 button {
   padding: 5px;
 }
@@ -58,8 +59,9 @@ button {
   grid-template-columns: calc(272px - 32px) 1fr auto;
   align-items: center;
   padding: 0 32px;
-  background-color: var(--p-color-bg-0);
-  color: var(--p-color-text-0);
+  background-color: var(--pizza-color-bg-0);
+  color: var(--pizza-color-text-0);
+  @include font-size(3);
 }
 
 .site-header__logo {
