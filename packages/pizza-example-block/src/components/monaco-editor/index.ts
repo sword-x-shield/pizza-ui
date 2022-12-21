@@ -1,7 +1,7 @@
 import * as monaco from 'monaco-editor';
 import { editor } from 'monaco-editor';
 import assign from 'nano-assign';
-import { PropType, defineComponent, getCurrentInstance, h, nextTick, onBeforeMount, onMounted, shallowRef, watch } from 'vue';
+import { PropType, defineComponent, getCurrentInstance, h, nextTick, onBeforeUnmount, onMounted, shallowRef, watch } from 'vue';
 import './monacoEditor';
 
 type MonacoEditor = typeof monaco
@@ -143,7 +143,7 @@ export default defineComponent({
       });
     });
 
-    onBeforeMount(() => {
+    onBeforeUnmount(() => {
       editorRef.value && editorRef.value.dispose();
     });
 
