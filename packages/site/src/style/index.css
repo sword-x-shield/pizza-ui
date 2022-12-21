@@ -5,13 +5,13 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: var(--pizza-primary-6);
+  background-color: var(--p-primary-6);
   cursor: pointer;
   transition: border-color 0.25s;
-  color: var(--pizza-color-text-0);
+  color: var(--p-color-text-0);
 }
 button:hover {
-  border-color: var(--pizza-primary-7);
+  border-color: var(--p-primary-7);
 }
 button:focus,
 button:focus-visible {

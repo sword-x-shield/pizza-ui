@@ -1,15 +1,15 @@
 <docs>
 ---
-title: 简单运用
+title: 选择是否需要背景
 ---
 
 ## zh-CN
 
-引入组件，就是这么见到那
+使用 `showBackground` 这个参数能帮助你把背景干掉
 </docs>
 
 <template>
-  <p-anchor>
+  <p-anchor :show-background="false">
     <p-anchor-link title="链接1" href="#basic">
       <p-anchor-link title="链接3" />
       <p-anchor-link title="链接4" />

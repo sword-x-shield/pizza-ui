@@ -54,7 +54,7 @@ button {
   padding: 5px;
 }
 .site-header__container{
-  border-bottom: 1px solid rgb(var(--pizza-gray-2));
+  border-bottom: 1px solid rgb(var(--p-gray-2));
   display: grid;
   grid-template-columns: calc(272px - 32px) 1fr auto;
   align-items: center;
