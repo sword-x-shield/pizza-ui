@@ -1,4 +1,5 @@
 export * from './anchor';
+export * from './affix';
 export * from './config-provider';
 
 declare module 'vue' {

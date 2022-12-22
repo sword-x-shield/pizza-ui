@@ -3,11 +3,5 @@
 $anchor-prefix-cls: #{$prefix}-affix;
 
 .#{$anchor-prefix-cls} {
-  position: fixed;
   z-index: 999;
-
-  &-absolute {
-    position: absolute;
-    z-index: 999;
-  }
 }
