@@ -1,19 +1,15 @@
 <docs>
 ---
-title: 基础用法
+title: 选择是否需要轨道
 ---
 
 ## zh-CN
 
-引入组件，就是这么见到
-
-## en-US
-
-use component, that's how you see it
+当 `showRail` 和 `show-background` 一起使用，你就能得到一个纯净的侧边栏了
 </docs>
 
 <template>
-  <p-anchor>
+  <p-anchor :show-rail="false" :show-background="false">
     <p-anchor-link title="链接1" href="#basic">
       <p-anchor-link title="链接3" />
       <p-anchor-link title="链接4" />
@@ -22,4 +18,3 @@ use component, that's how you see it
     <p-anchor-link title="链接5" href="#rail" />
   </p-anchor>
 </template>
-

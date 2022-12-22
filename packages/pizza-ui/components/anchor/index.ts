@@ -1,17 +1,17 @@
 import { withInstall } from '@pizza-ui/utils';
 import { App } from 'vue';
+import type{ Component, Plugin } from 'vue';
 
 import Anchor from './src/anchor.vue';
 import AnchorLink from './src/anchor-link.vue';
 
 export const PAnchor = withInstall(Anchor);
 export const PAnchorLink = withInstall(AnchorLink);
-const _Anchor = {
+const _Anchor: Component & Plugin = {
+  ...Anchor,
   Link: AnchorLink,
   install: (app: App) => {
-    [PAnchor.install, PAnchorLink.install].forEach((installFn) => {
-      installFn && installFn(app);
-    });
+    [PAnchor.install, PAnchorLink.install].forEach(installFn => installFn && installFn(app));
   },
 };
 

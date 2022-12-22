@@ -17,6 +17,7 @@ title: 选择是否需要背景
       <p-anchor-link title="链接4" />
     </p-anchor-link>
     <p-anchor-link title="链接2" href="#background" />
+    <p-anchor-link title="链接5" href="#rail" />
   </p-anchor>
 </template>
 
