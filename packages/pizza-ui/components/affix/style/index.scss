@@ -4,4 +4,8 @@ $anchor-prefix-cls: #{$prefix}-affix;
 
 .#{$anchor-prefix-cls} {
   z-index: 999;
+
+  &-warp {
+    position: relative;
+  }
 }

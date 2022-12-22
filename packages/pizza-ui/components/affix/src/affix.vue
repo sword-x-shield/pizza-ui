@@ -47,8 +47,7 @@ export default defineComponent({
         newFixedStyles = isFixed
           ? {
             position: positionType,
-            top: positionType === 'fixed' ? `${containerRect.top + (offsetTop || 0)}px` : null,
-            bottom: positionType === 'fixed' ? null : `${containerRect.top + (offsetTop || 0)}px`,
+            top: positionType === 'fixed' ? `${containerRect.top + (offsetTop || 0)}px` : `${offsetTop || 0}px`,
           }
           : {};
       }
@@ -57,15 +56,13 @@ export default defineComponent({
         newFixedStyles = isFixed
           ? {
             position: positionType,
-            bottom: `${
-              window.innerHeight - containerRect.bottom + (offsetBottom || 0)
-            }px`,
+            bottom: positionType === 'fixed' ? `${window.innerHeight - containerRect.bottom + (offsetBottom || 0)}px` : `${offsetBottom || 0}px`,
           }
           : {};
       }
 
       fixedStyles.value = { ...newFixedStyles };
-    });
+    }, 200);
 
     const init = () => {
       const { scrollTarget } = props;

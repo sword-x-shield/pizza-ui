@@ -5,18 +5,27 @@ title: 基础用法
 
 ## zh-CN
 
-引入组件，就是这么见到
+设置好固定值就能用了，当然，也别忘了需要设置滚动监听的目标
 </docs>
 
 <template>
-  <div id="containerRef" class="block-container">
+  <div id="fixedContainer" class="block-container">
     <div style="height: 600px;">
       <div class="padding-block" />
-      <p-affix :offset-top="50" scroll-target="#containerRef">
-        <div class="block">
-          我是固定盒子
-        </div>
-      </p-affix>
+      <div style="display: inline-block; width: 50%">
+        <p-affix :offset-top="50" scroll-target="#fixedContainer">
+          <div class="block">
+            距离顶部50px
+          </div>
+        </p-affix>
+      </div>
+      <div style="display: inline-block; width: 50%">
+        <p-affix :offset-bottom="50" scroll-target="#fixedContainer">
+          <div class="block">
+            距离底部60px
+          </div>
+        </p-affix>
+      </div>
     </div>
   </div>
 </template>
