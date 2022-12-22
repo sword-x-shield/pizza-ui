@@ -31,7 +31,6 @@ async function getContentOfExample(code: string, filePath: string): Promise<Comp
   if (script.includes('lang="ts"')) languageType = 'ts';
 
   // get template
-  const templateContent = await fetchCode(code, 'templateContent');
   const template = await fetchCode(code, 'template');
 
   // get style
@@ -41,7 +40,6 @@ async function getContentOfExample(code: string, filePath: string): Promise<Comp
     title: data.title,
     language: languageType,
     fileName: await getFileName(filePath),
-    template: templateContent,
     script,
     style,
     content,
