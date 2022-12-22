@@ -1,3 +1,5 @@
+@import '../../../_styles/variables/index.scss';
+
 $anchor-prefix-cls: #{$prefix}-affix;
 
 .#{$anchor-prefix-cls} {

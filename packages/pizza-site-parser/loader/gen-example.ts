@@ -17,7 +17,8 @@ async function getContentOfExample(code: string, filePath: string): Promise<Comp
   const tokens = marked.lexer(matterContent);
   const cnSplitIndex = tokens.findIndex(h => h.type === 'heading' && h.text === 'zh-CN');
   const enSplitIndex = tokens.findIndex(h => h.type === 'heading' && h.text === 'en-US');
-  const cnContentTokens = tokens.slice(cnSplitIndex + 1, enSplitIndex);
+  const endIndex = ~enSplitIndex ? enSplitIndex : tokens.length;
+  const cnContentTokens = tokens.slice(cnSplitIndex + 1, endIndex);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const enContentTokens = tokens.slice(enSplitIndex + 1);
   // 暂时默认为中文，后续根据全局语言切换content

@@ -1,6 +1,6 @@
 <docs>
 ---
-title: 简单运用
+title: 基础用法
 ---
 
 ## zh-CN
