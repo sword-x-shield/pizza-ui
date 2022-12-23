@@ -3,15 +3,7 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import dts from 'vite-plugin-dts';
 
-const monacoEditorEsmPrefix = 'monaco-editor/esm/vs';
-
-const monacoEditorWorker = [
-  `${monacoEditorEsmPrefix}/language/json/json.worker`,
-  `${monacoEditorEsmPrefix}/language/css/css.worker`,
-  `${monacoEditorEsmPrefix}/language/html/html.worker`,
-  `${monacoEditorEsmPrefix}/language/typescript/ts.worker`,
-  `${monacoEditorEsmPrefix}/editor/editor.worker`,
-];
+// const monacoEditorEsmPrefix = 'monaco-editor-core/esm/vs';
 
 export default defineConfig({
   plugins: [vue(), dts() as any],
@@ -23,7 +15,7 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: [...monacoEditorWorker, resolve(__dirname, './src/components/monaco-editor/index')],
+    include: [resolve(__dirname, './src/components/monaco-editor/index'), '@volar/vue-language-service'],
   },
   base: '',
   build: {
@@ -36,13 +28,6 @@ export default defineConfig({
     sourcemap: false,
     rollupOptions: {
       external: ['vue'],
-      manualChunks: {
-        jsonWorker: [`${monacoEditorEsmPrefix}/language/json/json.worker`],
-        cssWorker: [`${monacoEditorEsmPrefix}/language/css/css.worker`],
-        htmlWorker: [`${monacoEditorEsmPrefix}/language/html/html.worker`],
-        tsWorker: [`${monacoEditorEsmPrefix}/language/typescript/ts.worker`],
-        editorWorker: [`${monacoEditorEsmPrefix}/editor/editor.worker`],
-      },
     },
   },
 });

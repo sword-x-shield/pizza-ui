@@ -116,12 +116,13 @@ const editorTheme = computed(() => {
       <monaco-editor
         ref="editor"
         v-model="decodedCode"
-        language="html"
+        language="vue"
         :theme="editorTheme"
         style="height: 100%;"
         :options="{
           automaticLayout: true,
           scrollBeyondLastLine: false,
+          fixedOverflowWidgets: true,
           minimap: {
             autohide: true,
           },
