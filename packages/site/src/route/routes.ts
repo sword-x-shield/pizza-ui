@@ -6,18 +6,18 @@ export const baseRoute: Array<RouteRecordRaw> = [{
 }, {
   name: 'components',
   path: '/components',
-  redirect: '/components/test',
+  redirect: '/components/anchor',
   component: () => import('@/components/siteLayout.vue'),
   children: [
-    {
-      name: 'test',
-      path: 'test',
-      component: () => import('../../../pizza-site-parser/__test__/index.demo-entry.md'),
-    },
     {
       name: 'anchor',
       path: 'anchor',
       component: () => import('pizza-ui/components/anchor/example/index.entry.md'),
+    },
+    {
+      name: 'affix',
+      path: 'affix',
+      component: () => import('pizza-ui/components/affix/example/index.entry.md'),
     },
   ],
 },

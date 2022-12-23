@@ -1,5 +1,6 @@
 <script lang='ts'>
-import { PropType, defineComponent, onBeforeUnmount, onMounted, provide, reactive, ref, watch } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, onBeforeUnmount, onMounted, provide, reactive, ref, watch } from 'vue';
 import { throttle } from 'lodash-es';
 import { getClsPrefix, getElement } from '@pizza-ui/utils';
 import { anchorInjectionKey } from './context';

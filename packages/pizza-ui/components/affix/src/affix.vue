@@ -1,6 +1,7 @@
 <script lang='ts'>
-import { PropType, defineComponent, onMounted, ref } from 'vue';
-import { throttle } from 'lodash-es';
+import type { CSSProperties, PropType } from 'vue';
+import { defineComponent, onBeforeUnmount, onMounted, ref } from 'vue';
+import { isUndefined, throttle } from 'lodash-es';
 import { getClsPrefix, getElement } from '@pizza-ui/utils';
 
 export type AffixPosition = 'fixed' | 'absolute'
@@ -29,10 +30,39 @@ export default defineComponent({
     const clsPrefix = getClsPrefix('affix');
     const affixRef = ref<HTMLElement>();
     const container = ref<HTMLElement | Document | Window>();
+    const fixedStyles = ref<CSSProperties>();
+    const fixedStatus = ref(false);
 
     const handleScroll = throttle(() => {
-      // TODO top bottom计算
-    });
+      if (!affixRef.value) return;
+      const { offsetTop, offsetBottom, position } = props;
+      const offsetType = isUndefined(offsetBottom) ? 'top' : 'bottom';
+      const affixRect = affixRef.value.getBoundingClientRect();
+      const containerRect = container.value instanceof HTMLElement ? container.value.getBoundingClientRect() : { top: 0, bottom: window.innerHeight };
+      const positionType = position === 'absolute' ? 'absolute' : 'fixed';
+      let isFixed = false;
+      let newFixedStyles = {};
+      if (offsetType === 'top') {
+        isFixed = affixRect.top - containerRect.top < (offsetTop || 0);
+        newFixedStyles = isFixed
+          ? {
+            position: positionType,
+            top: positionType === 'fixed' ? `${containerRect.top + (offsetTop || 0)}px` : `${offsetTop || 0}px`,
+          }
+          : {};
+      }
+      else {
+        isFixed = containerRect.bottom - affixRect.bottom < (offsetBottom || 0);
+        newFixedStyles = isFixed
+          ? {
+            position: positionType,
+            bottom: positionType === 'fixed' ? `${window.innerHeight - containerRect.bottom + (offsetBottom || 0)}px` : `${offsetBottom || 0}px`,
+          }
+          : {};
+      }
+
+      fixedStyles.value = { ...newFixedStyles };
+    }, 200);
 
     const init = () => {
       const { scrollTarget } = props;
@@ -51,9 +81,18 @@ export default defineComponent({
       init();
     });
 
+    onBeforeUnmount(() => {
+      if (container.value) {
+        container.value.removeEventListener('scroll', handleScroll);
+        handleScroll();
+      }
+    });
+
     return {
       clsPrefix,
       affixRef,
+      fixedStyles,
+      fixedStatus,
     };
   },
 });
@@ -62,9 +101,10 @@ export default defineComponent({
 <template>
   <div
     ref="affixRef"
-    :class="[position === 'fixed' ? `${clsPrefix}` : `${clsPrefix}-absolute`]"
   >
-    <slot />
+    <div :style="fixedStyles" :class="clsPrefix">
+      <slot />
+    </div>
   </div>
 </template>
 
