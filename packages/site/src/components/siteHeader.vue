@@ -60,9 +60,11 @@ button {
   display: flex;
   padding-left: 32px;
 }
+
 .site-header__right {
   padding-right: 32px;
 }
+
 .site-header__container{
   position: fixed;
   z-index: 999;
