@@ -71,7 +71,6 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // padding: 0 32px;
   background-color: var(--p-color-bg-0);
   color: var(--p-color-text-0);
   @include font-size(3);
