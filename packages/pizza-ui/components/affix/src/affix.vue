@@ -89,10 +89,7 @@ export default defineComponent({
     });
 
     onBeforeUnmount(() => {
-      if (container.value) {
-        container.value.removeEventListener('scroll', handleScroll);
-        handleScroll();
-      }
+      if (container.value) container.value.removeEventListener('scroll', handleScroll);
     });
 
     return {
