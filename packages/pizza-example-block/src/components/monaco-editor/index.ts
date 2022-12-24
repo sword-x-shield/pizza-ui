@@ -1,8 +1,7 @@
-import * as monaco from 'monaco-editor';
-import { editor } from 'monaco-editor';
 import assign from 'nano-assign';
 import { PropType, defineComponent, getCurrentInstance, h, nextTick, onBeforeUnmount, onMounted, shallowRef, watch } from 'vue';
-import './monacoEditor';
+import { editor } from 'monaco-editor-core';
+import { monaco, wire } from './monacoEditor';
 
 type MonacoEditor = typeof monaco
 
@@ -86,8 +85,15 @@ export default defineComponent({
         });
       }
       else {
-        editorRef.value = monaco.editor.create(instance.proxy!.$el, options);
+        const model = monaco.editor.createModel(props.modelValue, props.language);
+
+        editorRef.value = monaco.editor.create(instance.proxy!.$el, {
+          ...options,
+          model,
+        });
       }
+
+      wire(editorRef.value);
 
       const editor = getModifiedEditor();
       editor.onDidChangeModelContent((event: any) => {

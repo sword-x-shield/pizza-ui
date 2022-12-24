@@ -1,16 +1,39 @@
-import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
-import HtmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
-import { editor } from 'monaco-editor/esm/vs/editor/editor.api';
+import EditorWorker from 'monaco-editor-core/esm/vs/editor/editor.worker?worker';
+import VueWorker from 'monaco-volar/vue.worker?worker';
+import * as monaco from 'monaco-editor-core';
 import GithubDark from 'monaco-themes/themes/GitHub Dark.json';
+import GithubLight from 'monaco-themes/themes/GitHub Light.json';
+import { loadWASM } from 'onigasm';
+import { loadGrammars, prepareVirtualFiles } from 'monaco-volar';
+import onigasmWasm from 'onigasm/lib/onigasm.wasm?url';
 
-editor.defineTheme('github-dark', GithubDark as any);
+function loadMonacoEnv() {
+  (self as any).MonacoEnvironment = {
+    async getWorker(_: any, label: string) {
+      if (label === 'vue')
+        return new VueWorker();
 
-self.MonacoEnvironment = {
-  getWorker(workerId, label) {
-    if (label === 'html' || label === 'handlebars' || label === 'razor')
-      return new HtmlWorker();
+      return new EditorWorker();
+    },
+  };
+}
+// 初始化编辑器
+export const initMonacoEditor = async () => {
+  monaco.editor.defineTheme('github-light', GithubLight as any);
+  monaco.editor.defineTheme('github-dark', GithubDark as any);
 
-    return new EditorWorker();
-  },
+  await Promise.all([
+    loadWASM(onigasmWasm),
+    loadMonacoEnv(),
+    prepareVirtualFiles(),
+  ]);
 };
+
+export const wire = async (editor: any) => {
+  loadGrammars(editor);
+};
+
+initMonacoEditor();
+
+export { monaco };
 

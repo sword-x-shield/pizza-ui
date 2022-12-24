@@ -28,7 +28,7 @@ export default defineComponent({
     },
   },
   emits: {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
     select: (_hash: string | undefined, _preHash: string) => true,
   },
   setup(props, { emit }) {

@@ -8,5 +8,7 @@ module.exports = {
     'no-undef': 'off',
     'no-unused-vars': 'off',
     'vue/no-reserved-component-names': 'off',
+
+    '@typescript-eslint/strict-boolean-expressions': 'off',
   },
 };

@@ -52,7 +52,6 @@ function genExampleTemplate(exampleList: ExampleListType, colSpan = 2) {
 }
 
 function genScript(demoInfos: ExampleListType, components = [], forceShowAnchor: boolean) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const showAnchor = !!(demoInfos.length || forceShowAnchor);
   const importStmts = demoInfos
     .map(({ variable, fileName }) => `import ${variable} from './${fileName}'`)
