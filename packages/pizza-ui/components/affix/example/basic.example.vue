@@ -47,7 +47,7 @@ title: 基础用法
   height: 30px;
   text-align: center;
   margin-left: 30px;
-  background-color:  #fff;
+  background-color:  transparent;
   border: 1px solid black;
 }
 

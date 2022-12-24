@@ -2,8 +2,8 @@ import { InjectionKey } from 'vue';
 
 export interface AnchorContext {
   currentLink: string
+  showRail: boolean
   addLink(hash: string, node: HTMLElement): void
-  // removeLink(): void
   handleClick(e: Event, hash?: string): void
 }
 

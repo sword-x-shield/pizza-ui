@@ -6,7 +6,7 @@
 
 ```example
 basic.vue
-background.vue
+fixed.vue
 rail.vue
 ```
 
@@ -17,6 +17,5 @@ rail.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | show-rail | `boolean` | `true` | 是否展示轨道 |  |
-| show-background | `boolean` | `true` | 是否展示背景|  |
 | smooth | `boolean` | `false` | 是否开始流畅滚动 |  |
 | offsetTarget | `string | HTMLElement` | `document` | 滚动目标容器 |  |

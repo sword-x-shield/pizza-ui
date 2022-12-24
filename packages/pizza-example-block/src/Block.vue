@@ -262,7 +262,7 @@ div[class*='language-'] {
   transform: translateY(-50%);
   background: var(--example-bg);
   font-weight: 600;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .editor {

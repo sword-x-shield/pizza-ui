@@ -35,7 +35,10 @@ export default defineComponent({
   <li ref="linkRef" :class="`${linkCls}-item`">
     <a
       :href="href"
-      :class="[linkCls, { [`${linkCls}-active`]: context?.currentLink === href }]"
+      :class="[linkCls, {
+        [`${linkCls}-active-line`]: context?.currentLink === href && context?.showRail,
+        [`${linkCls}-active`]: context?.currentLink === href && !context?.showRail,
+      }]"
       @click="handleClick"
     >
       {{ title }}

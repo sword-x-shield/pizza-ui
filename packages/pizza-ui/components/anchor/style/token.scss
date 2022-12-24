@@ -1,13 +1,12 @@
 @import '../../../_styles/variables/index.scss';
 
 body {
-  --p-rail-width: 4px;
+  --p-rail-width: 2px;
 }
 
 $pizza-anchor-bezier: var(--p-cubic-bezier-ease-in-out);
 
-$pizza-anchor-background-color: var(--p-primary-2);
-$pizza-anchor-background-radius: var(--p-border-radius-large);
+$pizza-anchor-background-color: rgb(var(--p-gray-1));
 
 $pizza-anchor-rail-color: var(--p-color-bg-2);
 $pizza-anchor-rail-bar-color: var(--p-primary-7);

@@ -1,6 +1,7 @@
 <script lang='ts'>
 import type { PropType } from 'vue';
 import { defineComponent, onBeforeUnmount, onMounted, provide, reactive, ref, watch } from 'vue';
+import scrollIntoViewIfNeed, { SmoothBehaviorOptions } from 'smooth-scroll-into-view-if-needed';
 import { throttle } from 'lodash-es';
 import { getClsPrefix, getElement } from '@pizza-ui/utils';
 import { anchorInjectionKey } from './context';
@@ -28,7 +29,6 @@ export default defineComponent({
     },
   },
   emits: {
-
     select: (_hash: string | undefined, _preHash: string) => true,
   },
   setup(props, { emit }) {
@@ -38,16 +38,15 @@ export default defineComponent({
     const links = reactive<Record<string, HTMLElement>>({});
     const scrollContainerEle = ref<HTMLElement>();
     const barRef = ref<HTMLElement>();
-    const backgroundRef = ref<HTMLElement>();
 
     const scrollIntoView = (hash: string) => {
       const element = getElement(hash);
       if (!element) return;
       isScrolling.value = true;
-      element.scrollIntoView({
-        behavior: props.smooth ? 'smooth' : 'auto',
+      const behaviorType = props.smooth ? 'smooth' : 'auto';
+      scrollIntoViewIfNeed(element, { block: 'start', behavior: behaviorType as SmoothBehaviorOptions['behavior'] }).then(() => {
+        isScrolling.value = false;
       });
-      isScrolling.value = false;
     };
 
     const handleAnchorChange = (hash: string) => {
@@ -86,10 +85,7 @@ export default defineComponent({
           const offsetTop = scrollContainerEle.value === document.documentElement
             ? top
             : top - containerRect.top;
-
-          // 超过容器一半代表滚动条已经到底
-          if (offsetTop >= 0 && offsetTop <= containerRect.height / 2)
-            return element;
+          if (offsetTop >= -5 && offsetTop <= containerRect.height / 2) return element;
         }
       }
       return undefined;
@@ -115,14 +111,8 @@ export default defineComponent({
     watch(currentLink, () => {
       const link = links[currentLink.value];
       if (props.showRail && link && barRef.value) {
-        barRef.value.style.top = `${link.getElementsByTagName('a')[0].offsetTop}px`;
-        barRef.value.style.height = `${link.getElementsByTagName('a')[0].offsetHeight}px`;
-      }
-
-      if (props.showBackground && link && backgroundRef.value) {
-        backgroundRef.value.style.top = `${link.getElementsByTagName('a')[0].offsetTop}px`;
-        backgroundRef.value.style.height = `${link.getElementsByTagName('a')[0].offsetHeight}px`;
-        backgroundRef.value.style.maxWidth = `${link.getElementsByTagName('a')[0].offsetWidth}px`;
+        barRef.value.style.top = `${(link.firstElementChild as HTMLElement).offsetTop}px`;
+        barRef.value.style.height = `${(link.firstElementChild as HTMLElement).offsetHeight}px`;
       }
     });
 
@@ -149,6 +139,7 @@ export default defineComponent({
       anchorInjectionKey,
       reactive({
         currentLink,
+        showRail: props.showRail,
         handleClick,
         addLink,
       }),
@@ -157,7 +148,6 @@ export default defineComponent({
     return {
       clsPrefix,
       barRef,
-      backgroundRef,
       currentLink,
     };
   },
@@ -165,8 +155,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div ref="selfRef" :class="`${clsPrefix}`">
-    <div v-if="showBackground" ref="backgroundRef" :class="`${clsPrefix}-background`" />
+  <div :class="`${clsPrefix}`">
     <div v-if="showRail" :class="`${clsPrefix}-rail`">
       <div
         ref="barRef"

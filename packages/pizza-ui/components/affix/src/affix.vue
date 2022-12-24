@@ -42,6 +42,10 @@ export default defineComponent({
       const positionType = position === 'absolute' ? 'absolute' : 'fixed';
       let isFixed = false;
       let newFixedStyles = {};
+      const newPlaceholderStyles: CSSProperties = {
+        width: `${affixRef.value.offsetWidth}px`,
+        height: `${affixRef.value.offsetHeight}px`,
+      };
       if (offsetType === 'top') {
         isFixed = affixRect.top - containerRect.top < (offsetTop || 0);
         newFixedStyles = isFixed
@@ -61,7 +65,10 @@ export default defineComponent({
           : {};
       }
 
-      fixedStyles.value = { ...newFixedStyles };
+      fixedStyles.value = {
+        ...newFixedStyles,
+        ...(isFixed ? newPlaceholderStyles : {}),
+      };
     }, 200);
 
     const init = () => {

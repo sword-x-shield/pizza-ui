@@ -10,8 +10,6 @@ $anchor-prefix-cls: #{$prefix}-anchor;
     width: 100%;
     max-width: 0;
     background-color: $pizza-anchor-background-color;
-    border-top-right-radius: $pizza-anchor-background-radius;
-    border-bottom-right-radius: $pizza-anchor-background-radius;
     transition: top .15s $pizza-anchor-bezier, max-width .15s $pizza-anchor-bezier, background-color .3s $pizza-anchor-bezier;
   }
 
@@ -54,6 +52,7 @@ $anchor-prefix-cls: #{$prefix}-anchor;
     .#{$anchor-prefix-cls}-link {
       display: block;
       margin-bottom: 5px;
+      padding: 2px 8px;
       overflow: hidden;
       color: $pizza-anchor-link-color;
       font-size: $font-size-regular;
@@ -65,10 +64,17 @@ $anchor-prefix-cls: #{$prefix}-anchor;
 
       &:hover {
         color: $pizza-anchor-link-hover-color;
-        font-weight: 500;
+        font-weight: $font-weight-bold;
       }
 
       &-active {
+        color: $pizza-anchor-link-hover-color;
+        background-color: $pizza-anchor-background-color;
+        transition: background-color .3s $pizza-anchor-bezier;
+        font-weight: $font-weight-bold;
+      }
+
+      &-active-line {
         color: $pizza-anchor-link-hover-color;
       }
     }

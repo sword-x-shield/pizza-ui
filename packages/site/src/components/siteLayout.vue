@@ -17,7 +17,7 @@ import siteFooter from './siteFooter.vue';
 <style scoped>
 .site-layout {
   display: flex;
-
+  padding-top: 46px;
 }
 
 .site-layout__menu {
