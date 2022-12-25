@@ -17,8 +17,9 @@ async function getContentOfExample(code: string, filePath: string): Promise<Comp
   const tokens = marked.lexer(matterContent);
   const cnSplitIndex = tokens.findIndex(h => h.type === 'heading' && h.text === 'zh-CN');
   const enSplitIndex = tokens.findIndex(h => h.type === 'heading' && h.text === 'en-US');
-  const cnContentTokens = tokens.slice(cnSplitIndex + 1, enSplitIndex);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const endIndex = ~enSplitIndex ? enSplitIndex : tokens.length;
+  const cnContentTokens = tokens.slice(cnSplitIndex + 1, endIndex);
+
   const enContentTokens = tokens.slice(enSplitIndex + 1);
   // 暂时默认为中文，后续根据全局语言切换content
   const content = await marked.parser(cnContentTokens, {
@@ -31,7 +32,6 @@ async function getContentOfExample(code: string, filePath: string): Promise<Comp
   if (script.includes('lang="ts"')) languageType = 'ts';
 
   // get template
-  const templateContent = await fetchCode(code, 'templateContent');
   const template = await fetchCode(code, 'template');
 
   // get style
@@ -41,7 +41,6 @@ async function getContentOfExample(code: string, filePath: string): Promise<Comp
     title: data.title,
     language: languageType,
     fileName: await getFileName(filePath),
-    template: templateContent,
     script,
     style,
     content,

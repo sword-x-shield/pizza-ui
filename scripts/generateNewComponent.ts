@@ -42,16 +42,16 @@ function init() {
   const genVueTemplate = (newComponentPath: string) => {
     fse.outputFileSync(
       path.join(newComponentPath, `src/${kebabCaseComponentName}.vue`),
-      `<template>
+      `<script lang='ts'>
+import { defineComponent } from 'vue';
+export default defineComponent({
+  name: '${upperComponentName}',
+});
+</script>
+
+<template>
   <div>P${upperComponentName}</div>
 </template>
-
-<script lang='ts' setup>
-defineOptions({
-  name: 'P${upperComponentName}',
-})
-
-</script>
         `,
     );
   };
@@ -59,8 +59,8 @@ defineOptions({
   const genTestTemplate = (newComponentPath: string) => {
     fse.outputFileSync(
       path.join(newComponentPath, `__tests__/${kebabCaseComponentName}.spec.ts`),
-      `import { mount } from '@vue/test-utils'
-import ${upperComponentName} from '../src/${kebabCaseComponentName}.vue'
+      `import { mount } from '@vue/test-utils;'
+import ${upperComponentName} from '../src/${kebabCaseComponentName}.vue;'
 
 describe('${kebabCaseComponentName}.vue', () => {
   test('should render ${kebabCaseComponentName}', () => {
@@ -80,10 +80,10 @@ describe('${kebabCaseComponentName}.vue', () => {
   const genExportTemplate = (newComponentPath: string) => {
     fse.outputFileSync(
       path.join(newComponentPath, 'index.ts'),
-      `import { withInstall } from '@pizza-ui/utils'\n
-import ${upperComponentName} from './src/${kebabCaseComponentName}.vue'\n
-export const P${upperComponentName} = withInstall(${upperComponentName})\n
-export default P${upperComponentName}\n`,
+      `import { withInstall } from '@pizza-ui/utils';\n
+import ${upperComponentName} from './src/${kebabCaseComponentName}.vue';\n
+export const P${upperComponentName} = withInstall(${upperComponentName});\n
+export default P${upperComponentName};\n`,
     );
   };
 

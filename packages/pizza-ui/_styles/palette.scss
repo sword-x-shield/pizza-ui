@@ -1,0 +1,126 @@
+@import './variables/index.scss';
+
+body {
+    --p-primary-1: rgb(255, 253, 232);
+    --p-primary-2: rgb(255, 247, 187);
+    --p-primary-3: rgb(255, 238, 142);
+    --p-primary-4: rgb(255, 226, 96);
+    --p-primary-5: rgb(255, 211, 51);
+    --p-primary-6: rgb(255, 193, 6);
+    --p-primary-7: rgb(210, 152, 4);
+    --p-primary-8: rgb(166, 114, 2);
+    --p-primary-9: rgb(121, 79, 1);
+    --p-primary-10: rgb(77, 47, 0);
+
+    --p-orange-1: rgb(255, 247, 232);
+    --p-orange-2: rgb(253, 228, 184);
+    --p-orange-3: rgb(251, 205, 137);
+    --p-orange-4: rgb(249, 180, 91);
+    --p-orange-5: rgb(247, 153, 45);
+    --p-orange-6: rgb(245, 124, 0);
+    --p-orange-7: rgb(203, 95, 0);
+    --p-orange-8: rgb(161, 70, 0);
+    --p-orange-9: rgb(119, 47, 0);
+    --p-orange-10: rgb(77, 28, 0);
+
+    --p-danger-1: rgb(255, 237, 232);
+    --p-danger-2: rgb(254, 213, 202);
+    --p-danger-3: rgb(254, 186, 172);
+    --p-danger-4: rgb(253, 158, 143);
+    --p-danger-5: rgb(253, 127, 113);
+    --p-danger-6: rgb(252, 94, 84);
+    --p-danger-7: rgb(208, 57, 52);
+    --p-danger-8: rgb(164, 27, 27);
+    --p-danger-9: rgb(120, 10, 14);
+    --p-danger-10: rgb(77, 0, 5);
+
+    --p-green-1: rgb(232, 255, 234);
+    --p-green-2: rgb(180, 246, 186);
+    --p-green-3: rgb(131, 237, 145);
+    --p-green-4: rgb(85, 229, 109);
+    --p-green-5: rgb(42, 220, 77);
+    --p-green-6: rgb(2, 211, 52);
+    --p-green-7: rgb(1, 177, 48);
+    --p-green-8: rgb(1, 144, 44);
+    --p-green-9: rgb(0, 110, 37);
+    --p-green-10: rgb(0, 77, 28);
+
+    --p-gray-1: 242, 243, 245;
+    --p-gray-2: 224, 224, 224;
+    --p-gray-3: 204, 204, 204;
+    --p-gray-4: 163, 163, 163;
+    --p-gray-5: 133, 133, 133;
+    --p-gray-6: 102, 102, 102;
+    --p-gray-7: 83, 83, 83;
+    --p-gray-8: 40, 40, 40;
+
+    --p-color-text-0: rgba(var(--p-gray-8), 1); // 主要文字
+    --p-color-text-1: rgba(var(--p-gray-8), 0.8); // 次要文字
+    --p-color-text-2: rgba(var(--p-gray-8), 0.6);
+
+    --p-black: 0,0,0;
+    --p-white: 255, 255, 255;
+
+    --p-color-bg-0: rgba(var(--p-white), 1); // 背景色
+    --p-color-bg-1: rgba(var(--p-white), 1);
+    --p-color-bg-2: rgb(250, 250, 252);
+}
+
+body[#{$dark-mode-attr}] {
+    --p-primary-1: rgb(77, 47, 0);
+    --p-primary-2: rgb(121, 79, 2);
+    --p-primary-3: rgb(166, 116, 9);
+    --p-primary-4: rgb(210, 156, 20);
+    --p-primary-5: rgb(255, 200, 34);
+    --p-primary-6: rgb(255, 210, 44);
+    --p-primary-7: rgb(255, 225, 93);
+    --p-primary-8: rgb(255, 238, 141);
+    --p-primary-9: rgb(255, 247, 190);
+    --p-primary-10: rgb(255, 254, 238);
+
+    --p-orange-1: rgb(77, 28, 0);
+    --p-orange-2: rgb(119, 49, 4);
+    --p-orange-3: rgb(161, 75, 10);
+    --p-orange-4: rgb(203, 105, 18);
+    --p-orange-5: rgb(245, 139, 29);
+    --p-orange-6: rgb(247, 149, 37);
+    --p-orange-7: rgb(249, 177, 85);
+    --p-orange-8: rgb(251, 203, 133);
+    --p-orange-9: rgb(253, 227, 182);
+    --p-orange-10: rgb(255, 247, 232);
+
+    --p-danger-1: rgb(77, 0, 5);
+    --p-danger-2: rgb(120, 10, 14);
+    --p-danger-3: rgb(164, 30, 30);
+    --p-danger-4: rgb(208, 64, 59);
+    --p-danger-5: rgb(252, 106, 97);
+    --p-danger-6: rgb(253, 135, 122);
+    --p-danger-7: rgb(253, 164, 150);
+    --p-danger-8: rgb(254, 192, 179);
+    --p-danger-9: rgb(254, 217, 207);
+    --p-danger-10: rgb(255, 240, 235);
+
+    --p-green-1: rgb(0, 77, 28);
+    --p-green-2: rgb(1, 110, 38);
+    --p-green-3: rgb(9, 144, 49);
+    --p-green-4: rgb(19, 177, 61);
+    --p-green-5: rgb(34, 211, 76);
+    --p-green-6: rgb(46, 220, 80);
+    --p-green-7: rgb(89, 229, 112);
+    --p-green-8: rgb(135, 237, 148);
+    --p-green-9: rgb(184, 246, 190);
+    --p-green-10: rgb(237, 255, 239);
+
+    --p-gray-1: 23, 23, 23;
+    --p-gray-2: 46, 46, 46;
+    --p-gray-3: 126, 123, 123;
+    --p-gray-4: 133, 133, 133;
+    --p-gray-5: 167, 167, 167;
+    --p-gray-6: 194, 190, 190;
+    --p-gray-7: 210, 210, 210;
+    --p-gray-8: 245, 245, 245;
+
+    --p-color-bg-0: rgba(22, 22, 22, 1);
+    --p-color-bg-1: rgba(35, 35, 45, 1); // 背景色
+    --p-color-bg-2: rgba(53, 53, 60, 1);
+}

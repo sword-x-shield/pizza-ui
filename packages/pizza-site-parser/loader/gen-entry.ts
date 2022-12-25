@@ -32,9 +32,8 @@ async function parserExampleList(code: string, url: string) {
 
     const variable = `${uppercamelcase(id)}Example`;
     const { title } = await getExampleContentByFile(fileName, url);
-
     formatList.push({
-      id,
+      id: id.replace('.vue', ''),
       variable,
       title,
       tag: `<${variable} />`,
@@ -52,7 +51,6 @@ function genExampleTemplate(exampleList: ExampleListType, colSpan = 2) {
 }
 
 function genScript(demoInfos: ExampleListType, components = [], forceShowAnchor: boolean) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const showAnchor = !!(demoInfos.length || forceShowAnchor);
   const importStmts = demoInfos
     .map(({ variable, fileName }) => `import ${variable} from './${fileName}'`)
@@ -70,8 +68,9 @@ function genScript(demoInfos: ExampleListType, components = [], forceShowAnchor:
     },
     setup () {
       return {
-        wrapperStyle: 'display: flex; flex-wrap: nowrap; padding: 20px',
-        contentStyle: '',
+        wrapperStyle: 'display: flex; flex-wrap: nowrap; padding: 0 20px',
+        contentStyle: 'flex: 1; margin-right: 36px;',
+        showAnchor: ${showAnchor}
       }
     }
   }
@@ -79,7 +78,36 @@ function genScript(demoInfos: ExampleListType, components = [], forceShowAnchor:
   return script;
 }
 
-function genTemplate(tokens: marked.TokensList) {
+function genExampleAnchorTemplate(tokens: marked.TokensList, exampleList: ExampleListType, hasApi: boolean) {
+  const linksWithApi = [
+    {
+      id: 'API',
+      title: 'API',
+    },
+  ].concat(tokens
+    .filter(token => token.type === 'heading' && token.depth === 3)
+    .map(token => ({
+      id: (token as marked.Tokens.Heading).text.replace(/ /g, '-'),
+      title: (token as marked.Tokens.Heading).text,
+    })));
+  const links = (hasApi ? exampleList.concat(linksWithApi as ExampleListType) : exampleList).map(({ id, title }) => `<p-anchor-link title="${title}" href="#${id}"/>`);
+
+  return `
+    <p-anchor
+      :show-rail="false"
+      style="width: 192px; position: sticky; top: 80px; max-height: calc(100vh - 32px - 64px); height: auto;"
+    >
+      ${links.join('\n')}
+    </p-anchor>
+  `;
+}
+
+function genPageAnchorTemplate(tokens: marked.TokensList) {
+  // TODO - simple md file
+  return '';
+}
+
+function genTemplate(tokens: marked.TokensList, exampleList: ExampleListType, hasApi: boolean) {
   const docMainTemplate = marked.parser(tokens, {
     gfm: true,
     renderer: mdRenderer,
@@ -95,6 +123,11 @@ function genTemplate(tokens: marked.TokensList) {
         ${docMainTemplate}
       </div>
       <div style="width: 192px;" v-if="showAnchor">
+${
+  exampleList.length
+    ? genExampleAnchorTemplate(tokens, exampleList, hasApi)
+    : genPageAnchorTemplate(tokens)
+}
       </div>
     </div>
   </template>`;
@@ -103,6 +136,7 @@ function genTemplate(tokens: marked.TokensList) {
 
 export async function parserEntryMarkdown(code: string, url: string) {
   const forceShowAnchor = !!~code.search('<!--anchor:on-->');
+  const hasApi = !!~code.search('## API');
   const colSpan = ~code.search('<!--single-column-->') ? 1 : 2;
   const tokens = marked.lexer(code);
   // 解析示例
@@ -117,7 +151,7 @@ export async function parserEntryMarkdown(code: string, url: string) {
     } as unknown as marked.Tokens.HTML);
   }
   const scriptCode = await genScript(examplesList, [], forceShowAnchor);
-  const templateCode = await genTemplate(tokens);
+  const templateCode = await genTemplate(tokens, examplesList, hasApi);
 
   return `${templateCode}\n\n${scriptCode}`;
 }

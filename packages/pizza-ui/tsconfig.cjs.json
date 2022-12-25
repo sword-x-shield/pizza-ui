@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "exclude": ["./**/*.spec.*"],
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "./lib",
+    "module": "CommonJS",
+    "target": "ES6",
+    "jsx": "react",
+    "baseUrl": ".",
+    "paths": {
+      "@pizza-ui/*": ["./*"]
+    }
+  }
+}

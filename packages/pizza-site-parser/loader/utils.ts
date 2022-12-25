@@ -28,9 +28,6 @@ const demoBlock = `
     <template #content>
       <!-- CONTENT_SLOT -->
     </template>
-    <template #example>
-      <!-- EXAMPLE_SLOT -->
-    </template>
   </example-block>
 </template>
 
@@ -121,7 +118,6 @@ export function genVueComponent(parts: ComponentPartsType, fileName?: string, re
   const contentReg = /<!-- CONTENT_SLOT -->/;
   const scriptReg = /<!-- SCRIPT_SLOT -->/;
   const styleReg = /<!-- STYLE_SLOT -->/;
-  const exampleReg = /<!-- EXAMPLE_SLOT -->/;
   const languageTypeReg = /<!--LANGUAGE_TYPE_SLOT-->/;
   let src = demoBlock;
   src = src.replace(relativeUrlReg, relativeUrl);
@@ -146,9 +142,6 @@ export function genVueComponent(parts: ComponentPartsType, fileName?: string, re
 
   if (parts.style)
     src = src.replace(styleReg, parts.style);
-
-  if (parts.template)
-    src = src.replace(exampleReg, parts.template);
 
   return src.trim();
 }
