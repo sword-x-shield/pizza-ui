@@ -32,7 +32,7 @@ $anchor-prefix-cls: #{$prefix}-anchor;
       background-color: $pizza-anchor-rail-color;
       transition: top .15s $pizza-anchor-bezier, background-color .3s $pizza-anchor-bezier;
 
-      &-active {
+      &--active {
         background-color: $pizza-anchor-rail-bar-color;
       }
     }

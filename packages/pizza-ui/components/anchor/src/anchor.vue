@@ -66,7 +66,7 @@ export default defineComponent({
       emit('select', hash, currentLink.value);
     };
 
-    const getContainer = () => {
+    const setContainer = () => {
       if (props.offsetTarget)
         scrollContainerEle.value = getElement(props.offsetTarget);
       else
@@ -117,7 +117,7 @@ export default defineComponent({
     });
 
     onMounted(() => {
-      getContainer();
+      setContainer();
 
       const hash = decodeURIComponent(window.location.hash);
       if (hash) {
@@ -159,7 +159,7 @@ export default defineComponent({
     <div v-if="showRail" :class="`${clsPrefix}-rail`">
       <div
         ref="barRef"
-        :class="[`${clsPrefix}-rail-bar`, currentLink !== null && `${clsPrefix}-rail-bar-active`]"
+        :class="[`${clsPrefix}-rail-bar`, currentLink !== null && `${clsPrefix}-rail-bar--active`]"
       />
     </div>
     <ul :class="`${clsPrefix}-wrap`">

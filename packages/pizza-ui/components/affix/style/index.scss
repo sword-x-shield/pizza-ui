@@ -3,7 +3,7 @@
 $anchor-prefix-cls: #{$prefix}-affix;
 
 .#{$anchor-prefix-cls} {
-  z-index: 999;
+  z-index: $z-index-affix;
 
   &-warp {
     position: relative;

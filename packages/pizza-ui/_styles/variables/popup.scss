@@ -1,0 +1,7 @@
+$z-index-popup-base: 1000;
+$z-index-affix: $z-index-popup-base - 1; // 999
+$z-index-popup: $z-index-popup-base; // 1000
+$z-index-drawer: $z-index-popup-base + 1; // 1001
+$z-index-modal: $z-index-drawer; // 1001
+$z-index-message: $z-index-popup-base + 3; // 1003
+$z-index-notification: $z-index-popup-base + 3; // 1003
