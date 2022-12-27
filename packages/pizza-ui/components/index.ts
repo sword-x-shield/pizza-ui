@@ -1,7 +1,16 @@
-export { default } from './preset';
+import type { App } from 'vue';
+import * as components from './components';
+
+const install = (app: App) => {
+  for (const key of Object.keys(components)) {
+    const name = key as keyof typeof components;
+    app.use(components[name]);
+  }
+};
+
+export * from './components';
 export { useConfig } from '../composables/use-config';
 
-export { PAnchor } from './anchor';
-export type { AnchorInstance } from './anchor';
-export { PAffix } from './affix';
-export type { AffixInstance } from './affix';
+export default {
+  install,
+};

@@ -13,6 +13,7 @@
     "build:component": "rollup -c --bundleConfigAsCjs",
     "build:style": "tsx build/build-style",
     "dev": "rollup -c --watch --bundleConfigAsCjs",
+    "gen-declare": "tsx --tsconfig ./tsconfig.esm.json build/gen-declare",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
