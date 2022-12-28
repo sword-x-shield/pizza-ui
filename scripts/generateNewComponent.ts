@@ -77,6 +77,19 @@ describe('${kebabCaseComponentName}.vue', () => {
     );
   };
 
+  const genStyleTemplate = (newComponentPath: string) => {
+    fse.outputFileSync(path.join(newComponentPath, 'style/index.ts'), 'import \'./index.scss\';');
+    fse.outputFileSync(path.join(newComponentPath, 'style/index.scss'), `
+  @import '../../../_styles/index.scss';
+
+  $anchor-prefix-cls: #{$prefix}-${componentName};
+
+  .#{$anchor-prefix-cls} {
+
+  }
+    `);
+  };
+
   const genExportTemplate = (newComponentPath: string) => {
     fse.outputFileSync(
       path.join(newComponentPath, 'index.ts'),
@@ -90,6 +103,7 @@ export default P${upperComponentName};\n`,
   const genTemplateList = [
     genVueTemplate,
     genTestTemplate,
+    genStyleTemplate,
     genExportTemplate,
   ];
 
