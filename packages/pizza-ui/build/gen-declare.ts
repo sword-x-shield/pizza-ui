@@ -3,6 +3,7 @@ import process from 'process';
 import uppercamelcase from 'uppercamelcase';
 import fs from 'fs-extra';
 import glob from 'glob';
+import { componentPrefix } from '../utils';
 
 const root = process.cwd();
 const resolvePath = (relativePath: string) => {
@@ -16,14 +17,14 @@ const files = glob.sync('**/index.ts', {
 async function genDeclare() {
   const components: Record<string, string> = {};
   files.forEach((key) => {
-    const entry = `typeof import('pizza-ui')['P${key}']`;
+    const entry = `typeof import('pizza-ui')['${componentPrefix}${key}']`;
     components[key] = entry;
   });
 
   const lines = Object.entries(components).map(([name, v]) => {
     if (!/^\w+$/.test(name)) name = `'${name}'`;
 
-    return `P${name}: ${v}`;
+    return `${componentPrefix}${name}: ${v}`;
   });
   const code = `declare module 'vue' {
   export interface GlobalComponents {

@@ -4,7 +4,7 @@ interface PizzaOption {
   componentPrefix: string
 }
 
-const componentPrefix = 'P';
+export const componentPrefix = 'P';
 
 export const getClsPrefix = (componentName?: string): string => {
   const { clsPrefix } = useConfig();
