@@ -106,6 +106,7 @@ importers:
       '@types/clean-css': ^4.2.6
       '@types/glob': ^8.0.0
       '@types/lodash-es': ^4.17.6
+      '@types/uppercamelcase': ^3.0.0
       clean-css: ^5.3.1
       esbuild: ^0.16.2
       fs-extra: ^10.1.0
@@ -118,6 +119,7 @@ importers:
       smooth-scroll-into-view-if-needed: ^1.1.33
       tslib: ^2.4.1
       tsx: ^3.12.0
+      uppercamelcase: ^3.0.0
       vue: ^3.0.0
     dependencies:
       lodash-es: 4.17.21
@@ -134,6 +136,7 @@ importers:
       '@types/clean-css': 4.2.6
       '@types/glob': 8.0.0
       '@types/lodash-es': 4.17.6
+      '@types/uppercamelcase': 3.0.0
       clean-css: 5.3.1
       esbuild: 0.16.2
       fs-extra: 10.1.0
@@ -144,6 +147,7 @@ importers:
       sass: 1.57.0
       tslib: 2.4.1
       tsx: 3.12.1
+      uppercamelcase: 3.0.0
 
   packages/playground:
     specifiers: {}
