@@ -31,6 +31,7 @@ async function genDeclare() {
     ${lines.join('\n    ')}
   }
 }
+
 export {}
 `;
   await fs.writeFile(path.resolve(root, 'global.d.ts'), code, 'utf-8');

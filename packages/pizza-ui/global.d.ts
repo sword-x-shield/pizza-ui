@@ -6,4 +6,5 @@ declare module 'vue' {
     PConfigProvider: typeof import('pizza-ui')['PConfigProvider']
   }
 }
+
 export {}
