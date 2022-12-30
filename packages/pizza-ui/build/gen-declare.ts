@@ -3,8 +3,8 @@ import process from 'process';
 import uppercamelcase from 'uppercamelcase';
 import fs from 'fs-extra';
 import glob from 'glob';
-import { componentPrefix } from '../utils';
 
+const componentPrefix = 'P';
 const root = process.cwd();
 const resolvePath = (relativePath: string) => {
   return path.resolve(root, relativePath);
