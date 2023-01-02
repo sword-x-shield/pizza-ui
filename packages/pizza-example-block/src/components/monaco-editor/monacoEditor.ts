@@ -10,6 +10,8 @@ import onigasmWasm from 'onigasm/lib/onigasm.wasm?url';
 function loadMonacoEnv() {
   (self as any).MonacoEnvironment = {
     async getWorker(_: any, label: string) {
+      console.log({ label });
+
       if (label === 'vue')
         return new VueWorker();
 

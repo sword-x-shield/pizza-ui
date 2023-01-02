@@ -4,6 +4,7 @@ module.exports = {
   ],
   rules: {
     'no-console': 'off',
+    'brace-style': ['error', '1tbs'],
     // for script setup marco
     'no-undef': 'off',
     'no-unused-vars': 'off',

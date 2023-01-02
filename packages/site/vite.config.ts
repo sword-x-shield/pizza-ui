@@ -20,6 +20,9 @@ export default defineConfig({
       { find: /^@pizza\/(.*)/, replacement: path.resolve('../pizza-$1/src') },
     ],
   },
+  optimizeDeps: {
+    include: ['monaco-volar/vue.worker'],
+  },
   server: {
     host: true,
   },

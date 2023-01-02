@@ -5,6 +5,17 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pizza UI</title>
+    <script>
+      (() => {
+        // 存储 exapmle 生成的所有 app 实例
+        window.__p_apps__ = {};
+      })();
+    </script>
+    <!-- ES Module Shims: Import maps polyfill for modules browsers without import maps support (all except Chrome 89+) -->
+		<script async src="https://unpkg.com/es-module-shims@1.5.18/dist/es-module-shims.wasm.js"></script>
+    <script type="importmap">
+      {"imports":{"vue":"https://unpkg.com/@vue/runtime-dom@3.2.45/dist/runtime-dom.esm-browser.js","pizza-ui/":"http://localhost:5173/pizza-ui/"}}
+    </script>
   </head>
   <body>
     <div id="app"></div>

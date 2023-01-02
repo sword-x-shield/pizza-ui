@@ -8,6 +8,7 @@ import refreshSvg from './Icons/refresh.vue';
 import playgroundSvg from './icons/playground.vue';
 import MonacoEditor from './components/monaco-editor/index';
 import { useCopyCode, useError } from './composables';
+import PLive from './components/live/index.vue';
 
 const props = withDefaults(
   defineProps<{
@@ -79,13 +80,15 @@ const editorTheme = computed(() => {
     </div>
 
     <div class="example-slot">
-      <vue-live-preview
+      <p-live :code="decodedCode" :show="true" />
+
+      <!-- <vue-live-preview
         :code="decodedCode"
         class="editor-preview"
         :check-variable-availability="false"
         @success="cleanError"
         @error="handleError"
-      />
+      /> -->
       <code v-show="errMsg" class="editor__error">{{ errMsg }}</code>
     </div>
 
@@ -141,8 +144,6 @@ const editorTheme = computed(() => {
 </template>
 
 <style lang="scss">
-@import './styles/index.scss';
-
 .example-block {
   --example-border-color: #ebedf1;
   --example-bg: #ffffff;
