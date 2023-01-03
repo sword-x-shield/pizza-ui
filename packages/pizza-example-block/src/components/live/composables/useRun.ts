@@ -1,28 +1,57 @@
 import { Ref, onMounted, ref, watch } from 'vue';
 import { LiveProps } from '../props';
-import { COMP_IDENTIFIER, compileFile } from '../utils';
+import { compileFile } from '../utils';
 
-export function useRun(props: Readonly<LiveProps>, target: Ref<HTMLElement>, id: string, currentCount: number) {
+export interface UseRunOptions {
+  /**
+   * 默认值为 '__sfc__' + new Date().getTime()
+   */
+  componentId?: string
+}
+
+export const COMP_IDENTIFIER = '__sfc__';
+
+export function useRun(props: Readonly<LiveProps>, options: UseRunOptions = {}) {
+  const defaultOptions = {
+    componentId: `${COMP_IDENTIFIER}${new Date().getTime()}`,
+  };
+
+  const { componentId } = {
+    ...defaultOptions,
+    ...options,
+  };
+
   let scriptElement: HTMLScriptElement;
+  let styleElement: HTMLStyleElement;
 
-  // TODO: 应该要收集所有 script 标签，离开当前组件页面时清空
+  // TODO: 应该要收集所有 script / style 标签，离开当前组件页面时清空
   function createModuleScript(blob: Blob) {
     if (scriptElement)
       document.body.removeChild(scriptElement);
 
     scriptElement = document.createElement('script');
     scriptElement.setAttribute('type', 'module');
-    scriptElement.onload = () => {
-      console.warn('加载成功');
-    };
     scriptElement.src = URL.createObjectURL(blob);
     document.body.appendChild(scriptElement);
+  }
+
+  function updateStyle(id: string, content: string) {
+    if (styleElement) {
+      styleElement.textContent = content;
+      return;
+    }
+
+    styleElement = document.createElement('style');
+    styleElement.setAttribute('type', 'text/css');
+    styleElement.setAttribute('data-p-style-id', id);
+    styleElement.textContent = content;
+    document.head.appendChild(styleElement);
   }
 
   async function runCompileCodeInlineScript() {
     if (props.code) {
       // 1. 编译 Vue 单文件组件，生成
-      const { js } = await compileFile(props.code, currentCount);
+      const { js, css } = await compileFile(props.code, componentId);
 
       // 2. 处理待执行的 js
       const codeToEval = [
@@ -36,18 +65,18 @@ export function useRun(props: Readonly<LiveProps>, target: Ref<HTMLElement>, id:
         js,
         `
             ;const _mount = () => {
-              const AppComponent = ${COMP_IDENTIFIER}${currentCount};
-              if(window.__p_apps__['${COMP_IDENTIFIER}${currentCount}']) {
-                console.log('卸载 ${COMP_IDENTIFIER}${currentCount}')
-                window.__p_apps__['${COMP_IDENTIFIER}${currentCount}'].unmount();
+              const AppComponent = ${componentId};
+              if(window.__p_apps__['${componentId}']) {
+                console.log('卸载 ${componentId}')
+                window.__p_apps__['${componentId}'].unmount();
               }
 
               AppComponent.name = 'Repl'
-              const app = window.__p_apps__['${COMP_IDENTIFIER}${currentCount}'] = _createApp(AppComponent)
+              const app = window.__p_apps__['${componentId}'] = _createApp(AppComponent)
               app.use(Pizza)
               app.config.unwrapInjectedRef = true
               app.config.errorHandler = e => console.error(e)
-              app.mount('#${id}')
+              app.mount('#${componentId}')
             }
             if (window.__ssr_promise__) {
               window.__ssr_promise__.then(_mount)
@@ -60,6 +89,9 @@ export function useRun(props: Readonly<LiveProps>, target: Ref<HTMLElement>, id:
       const blob = new Blob([codeToEval.join('')], { type: 'text/javascript' });
       // 3. 创建 js 标签
       createModuleScript(blob);
+
+      // 4. 创建 style 标签
+      updateStyle(componentId, css);
 
       return js;
     }

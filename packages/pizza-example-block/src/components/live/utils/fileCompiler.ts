@@ -2,8 +2,6 @@ import * as compiler from 'vue/compiler-sfc';
 import { BindingMetadata, CompilerOptions, SFCDescriptor } from 'vue/compiler-sfc';
 import { transform } from 'sucrase';
 
-export const COMP_IDENTIFIER = '__sfc__';
-
 /**
  * 转换 ts 代码
  * @param src 源码
@@ -14,7 +12,7 @@ async function transformTS(src: string) {
   }).code;
 }
 
-export async function compileFile(code: string, count) {
+export async function compileFile(code: string, id: string) {
   const { errors, descriptor } = compiler.parse(code);
 
   if (errors.length) {
@@ -45,9 +43,10 @@ export async function compileFile(code: string, count) {
   // TODO: 支持 ssr
   let clientCode = '';
 
-  const clientScriptResult = await doCompileScript(descriptor, {
+  // script
+  const clientScriptResult = await doCompileScript(descriptor, id, {
     isTS,
-  }, count);
+  });
   if (!clientScriptResult)
     return;
 
@@ -62,11 +61,11 @@ export async function compileFile(code: string, count) {
     const clientTemplateResult = await doCompileTemplate(
       descriptor,
       bindings,
+      id,
       {
         ssr: false,
         isTS,
       },
-      count,
     );
     if (!clientTemplateResult)
       return;
@@ -75,18 +74,52 @@ export async function compileFile(code: string, count) {
     clientCode += clientTemplateResult;
   }
 
+  const hasScoped = descriptor.styles.some(s => s.scoped);
+  if (hasScoped)
+    clientCode += `\n${id}.__scopeId = ${JSON.stringify(`data-v-${id}`)}`;
+
+  // styles
+  let css = '';
+  for (const style of descriptor.styles) {
+    if (style.module) {
+      console.log('<style module> is not supported in the playground.');
+      return;
+    }
+
+    const styleResult = await compiler.compileStyleAsync({
+      source: style.content,
+      filename: id,
+      id,
+      scoped: style.scoped,
+      modules: !!style.module,
+    });
+
+    if (styleResult.errors.length) {
+      // postcss uses pathToFileURL which isn't polyfilled in the browser
+      // ignore these errors for now
+      if (!styleResult.errors[0].message.includes('pathToFileURL')) {
+        // TODO: 收集错误
+        console.log(styleResult.errors);
+      }
+      // proceed even if css compile errors
+    } else {
+      css += `${styleResult.code}\n`;
+    }
+  }
+
   return {
     js: clientCode.trimStart(),
+    css: css ? css.trim() : '/* No <style> tags present */',
   };
 }
 
 async function doCompileScript(
   descriptor: SFCDescriptor,
+  id: string,
   options: {
         ssr?: boolean
         isTS?: boolean
     } = {},
-  count: number,
 ): Promise<[string, BindingMetadata | undefined] | undefined> {
   const { ssr = false, isTS = true } = options;
 
@@ -97,7 +130,7 @@ async function doCompileScript(
         : undefined;
       const compiledScript = compiler.compileScript(descriptor, {
         inlineTemplate: true,
-        id: 'example', // FIXME: 待修复
+        id,
         templateOptions: {
           ssr,
           ssrCssVars: descriptor.cssVars,
@@ -118,7 +151,7 @@ async function doCompileScript(
           += `\n${
           compiler.rewriteDefault(
             compiledScript.content,
-            COMP_IDENTIFIER + count,
+            id,
             expressionPlugins,
           )}`;
 
@@ -131,24 +164,24 @@ async function doCompileScript(
       console.log(e.stack.split('\n').slice(0, 12).join('\n'));
     }
   } else {
-    return [`\nconst ${COMP_IDENTIFIER}${count} = {}`, undefined];
+    return [`\nconst ${id} = {}`, undefined];
   }
 }
 
 async function doCompileTemplate(
   descriptor: SFCDescriptor,
   bindingMetadata: BindingMetadata | undefined,
+  id: string,
   options: {
         ssr?: boolean
         isTS?: boolean
     },
-  count: number,
 ) {
   const { ssr = false, isTS = true } = options;
   const templateResult = compiler.compileTemplate({
     source: descriptor.template!.content,
     filename: descriptor.filename,
-    id: 'example', // FIXME: 待替换
+    id,
     scoped: descriptor.styles.some(s => s.scoped),
     slotted: descriptor.slotted,
     ssr,
@@ -172,7 +205,7 @@ async function doCompileTemplate(
     = `\n${templateResult.code.replace(
       /\nexport (function|const) (render|ssrRender)/,
       `$1 ${fnName}`,
-    )}` + `\n${COMP_IDENTIFIER}${count}.${fnName} = ${fnName}`;
+    )}` + `\n${id}.${fnName} = ${fnName}`;
 
   if ((descriptor.script || descriptor.scriptSetup)?.lang === 'ts')
     code = await transformTS(code);

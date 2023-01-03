@@ -80,7 +80,7 @@ const editorTheme = computed(() => {
     </div>
 
     <div class="example-slot">
-      <p-live :code="decodedCode" :show="true" />
+      <p-live :code="decodedCode" :show="true" :file-name="fileName" />
 
       <!-- <vue-live-preview
         :code="decodedCode"
