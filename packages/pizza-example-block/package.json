@@ -36,8 +36,7 @@
     "nano-assign": "^1.0.1",
     "onigasm": "^2.2.5",
     "pizza-ui": "workspace:*",
-    "sucrase": "^3.29.0",
-    "vue-live": "^2.3.2"
+    "sucrase": "^3.29.0"
   },
   "devDependencies": {
     "@types/prismjs": "^1.26.0",

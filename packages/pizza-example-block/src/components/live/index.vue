@@ -5,22 +5,23 @@ import { liveProps } from './props';
 const props = defineProps(liveProps);
 
 const EXAMPLE_ID = 'example__';
-console.log(props);
+
 const id = `${EXAMPLE_ID}${props.fileName}`;
 
-useRun(props, {
+const { formatErrorMsg } = useRun(props, {
   componentId: id,
 });
 </script>
 
 <script lang="ts">
 export default {
-  name: 'PLive',
+  name: 'PLivePreview',
 };
 </script>
 
 <template>
-  <div :id="id" />
+  <div v-show="show" :id="id" />
+  <code v-show="formatErrorMsg" class="editor__error">{{ formatErrorMsg }}</code>
 </template>
 
 <style scoped>

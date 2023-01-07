@@ -15,30 +15,21 @@ async function transformTS(src: string) {
 export async function compileFile(code: string, id: string) {
   const { errors, descriptor } = compiler.parse(code);
 
-  if (errors.length) {
-    // TODO: 收集错误
-    console.log(errors);
-    return;
-  }
+  if (errors.length)
+    throw errors;
 
   if (
     descriptor.styles.some(s => s.lang)
     || (descriptor.template && descriptor.template.lang)
-  ) {
-    // TODO: 收集错误
-    console.log('lang="x" pre-processors for <template> or <style> are currently not '
-        + 'supported.');
-    return;
-  }
+  )
+    throw new Error('lang="x" pre-processors for <template> or <style> are currently not supported.');
 
   const scriptLang
     = (descriptor.script && descriptor.script.lang)
     || (descriptor.scriptSetup && descriptor.scriptSetup.lang);
   const isTS = scriptLang === 'ts';
-  if (scriptLang && !isTS) {
-    // TODO: 收集错误
-    console.log('Only lang="ts" is supported for <script> blocks.');
-  }
+  if (scriptLang && !isTS)
+    throw new Error('Only lang="ts" is supported for <script> blocks.');
 
   // TODO: 支持 ssr
   let clientCode = '';
@@ -70,7 +61,6 @@ export async function compileFile(code: string, id: string) {
     if (!clientTemplateResult)
       return;
 
-    console.log({ clientTemplateResult });
     clientCode += clientTemplateResult;
   }
 
@@ -81,10 +71,8 @@ export async function compileFile(code: string, id: string) {
   // styles
   let css = '';
   for (const style of descriptor.styles) {
-    if (style.module) {
-      console.log('<style module> is not supported in the playground.');
-      return;
-    }
+    if (style.module)
+      throw new Error('<style module> is not supported in the playground.');
 
     const styleResult = await compiler.compileStyleAsync({
       source: style.content,
@@ -97,10 +85,9 @@ export async function compileFile(code: string, id: string) {
     if (styleResult.errors.length) {
       // postcss uses pathToFileURL which isn't polyfilled in the browser
       // ignore these errors for now
-      if (!styleResult.errors[0].message.includes('pathToFileURL')) {
-        // TODO: 收集错误
-        console.log(styleResult.errors);
-      }
+      if (!styleResult.errors[0].message.includes('pathToFileURL'))
+        throw styleResult.errors;
+
       // proceed even if css compile errors
     } else {
       css += `${styleResult.code}\n`;
@@ -160,8 +147,7 @@ async function doCompileScript(
 
       return [code, compiledScript.bindings];
     } catch (e: any) {
-      // TODO: 收集错误
-      console.log(e.stack.split('\n').slice(0, 12).join('\n'));
+      throw new Error(e.stack.split('\n').slice(0, 12).join('\n'));
     }
   } else {
     return [`\nconst ${id} = {}`, undefined];
@@ -193,11 +179,8 @@ async function doCompileTemplate(
       mode: 'module',
     },
   });
-  if (templateResult.errors.length) {
-    // TODO: 待收集错误
-    console.log(templateResult.errors.join(' '));
-    return;
-  }
+  if (templateResult.errors.length)
+    throw new Error(templateResult.errors.join(' '));
 
   const fnName = ssr ? 'ssrRender' : 'render';
 

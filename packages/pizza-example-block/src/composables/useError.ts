@@ -1,26 +1,36 @@
-import { computed, ref } from 'vue';
+import { Ref, computed, ref } from 'vue';
+import { CompilerError } from 'vue/compiler-sfc';
 
-export function useError() {
-  const error = ref<Error | null>(null);
+export function useError<T extends Error>() {
+  const errors = ref<Ref<T> | null | string>(null);
 
-  const errMsg = computed(() => {
-    if (!error.value) return '';
+  const formatErrorMsg = computed(() => {
+    if (!errors.value) return '';
 
-    return error.value.name ? `${error.value.name}: ${error.value.message}` : error.value.message;
+    if (typeof errors.value === 'string') {
+      return errors.value;
+    } else {
+      let msg = errors.value.message;
+      const loc = (errors.value as unknown as CompilerError).loc;
+      if (loc && loc.start)
+        msg = `(${loc.start.line}:${loc.start.column}) ${msg}`;
+
+      return msg;
+    }
   });
 
   function cleanError() {
-    error.value = null;
+    errors.value = null;
   }
 
-  function handleError(e: Error) {
-    error.value = e;
+  function handleError(e: T) {
+    errors.value = e;
   }
 
   return {
     handleError,
     cleanError,
-    error,
-    errMsg,
+    errors,
+    formatErrorMsg,
   };
 }
