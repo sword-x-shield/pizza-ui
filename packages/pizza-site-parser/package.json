@@ -1,5 +1,6 @@
 {
   "name": "@pizza/site-parser",
+  "type": "module",
   "version": "0.0.1",
   "description": "site parser for pizza ui",
   "directories": {
@@ -15,19 +16,18 @@
     ".": {
       "types": "./dist/index.d.ts",
       "require": "./dist/index.cjs",
-      "import": "./dist/index.mjs"
+      "import": "./dist/index.js"
     }
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "dev": "unbuild --stub",
-    "build": "unbuild",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsup --watch src",
+    "build": "tsup"
   },
   "dependencies": {
     "fs-extra": "^10.1.0",
@@ -38,6 +38,7 @@
   "devDependencies": {
     "@types/marked": "^4.0.7",
     "@types/uppercamelcase": "^3.0.0",
-    "unbuild": "^1.0.1"
+    "tsup": "^6.5.0",
+    "vite": "^4.0.4"
   }
 }
