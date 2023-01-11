@@ -23,7 +23,3 @@ export default {
   <div v-show="show" :id="id" />
   <code v-show="formatErrorMsg" class="editor__error">{{ formatErrorMsg }}</code>
 </template>
-
-<style scoped>
-
-</style>

@@ -51,7 +51,18 @@ export function useRun(props: Readonly<LiveProps>, options: UseRunOptions = {}) 
     document.head.appendChild(styleElement);
   }
 
-  async function runCompileCodeInlineScript() {
+  async function runCompileCodeInlineScript(options?: {
+    ssr?: boolean
+  }) {
+    const defaultOptions = {
+      ssr: false,
+    };
+
+    const { ssr } = {
+      ...defaultOptions,
+      ...options,
+    };
+
     if (props.code) {
       try {
       // 1. 编译 Vue 单文件组件，生成
@@ -60,7 +71,7 @@ export function useRun(props: Readonly<LiveProps>, options: UseRunOptions = {}) 
         // 2. 处理待执行的 js
         const codeToEval = [
           `import { ${
-            false ? 'createSSRApp' : 'createApp'
+            ssr ? 'createSSRApp' : 'createApp'
           } as _createApp } from "vue";
         `,
           `
