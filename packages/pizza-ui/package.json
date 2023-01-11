@@ -13,9 +13,8 @@
     "build:component": "rollup -c --bundleConfigAsCjs",
     "build:style": "tsx build/build-style",
     "dev": "pnpm run gen-declare && rollup -c --watch --bundleConfigAsCjs",
+    "gen-types": "npx vue-tsc --declaration --emitDeclarationOnly --project ./tsconfig.esm.json",
     "gen-declare": "tsx build/gen-declare",
-    "tsc": "npx vue-tsc --declaration --emitDeclarationOnly --project ./tsconfig.esm.json",
-    "gen-types": "tsx build/gen-types",
     "demo": "tsx build/build-component",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
