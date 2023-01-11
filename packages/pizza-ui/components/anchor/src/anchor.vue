@@ -67,10 +67,8 @@ export default defineComponent({
     };
 
     const setContainer = () => {
-      if (props.offsetTarget)
-        scrollContainerEle.value = getElement(props.offsetTarget);
-      else
-        scrollContainerEle.value = document.documentElement;
+      if (props.offsetTarget) scrollContainerEle.value = getElement(props.offsetTarget);
+      else scrollContainerEle.value = document.documentElement;
     };
 
     const getFirstInViewportEle = () => {
@@ -123,8 +121,7 @@ export default defineComponent({
       if (hash) {
         scrollIntoView(hash);
         handleAnchorChange(hash);
-      }
-      else {
+      } else {
         handleScroll();
       }
 

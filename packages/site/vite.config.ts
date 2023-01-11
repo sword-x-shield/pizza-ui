@@ -1,16 +1,15 @@
 import path from 'path';
 import { defineConfig } from 'vite';
 import createVuePlugin from '@vitejs/plugin-vue';
-import siteParser from '@pizza/site-parser';
+import { pizzaSitePlugin } from '@pizza/site-parser';
 
-const site = siteParser();
 const vuePlugin = createVuePlugin({
   include: [/\.vue$/, /\.md$/],
 }) as any;
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    site,
+    pizzaSitePlugin(),
     vuePlugin,
   ],
   resolve: {
@@ -19,6 +18,9 @@ export default defineConfig({
       { find: '@/components', replacement: path.resolve('./src/components') },
       { find: /^@pizza\/(.*)/, replacement: path.resolve('../pizza-$1/src') },
     ],
+  },
+  optimizeDeps: {
+    include: ['monaco-volar/vue.worker'],
   },
   server: {
     host: true,

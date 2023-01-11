@@ -9,8 +9,7 @@ const componentPrefix = 'P';
 export const getClsPrefix = (componentName?: string): string => {
   const { clsPrefix } = useConfig();
 
-  if (componentName)
-    return `${clsPrefix}-${componentName}`;
+  if (componentName) return `${clsPrefix}-${componentName}`;
 
   return clsPrefix;
 };

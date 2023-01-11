@@ -31,8 +31,7 @@ for (const filename of files) {
         result.css,
       );
       console.log(`${filename} build success`);
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
     }
   }

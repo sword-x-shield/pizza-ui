@@ -1,7 +1,7 @@
-import { parserEntryMarkdown } from './loader/gen-entry';
-import { parserExample } from './loader/gen-example';
+import { parserEntryMarkdown } from '../loader/gen-entry';
+import { parserExample } from '../loader/gen-example';
 
-export default function () {
+export function PSiteParserPlugin() {
   return {
     name: 'pizza:vite-plugin-site-parser',
     transform: async (code: string, id: string) => {

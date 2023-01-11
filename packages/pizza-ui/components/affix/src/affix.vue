@@ -54,8 +54,7 @@ export default defineComponent({
             top: positionType === 'fixed' ? `${containerRect.top + (offsetTop || 0)}px` : `${offsetTop || 0}px`,
           }
           : {};
-      }
-      else {
+      } else {
         isFixed = containerRect.bottom - affixRect.bottom < (offsetBottom || 0);
         newFixedStyles = isFixed
           ? {

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { VueLivePreview } from 'vue-live';
 import { useConfig } from 'pizza-ui';
 import copySvg from './Icons/copy.vue';
 import codeSvg from './Icons/code.vue';
@@ -8,6 +7,7 @@ import refreshSvg from './Icons/refresh.vue';
 import playgroundSvg from './icons/playground.vue';
 import MonacoEditor from './components/monaco-editor/index';
 import { useCopyCode, useError } from './composables';
+import PLivePreview from './components/live/index.vue';
 
 const props = withDefaults(
   defineProps<{
@@ -31,8 +31,6 @@ const props = withDefaults(
 
 const config = useConfig();
 
-const { cleanError, handleError, errMsg } = useError();
-
 const decodedCode = ref(decodeURIComponent(props.highlightedCode));
 
 const { showTip, copyCode } = useCopyCode(decodedCode);
@@ -42,7 +40,7 @@ const toggleExpand = () => {
   expand.value = !expand.value;
 };
 
-const editor = ref<InstanceType<typeof MonacoEditor> | null>();
+const editor = ref<typeof MonacoEditor | null>();
 const EDITOR_MAX_HEIGHT = 500;
 const style = computed(() => {
   if (expand.value) {
@@ -79,14 +77,7 @@ const editorTheme = computed(() => {
     </div>
 
     <div class="example-slot">
-      <vue-live-preview
-        :code="decodedCode"
-        class="editor-preview"
-        :check-variable-availability="false"
-        @success="cleanError"
-        @error="handleError"
-      />
-      <code v-show="errMsg" class="editor__error">{{ errMsg }}</code>
+      <p-live-preview :code="decodedCode" :show="true" :file-name="fileName" />
     </div>
 
     <div class="example-actions">
@@ -141,8 +132,6 @@ const editorTheme = computed(() => {
 </template>
 
 <style lang="scss">
-@import './styles/index.scss';
-
 .example-block {
   --example-border-color: #ebedf1;
   --example-bg: #ffffff;
