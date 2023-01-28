@@ -1,1 +1,1192 @@
-import{inject as t,defineComponent as e,ref as n,reactive as o,watch as r,onMounted as i,onBeforeUnmount as l,provide as a,openBlock as c,createElementBlock as u,normalizeClass as f,createElementVNode as s,createCommentVNode as d,renderSlot as v,toDisplayString as h,normalizeStyle as p,toRefs as m,getCurrentInstance as g}from"vue";const b=Symbol("PizzaConfigProvider");function y(){return t(b,{clsPrefix:"p",mode:"light"})}const x=t=>{const{clsPrefix:e}=y();return t?`${e}-${t}`:e},w=t=>(t.install=e=>{var n;e.component(`${n?.componentPrefix??"P"}${t.name}`,t)},t);var k="object"==typeof global&&global&&global.Object===Object&&global,$="object"==typeof self&&self&&self.Object===Object&&self,T=k||$||Function("return this")(),C=T.Symbol,P=Object.prototype,j=P.hasOwnProperty,S=P.toString,E=C?C.toStringTag:void 0;var R=Object.prototype.toString;var L=C?C.toStringTag:void 0;function O(t){return null==t?void 0===t?"[object Undefined]":"[object Null]":L&&L in Object(t)?function(t){var e=j.call(t,E),n=t[E];try{t[E]=void 0;var o=!0}catch(t){}var r=S.call(t);return o&&(e?t[E]=n:delete t[E]),r}(t):function(t){return R.call(t)}(t)}function W(t){return null!=t&&"object"==typeof t}var H=Array.isArray,B=/\s/;var M=/^\s+/;function _(t){return t?t.slice(0,function(t){for(var e=t.length;e--&&B.test(t.charAt(e)););return e}(t)+1).replace(M,""):t}function A(t){var e=typeof t;return null!=t&&("object"==e||"function"==e)}var N=/^[-+]0x[0-9a-f]+$/i,I=/^0b[01]+$/i,z=/^0o[0-7]+$/i,D=parseInt;function V(t){if("number"==typeof t)return t;if(function(t){return"symbol"==typeof t||W(t)&&"[object Symbol]"==O(t)}(t))return NaN;if(A(t)){var e="function"==typeof t.valueOf?t.valueOf():t;t=A(e)?e+"":e}if("string"!=typeof t)return 0===t?t:+t;t=_(t);var n=I.test(t);return n||z.test(t)?D(t.slice(2),n?2:8):N.test(t)?NaN:+t}var X=function(){return T.Date.now()},Y=Math.max,F=Math.min;function q(t,e,n){var o,r,i,l,a,c,u=0,f=!1,s=!1,d=!0;if("function"!=typeof t)throw new TypeError("Expected a function");function v(e){var n=o,i=r;return o=r=void 0,u=e,l=t.apply(i,n)}function h(t){return u=t,a=setTimeout(m,e),f?v(t):l}function p(t){var n=t-c;return void 0===c||n>=e||n<0||s&&t-u>=i}function m(){var t=X();if(p(t))return g(t);a=setTimeout(m,function(t){var n=e-(t-c);return s?F(n,i-(t-u)):n}(t))}function g(t){return a=void 0,d&&o?v(t):(o=r=void 0,l)}function b(){var t=X(),n=p(t);if(o=arguments,r=this,c=t,n){if(void 0===a)return h(c);if(s)return clearTimeout(a),a=setTimeout(m,e),v(c)}return void 0===a&&(a=setTimeout(m,e)),l}return e=V(e)||0,A(n)&&(f=!!n.leading,i=(s="maxWait"in n)?Y(V(n.maxWait)||0,e):i,d="trailing"in n?!!n.trailing:d),b.cancel=function(){void 0!==a&&clearTimeout(a),u=0,o=c=r=a=void 0},b.flush=function(){return void 0===a?l:g(X())},b}function U(t,e,n){var o=!0,r=!0;if("function"!=typeof t)throw new TypeError("Expected a function");return A(n)&&(o="leading"in n?!!n.leading:o,r="trailing"in n?!!n.trailing:r),q(t,e,{leading:o,maxWait:e,trailing:r})}const G=(t,e)=>{if("string"==typeof(n=t)||!H(n)&&W(n)&&"[object String]"==O(n)){const n="#"===t[0]?`[id='${t.slice(1)}']`:t;return(e??document).querySelector(n)??void 0}var n;return t};function J(t){return"object"==typeof t&&null!=t&&1===t.nodeType}function K(t,e){return(!e||"hidden"!==t)&&"visible"!==t&&"clip"!==t}function Q(t,e){if(t.clientHeight<t.scrollHeight||t.clientWidth<t.scrollWidth){var n=getComputedStyle(t,null);return K(n.overflowY,e)||K(n.overflowX,e)||function(t){var e=function(t){if(!t.ownerDocument||!t.ownerDocument.defaultView)return null;try{return t.ownerDocument.defaultView.frameElement}catch(t){return null}}(t);return!!e&&(e.clientHeight<t.scrollHeight||e.clientWidth<t.scrollWidth)}(t)}return!1}function Z(t,e,n,o,r,i,l,a){return i<t&&l>e||i>t&&l<e?0:i<=t&&a<=n||l>=e&&a>=n?i-t-o:l>e&&a<n||i<t&&a>n?l-e+r:0}var tt,et=function(t,e){var n=window,o=e.scrollMode,r=e.block,i=e.inline,l=e.boundary,a=e.skipOverflowHiddenElements,c="function"==typeof l?l:function(t){return t!==l};if(!J(t))throw new TypeError("Invalid target");for(var u,f,s=document.scrollingElement||document.documentElement,d=[],v=t;J(v)&&c(v);){if((v=null==(f=(u=v).parentElement)?u.getRootNode().host||null:f)===s){d.push(v);break}null!=v&&v===document.body&&Q(v)&&!Q(document.documentElement)||null!=v&&Q(v,a)&&d.push(v)}for(var h=n.visualViewport?n.visualViewport.width:innerWidth,p=n.visualViewport?n.visualViewport.height:innerHeight,m=window.scrollX||pageXOffset,g=window.scrollY||pageYOffset,b=t.getBoundingClientRect(),y=b.height,x=b.width,w=b.top,k=b.right,$=b.bottom,T=b.left,C="start"===r||"nearest"===r?w:"end"===r?$:w+y/2,P="center"===i?T+x/2:"end"===i?k:T,j=[],S=0;S<d.length;S++){var E=d[S],R=E.getBoundingClientRect(),L=R.height,O=R.width,W=R.top,H=R.right,B=R.bottom,M=R.left;if("if-needed"===o&&w>=0&&T>=0&&$<=p&&k<=h&&w>=W&&$<=B&&T>=M&&k<=H)return j;var _=getComputedStyle(E),A=parseInt(_.borderLeftWidth,10),N=parseInt(_.borderTopWidth,10),I=parseInt(_.borderRightWidth,10),z=parseInt(_.borderBottomWidth,10),D=0,V=0,X="offsetWidth"in E?E.offsetWidth-E.clientWidth-A-I:0,Y="offsetHeight"in E?E.offsetHeight-E.clientHeight-N-z:0,F="offsetWidth"in E?0===E.offsetWidth?0:O/E.offsetWidth:0,q="offsetHeight"in E?0===E.offsetHeight?0:L/E.offsetHeight:0;if(s===E)D="start"===r?C:"end"===r?C-p:"nearest"===r?Z(g,g+p,p,N,z,g+C,g+C+y,y):C-p/2,V="start"===i?P:"center"===i?P-h/2:"end"===i?P-h:Z(m,m+h,h,A,I,m+P,m+P+x,x),D=Math.max(0,D+g),V=Math.max(0,V+m);else{D="start"===r?C-W-N:"end"===r?C-B+z+Y:"nearest"===r?Z(W,B,L,N,z+Y,C,C+y,y):C-(W+L/2)+Y/2,V="start"===i?P-M-A:"center"===i?P-(M+O/2)+X/2:"end"===i?P-H+I+X:Z(M,H,O,A,I+X,P,P+x,x);var U=E.scrollLeft,G=E.scrollTop;C+=G-(D=Math.max(0,Math.min(G+D/q,E.scrollHeight-L/q+Y))),P+=U-(V=Math.max(0,Math.min(U+V/F,E.scrollWidth-O/F+X)))}j.push({el:E,top:D,left:V})}return j};function nt(t){return t===Object(t)&&0!==Object.keys(t).length}function ot(t,e){var n=t.isConnected||t.ownerDocument.documentElement.contains(t);if(nt(e)&&"function"==typeof e.behavior)return e.behavior(n?et(t,e):[]);if(n){var o=function(t){return!1===t?{block:"end",inline:"nearest"}:nt(t)?t:{block:"start",inline:"nearest"}}(e);return function(t,e){void 0===e&&(e="auto");var n="scrollBehavior"in document.body.style;t.forEach((function(t){var o=t.el,r=t.top,i=t.left;o.scroll&&n?o.scroll({top:r,left:i,behavior:e}):(o.scrollTop=r,o.scrollLeft=i)}))}(et(t,o),o.behavior)}}var rt=function(){return tt||(tt="performance"in window?performance.now.bind(performance):Date.now),tt()};function it(t){var e=rt(),n=Math.min((e-t.startTime)/t.duration,1),o=t.ease(n),r=t.startX+(t.x-t.startX)*o,i=t.startY+(t.y-t.startY)*o;t.method(r,i),r!==t.x||i!==t.y?requestAnimationFrame((function(){return it(t)})):t.cb()}function lt(t,e,n,o,r,i){var l,a,c,u;void 0===o&&(o=600),void 0===r&&(r=function(t){return 1+--t*t*t*t*t}),l=t,a=t.scrollLeft,c=t.scrollTop,u=function(e,n){t.scrollLeft=Math.ceil(e),t.scrollTop=Math.ceil(n)},it({scrollable:l,method:u,startTime:rt(),startX:a,startY:c,x:e,y:n,duration:o,ease:r,cb:i})}var at=function(t,e){var n=e||{};return function(t){return t&&!t.behavior||"smooth"===t.behavior}(n)?ot(t,{block:n.block,inline:n.inline,scrollMode:n.scrollMode,boundary:n.boundary,behavior:function(t){return Promise.all(t.reduce((function(t,e){var o=e.el,r=e.left,i=e.top,l=o.scrollLeft,a=o.scrollTop;return l===r&&a===i?t:[].concat(t,[new Promise((function(t){return lt(o,r,i,n.duration,n.ease,(function(){return t({el:o,left:[l,r],top:[a,i]})}))}))])}),[]))}}):Promise.resolve(ot(t,e))};const ct=Symbol("PizzaAnchor");var ut=e({name:"Anchor",props:{showRail:{type:Boolean,default:!0},showBackground:{type:Boolean,default:!0},size:{type:String,default:"default"},smooth:{type:Boolean,default:!0},offsetTarget:{type:[String,Object]}},emits:{select:(t,e)=>!0},setup(t,{emit:e}){const c=x("anchor"),u=n(""),f=n(!1),s=o({}),d=n(),v=n(),h=e=>{const n=G(e);if(!n)return;f.value=!0;const o=t.smooth?"smooth":"auto";at(n,{block:"start",behavior:o}).then((()=>{f.value=!1}))},p=t=>{t!==u.value&&(u.value=t)},m=U((()=>{if(f.value)return;const t=(()=>{if(!d.value)return;const t=d.value.getBoundingClientRect();for(const e of Object.keys(s)){const n=G(e);if(n){const{top:e}=n.getBoundingClientRect(),o=d.value===document.documentElement?e:e-t.top;if(o>=-5&&o<=t.height/2)return n}}})();if(t&&t.id){const e=`#${t.id}`;p(e)}}));return r(u,(()=>{const e=s[u.value];t.showRail&&e&&v.value&&(v.value.style.top=`${e.firstElementChild.offsetTop}px`,v.value.style.height=`${e.firstElementChild.offsetHeight}px`)})),i((()=>{t.offsetTarget?d.value=G(t.offsetTarget):d.value=document.documentElement;const e=decodeURIComponent(window.location.hash);e?(h(e),p(e)):m(),d.value&&document.addEventListener("scroll",m,!0)})),l((()=>{d.value&&document.removeEventListener("scroll",m,!0)})),a(ct,o({currentLink:u,showRail:t.showRail,handleClick:(t,n)=>{n&&(h(n),p(n)),e("select",n,u.value)},addLink:(t,e)=>{t&&(s[t]=e)}})),{clsPrefix:c,barRef:v,currentLink:u}}});ut.render=function(t,e,n,o,r,i){return c(),u("div",{class:f(`${t.clsPrefix}`)},[t.showRail?(c(),u("div",{key:0,class:f(`${t.clsPrefix}-rail`)},[s("div",{ref:"barRef",class:f([`${t.clsPrefix}-rail-bar`,null!==t.currentLink&&`${t.clsPrefix}-rail-bar--active`])},null,2)],2)):d("v-if",!0),s("ul",{class:f(`${t.clsPrefix}-wrap`)},[v(t.$slots,"default")],2)],2)},ut.__file="components/anchor/src/anchor.vue";var ft=e({name:"AnchorLink",props:{title:String,href:String},setup(e){const o=`${x("anchor")}-link`,r=n(),l=t(ct,void 0);i((()=>{e.href&&r.value&&l?.addLink(e.href,r.value)}));return{linkCls:o,context:l,linkRef:r,handleClick:t=>l?.handleClick(t,e.href)}}});const st=["href"];ft.render=function(t,e,n,o,r,i){return c(),u("li",{ref:"linkRef",class:f(`${t.linkCls}-item`)},[s("a",{href:t.href,class:f([t.linkCls,{[`${t.linkCls}-active-line`]:t.context?.currentLink===t.href&&t.context?.showRail,[`${t.linkCls}-active`]:t.context?.currentLink===t.href&&!t.context?.showRail}]),onClick:e[0]||(e[0]=(...e)=>t.handleClick&&t.handleClick(...e))},h(t.title),11,st),v(t.$slots,"default")],2)},ft.__file="components/anchor/src/anchor-link.vue";const dt=w(ut),vt=w(ft);var ht=e({name:"Affix",props:{offsetTop:{type:Number,default:0},offsetBottom:{type:Number},scrollTarget:{type:[String,Object,Function]},position:{type:String,default:"fixed"}},setup(t){const e=x("affix"),o=n(),r=n(),a=n(),c=n(!1),u=U((()=>{if(!o.value)return;const{offsetTop:e,offsetBottom:n,position:i}=t,l=void 0===n?"top":"bottom";const c=o.value.getBoundingClientRect(),u=r.value instanceof HTMLElement?r.value.getBoundingClientRect():{top:0,bottom:window.innerHeight},f="absolute"===i?"absolute":"fixed";let s=!1,d={};const v={width:`${o.value.offsetWidth}px`,height:`${o.value.offsetHeight}px`};"top"===l?(s=c.top-u.top<(e||0),d=s?{position:f,top:"fixed"===f?`${u.top+(e||0)}px`:`${e||0}px`}:{}):(s=u.bottom-c.bottom<(n||0),d=s?{position:f,bottom:"fixed"===f?`${window.innerHeight-u.bottom+(n||0)}px`:`${n||0}px`}:{}),a.value={...d,...s?v:{}}}),200);return i((()=>{(()=>{const{scrollTarget:e}=t;r.value=e&&e!==document&&G(e)||document,r.value&&(r.value.addEventListener("scroll",u),u())})()})),l((()=>{r.value&&r.value.removeEventListener("scroll",u)})),{clsPrefix:e,affixRef:o,fixedStyles:a,fixedStatus:c}}});const pt={ref:"affixRef"};ht.render=function(t,e,n,o,r,i){return c(),u("div",pt,[s("div",{style:p(t.fixedStyles),class:f(t.clsPrefix)},[v(t.$slots,"default")],6)],512)},ht.__file="components/affix/src/affix.vue";const mt=w(ht);var gt=e({name:"ConfigProvider",props:{mode:{type:String,default:"light"},global:{type:Boolean,default:!1},clsPrefix:{type:String,default:"p"}},setup(t){const e=o(m(t));if(t.global){const t=g();t&&t.appContext.app.provide(b,e)}else a(b,e)}});gt.render=function(t,e,n,o,r,i){return v(t.$slots,"default")},gt.__file="components/config-provider/src/config-provider.vue";const bt=w(gt);var yt=Object.freeze({__proto__:null,PAnchor:dt,PAnchorLink:vt,PAffix:mt,PConfigProvider:bt});const xt=t=>{for(const e of Object.keys(yt)){const n=e;t.use(yt[n])}};export{mt as PAffix,dt as PAnchor,xt as default,y as useConfig};
+import { inject, defineComponent, ref, reactive, watch, onMounted, onBeforeUnmount, provide, openBlock, createElementBlock, normalizeClass, unref, createElementVNode, createCommentVNode, renderSlot, toDisplayString, normalizeStyle, toRefs, getCurrentInstance } from 'vue';
+
+const injectKey = Symbol("PizzaConfigProvider");
+
+const defaultClsPrefix = "p";
+function useConfig() {
+  const defaultProvide = {
+    clsPrefix: defaultClsPrefix,
+    mode: "light"
+  };
+  const PConfigProvider = inject(injectKey, defaultProvide);
+  return PConfigProvider;
+}
+
+const componentPrefix = "P";
+const getClsPrefix = componentName => {
+  const {
+    clsPrefix
+  } = useConfig();
+  if (componentName) return `${clsPrefix}-${componentName}`;
+  return clsPrefix;
+};
+const getComponentPrefix = options => {
+  return options?.componentPrefix ?? componentPrefix;
+};
+
+const withInstall = main => {
+  main.install = app => {
+    app.component(`${getComponentPrefix()}${main.name}`, main);
+  };
+  return main;
+};
+
+/** Detect free variable `global` from Node.js. */
+var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+/** Built-in value references. */
+var Symbol$1 = root.Symbol;
+
+/** Used for built-in method references. */
+var objectProto$1 = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto$1.hasOwnProperty;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString$1 = objectProto$1.toString;
+
+/** Built-in value references. */
+var symToStringTag$1 = Symbol$1 ? Symbol$1.toStringTag : undefined;
+
+/**
+ * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the raw `toStringTag`.
+ */
+function getRawTag(value) {
+  var isOwn = hasOwnProperty.call(value, symToStringTag$1),
+    tag = value[symToStringTag$1];
+  try {
+    value[symToStringTag$1] = undefined;
+    var unmasked = true;
+  } catch (e) {}
+  var result = nativeObjectToString$1.call(value);
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag$1] = tag;
+    } else {
+      delete value[symToStringTag$1];
+    }
+  }
+  return result;
+}
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/**
+ * Converts `value` to a string using `Object.prototype.toString`.
+ *
+ * @private
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ */
+function objectToString(value) {
+  return nativeObjectToString.call(value);
+}
+
+/** `Object#toString` result references. */
+var nullTag = '[object Null]',
+  undefinedTag = '[object Undefined]';
+
+/** Built-in value references. */
+var symToStringTag = Symbol$1 ? Symbol$1.toStringTag : undefined;
+
+/**
+ * The base implementation of `getTag` without fallbacks for buggy environments.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+function baseGetTag(value) {
+  if (value == null) {
+    return value === undefined ? undefinedTag : nullTag;
+  }
+  return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
+}
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return value != null && typeof value == 'object';
+}
+
+/** `Object#toString` result references. */
+var symbolTag = '[object Symbol]';
+
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
+function isSymbol(value) {
+  return typeof value == 'symbol' || isObjectLike(value) && baseGetTag(value) == symbolTag;
+}
+
+/**
+ * Checks if `value` is classified as an `Array` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+ * @example
+ *
+ * _.isArray([1, 2, 3]);
+ * // => true
+ *
+ * _.isArray(document.body.children);
+ * // => false
+ *
+ * _.isArray('abc');
+ * // => false
+ *
+ * _.isArray(_.noop);
+ * // => false
+ */
+var isArray = Array.isArray;
+var isArray$1 = isArray;
+
+/** Used to match a single whitespace character. */
+var reWhitespace = /\s/;
+
+/**
+ * Used by `_.trim` and `_.trimEnd` to get the index of the last non-whitespace
+ * character of `string`.
+ *
+ * @private
+ * @param {string} string The string to inspect.
+ * @returns {number} Returns the index of the last non-whitespace character.
+ */
+function trimmedEndIndex(string) {
+  var index = string.length;
+  while (index-- && reWhitespace.test(string.charAt(index))) {}
+  return index;
+}
+
+/** Used to match leading whitespace. */
+var reTrimStart = /^\s+/;
+
+/**
+ * The base implementation of `_.trim`.
+ *
+ * @private
+ * @param {string} string The string to trim.
+ * @returns {string} Returns the trimmed string.
+ */
+function baseTrim(string) {
+  return string ? string.slice(0, trimmedEndIndex(string) + 1).replace(reTrimStart, '') : string;
+}
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return value != null && (type == 'object' || type == 'function');
+}
+
+/** Used as references for various `Number` constants. */
+var NAN = 0 / 0;
+
+/** Used to detect bad signed hexadecimal string values. */
+var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+
+/** Used to detect binary string values. */
+var reIsBinary = /^0b[01]+$/i;
+
+/** Used to detect octal string values. */
+var reIsOctal = /^0o[0-7]+$/i;
+
+/** Built-in method references without a dependency on `root`. */
+var freeParseInt = parseInt;
+
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */
+function toNumber(value) {
+  if (typeof value == 'number') {
+    return value;
+  }
+  if (isSymbol(value)) {
+    return NAN;
+  }
+  if (isObject(value)) {
+    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+    value = isObject(other) ? other + '' : other;
+  }
+  if (typeof value != 'string') {
+    return value === 0 ? value : +value;
+  }
+  value = baseTrim(value);
+  var isBinary = reIsBinary.test(value);
+  return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
+}
+
+/**
+ * Gets the timestamp of the number of milliseconds that have elapsed since
+ * the Unix epoch (1 January 1970 00:00:00 UTC).
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Date
+ * @returns {number} Returns the timestamp.
+ * @example
+ *
+ * _.defer(function(stamp) {
+ *   console.log(_.now() - stamp);
+ * }, _.now());
+ * // => Logs the number of milliseconds it took for the deferred invocation.
+ */
+var now$1 = function () {
+  return root.Date.now();
+};
+var now$2 = now$1;
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT$1 = 'Expected a function';
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max,
+  nativeMin = Math.min;
+
+/**
+ * Creates a debounced function that delays invoking `func` until after `wait`
+ * milliseconds have elapsed since the last time the debounced function was
+ * invoked. The debounced function comes with a `cancel` method to cancel
+ * delayed `func` invocations and a `flush` method to immediately invoke them.
+ * Provide `options` to indicate whether `func` should be invoked on the
+ * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+ * with the last arguments provided to the debounced function. Subsequent
+ * calls to the debounced function return the result of the last `func`
+ * invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the debounced function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.debounce` and `_.throttle`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to debounce.
+ * @param {number} [wait=0] The number of milliseconds to delay.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=false]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {number} [options.maxWait]
+ *  The maximum time `func` is allowed to be delayed before it's invoked.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new debounced function.
+ * @example
+ *
+ * // Avoid costly calculations while the window size is in flux.
+ * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+ *
+ * // Invoke `sendMail` when clicked, debouncing subsequent calls.
+ * jQuery(element).on('click', _.debounce(sendMail, 300, {
+ *   'leading': true,
+ *   'trailing': false
+ * }));
+ *
+ * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
+ * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
+ * var source = new EventSource('/stream');
+ * jQuery(source).on('message', debounced);
+ *
+ * // Cancel the trailing debounced invocation.
+ * jQuery(window).on('popstate', debounced.cancel);
+ */
+function debounce(func, wait, options) {
+  var lastArgs,
+    lastThis,
+    maxWait,
+    result,
+    timerId,
+    lastCallTime,
+    lastInvokeTime = 0,
+    leading = false,
+    maxing = false,
+    trailing = true;
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT$1);
+  }
+  wait = toNumber(wait) || 0;
+  if (isObject(options)) {
+    leading = !!options.leading;
+    maxing = 'maxWait' in options;
+    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+  function invokeFunc(time) {
+    var args = lastArgs,
+      thisArg = lastThis;
+    lastArgs = lastThis = undefined;
+    lastInvokeTime = time;
+    result = func.apply(thisArg, args);
+    return result;
+  }
+  function leadingEdge(time) {
+    // Reset any `maxWait` timer.
+    lastInvokeTime = time;
+    // Start the timer for the trailing edge.
+    timerId = setTimeout(timerExpired, wait);
+    // Invoke the leading edge.
+    return leading ? invokeFunc(time) : result;
+  }
+  function remainingWait(time) {
+    var timeSinceLastCall = time - lastCallTime,
+      timeSinceLastInvoke = time - lastInvokeTime,
+      timeWaiting = wait - timeSinceLastCall;
+    return maxing ? nativeMin(timeWaiting, maxWait - timeSinceLastInvoke) : timeWaiting;
+  }
+  function shouldInvoke(time) {
+    var timeSinceLastCall = time - lastCallTime,
+      timeSinceLastInvoke = time - lastInvokeTime;
+
+    // Either this is the first call, activity has stopped and we're at the
+    // trailing edge, the system time has gone backwards and we're treating
+    // it as the trailing edge, or we've hit the `maxWait` limit.
+    return lastCallTime === undefined || timeSinceLastCall >= wait || timeSinceLastCall < 0 || maxing && timeSinceLastInvoke >= maxWait;
+  }
+  function timerExpired() {
+    var time = now$2();
+    if (shouldInvoke(time)) {
+      return trailingEdge(time);
+    }
+    // Restart the timer.
+    timerId = setTimeout(timerExpired, remainingWait(time));
+  }
+  function trailingEdge(time) {
+    timerId = undefined;
+
+    // Only invoke if we have `lastArgs` which means `func` has been
+    // debounced at least once.
+    if (trailing && lastArgs) {
+      return invokeFunc(time);
+    }
+    lastArgs = lastThis = undefined;
+    return result;
+  }
+  function cancel() {
+    if (timerId !== undefined) {
+      clearTimeout(timerId);
+    }
+    lastInvokeTime = 0;
+    lastArgs = lastCallTime = lastThis = timerId = undefined;
+  }
+  function flush() {
+    return timerId === undefined ? result : trailingEdge(now$2());
+  }
+  function debounced() {
+    var time = now$2(),
+      isInvoking = shouldInvoke(time);
+    lastArgs = arguments;
+    lastThis = this;
+    lastCallTime = time;
+    if (isInvoking) {
+      if (timerId === undefined) {
+        return leadingEdge(lastCallTime);
+      }
+      if (maxing) {
+        // Handle invocations in a tight loop.
+        clearTimeout(timerId);
+        timerId = setTimeout(timerExpired, wait);
+        return invokeFunc(lastCallTime);
+      }
+    }
+    if (timerId === undefined) {
+      timerId = setTimeout(timerExpired, wait);
+    }
+    return result;
+  }
+  debounced.cancel = cancel;
+  debounced.flush = flush;
+  return debounced;
+}
+
+/** `Object#toString` result references. */
+var stringTag = '[object String]';
+
+/**
+ * Checks if `value` is classified as a `String` primitive or object.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a string, else `false`.
+ * @example
+ *
+ * _.isString('abc');
+ * // => true
+ *
+ * _.isString(1);
+ * // => false
+ */
+function isString(value) {
+  return typeof value == 'string' || !isArray$1(value) && isObjectLike(value) && baseGetTag(value) == stringTag;
+}
+
+/**
+ * Checks if `value` is `undefined`.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is `undefined`, else `false`.
+ * @example
+ *
+ * _.isUndefined(void 0);
+ * // => true
+ *
+ * _.isUndefined(null);
+ * // => false
+ */
+function isUndefined(value) {
+  return value === undefined;
+}
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * Creates a throttled function that only invokes `func` at most once per
+ * every `wait` milliseconds. The throttled function comes with a `cancel`
+ * method to cancel delayed `func` invocations and a `flush` method to
+ * immediately invoke them. Provide `options` to indicate whether `func`
+ * should be invoked on the leading and/or trailing edge of the `wait`
+ * timeout. The `func` is invoked with the last arguments provided to the
+ * throttled function. Subsequent calls to the throttled function return the
+ * result of the last `func` invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the throttled function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.throttle` and `_.debounce`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to throttle.
+ * @param {number} [wait=0] The number of milliseconds to throttle invocations to.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=true]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new throttled function.
+ * @example
+ *
+ * // Avoid excessively updating the position while scrolling.
+ * jQuery(window).on('scroll', _.throttle(updatePosition, 100));
+ *
+ * // Invoke `renewToken` when the click event is fired, but not more than once every 5 minutes.
+ * var throttled = _.throttle(renewToken, 300000, { 'trailing': false });
+ * jQuery(element).on('click', throttled);
+ *
+ * // Cancel the trailing throttled invocation.
+ * jQuery(window).on('popstate', throttled.cancel);
+ */
+function throttle(func, wait, options) {
+  var leading = true,
+    trailing = true;
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  if (isObject(options)) {
+    leading = 'leading' in options ? !!options.leading : leading;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+  return debounce(func, wait, {
+    'leading': leading,
+    'maxWait': wait,
+    'trailing': trailing
+  });
+}
+
+const getElement = (target, container) => {
+  if (isString(target)) {
+    const selector = target[0] === "#" ? `[id='${target.slice(1)}']` : target;
+    return (container ?? document).querySelector(selector) ?? void 0;
+  }
+  return target;
+};
+
+function t(t) {
+  return "object" == typeof t && null != t && 1 === t.nodeType;
+}
+function e(t, e) {
+  return (!e || "hidden" !== t) && "visible" !== t && "clip" !== t;
+}
+function n(t, n) {
+  if (t.clientHeight < t.scrollHeight || t.clientWidth < t.scrollWidth) {
+    var r = getComputedStyle(t, null);
+    return e(r.overflowY, n) || e(r.overflowX, n) || function (t) {
+      var e = function (t) {
+        if (!t.ownerDocument || !t.ownerDocument.defaultView) return null;
+        try {
+          return t.ownerDocument.defaultView.frameElement;
+        } catch (t) {
+          return null;
+        }
+      }(t);
+      return !!e && (e.clientHeight < t.scrollHeight || e.clientWidth < t.scrollWidth);
+    }(t);
+  }
+  return !1;
+}
+function r(t, e, n, r, i, o, l, d) {
+  return o < t && l > e || o > t && l < e ? 0 : o <= t && d <= n || l >= e && d >= n ? o - t - r : l > e && d < n || o < t && d > n ? l - e + i : 0;
+}
+var i = function (e, i) {
+  var o = window,
+    l = i.scrollMode,
+    d = i.block,
+    f = i.inline,
+    h = i.boundary,
+    u = i.skipOverflowHiddenElements,
+    s = "function" == typeof h ? h : function (t) {
+      return t !== h;
+    };
+  if (!t(e)) throw new TypeError("Invalid target");
+  for (var a, c, g = document.scrollingElement || document.documentElement, p = [], m = e; t(m) && s(m);) {
+    if ((m = null == (c = (a = m).parentElement) ? a.getRootNode().host || null : c) === g) {
+      p.push(m);
+      break;
+    }
+    null != m && m === document.body && n(m) && !n(document.documentElement) || null != m && n(m, u) && p.push(m);
+  }
+  for (var w = o.visualViewport ? o.visualViewport.width : innerWidth, v = o.visualViewport ? o.visualViewport.height : innerHeight, W = window.scrollX || pageXOffset, H = window.scrollY || pageYOffset, b = e.getBoundingClientRect(), y = b.height, E = b.width, M = b.top, V = b.right, x = b.bottom, I = b.left, C = "start" === d || "nearest" === d ? M : "end" === d ? x : M + y / 2, R = "center" === f ? I + E / 2 : "end" === f ? V : I, T = [], k = 0; k < p.length; k++) {
+    var B = p[k],
+      D = B.getBoundingClientRect(),
+      O = D.height,
+      X = D.width,
+      Y = D.top,
+      L = D.right,
+      S = D.bottom,
+      j = D.left;
+    if ("if-needed" === l && M >= 0 && I >= 0 && x <= v && V <= w && M >= Y && x <= S && I >= j && V <= L) return T;
+    var N = getComputedStyle(B),
+      q = parseInt(N.borderLeftWidth, 10),
+      z = parseInt(N.borderTopWidth, 10),
+      A = parseInt(N.borderRightWidth, 10),
+      F = parseInt(N.borderBottomWidth, 10),
+      G = 0,
+      J = 0,
+      K = "offsetWidth" in B ? B.offsetWidth - B.clientWidth - q - A : 0,
+      P = "offsetHeight" in B ? B.offsetHeight - B.clientHeight - z - F : 0,
+      Q = "offsetWidth" in B ? 0 === B.offsetWidth ? 0 : X / B.offsetWidth : 0,
+      U = "offsetHeight" in B ? 0 === B.offsetHeight ? 0 : O / B.offsetHeight : 0;
+    if (g === B) G = "start" === d ? C : "end" === d ? C - v : "nearest" === d ? r(H, H + v, v, z, F, H + C, H + C + y, y) : C - v / 2, J = "start" === f ? R : "center" === f ? R - w / 2 : "end" === f ? R - w : r(W, W + w, w, q, A, W + R, W + R + E, E), G = Math.max(0, G + H), J = Math.max(0, J + W);else {
+      G = "start" === d ? C - Y - z : "end" === d ? C - S + F + P : "nearest" === d ? r(Y, S, O, z, F + P, C, C + y, y) : C - (Y + O / 2) + P / 2, J = "start" === f ? R - j - q : "center" === f ? R - (j + X / 2) + K / 2 : "end" === f ? R - L + A + K : r(j, L, X, q, A + K, R, R + E, E);
+      var Z = B.scrollLeft,
+        $ = B.scrollTop;
+      C += $ - (G = Math.max(0, Math.min($ + G / U, B.scrollHeight - O / U + P))), R += Z - (J = Math.max(0, Math.min(Z + J / Q, B.scrollWidth - X / Q + K)));
+    }
+    T.push({
+      el: B,
+      top: G,
+      left: J
+    });
+  }
+  return T;
+};
+
+function isOptionsObject(options) {
+  return options === Object(options) && Object.keys(options).length !== 0;
+}
+function defaultBehavior(actions, behavior) {
+  if (behavior === void 0) {
+    behavior = 'auto';
+  }
+  var canSmoothScroll = ('scrollBehavior' in document.body.style);
+  actions.forEach(function (_ref) {
+    var el = _ref.el,
+      top = _ref.top,
+      left = _ref.left;
+    if (el.scroll && canSmoothScroll) {
+      el.scroll({
+        top: top,
+        left: left,
+        behavior: behavior
+      });
+    } else {
+      el.scrollTop = top;
+      el.scrollLeft = left;
+    }
+  });
+}
+function getOptions(options) {
+  if (options === false) {
+    return {
+      block: 'end',
+      inline: 'nearest'
+    };
+  }
+  if (isOptionsObject(options)) {
+    return options;
+  }
+  return {
+    block: 'start',
+    inline: 'nearest'
+  };
+}
+function scrollIntoView(target, options) {
+  var isTargetAttached = target.isConnected || target.ownerDocument.documentElement.contains(target);
+  if (isOptionsObject(options) && typeof options.behavior === 'function') {
+    return options.behavior(isTargetAttached ? i(target, options) : []);
+  }
+  if (!isTargetAttached) {
+    return;
+  }
+  var computeOptions = getOptions(options);
+  return defaultBehavior(i(target, computeOptions), computeOptions.behavior);
+}
+
+var memoizedNow;
+var now = function now() {
+  if (!memoizedNow) {
+    memoizedNow = 'performance' in window ? performance.now.bind(performance) : Date.now;
+  }
+  return memoizedNow();
+};
+function step(context) {
+  var time = now();
+  var elapsed = Math.min((time - context.startTime) / context.duration, 1);
+  var value = context.ease(elapsed);
+  var currentX = context.startX + (context.x - context.startX) * value;
+  var currentY = context.startY + (context.y - context.startY) * value;
+  context.method(currentX, currentY);
+  if (currentX !== context.x || currentY !== context.y) {
+    requestAnimationFrame(function () {
+      return step(context);
+    });
+  } else {
+    context.cb();
+  }
+}
+function smoothScroll(el, x, y, duration, ease, cb) {
+  if (duration === void 0) {
+    duration = 600;
+  }
+  if (ease === void 0) {
+    ease = function ease(t) {
+      return 1 + --t * t * t * t * t;
+    };
+  }
+  var scrollable;
+  var startX;
+  var startY;
+  var method;
+  scrollable = el;
+  startX = el.scrollLeft;
+  startY = el.scrollTop;
+  method = function method(x, y) {
+    el.scrollLeft = Math.ceil(x);
+    el.scrollTop = Math.ceil(y);
+  };
+  step({
+    scrollable: scrollable,
+    method: method,
+    startTime: now(),
+    startX: startX,
+    startY: startY,
+    x: x,
+    y: y,
+    duration: duration,
+    ease: ease,
+    cb: cb
+  });
+}
+var shouldSmoothScroll = function shouldSmoothScroll(options) {
+  return options && !options.behavior || options.behavior === 'smooth';
+};
+function scroll(target, options) {
+  var overrides = options || {};
+  if (shouldSmoothScroll(overrides)) {
+    return scrollIntoView(target, {
+      block: overrides.block,
+      inline: overrides.inline,
+      scrollMode: overrides.scrollMode,
+      boundary: overrides.boundary,
+      behavior: function behavior(actions) {
+        return Promise.all(actions.reduce(function (results, _ref) {
+          var el = _ref.el,
+            left = _ref.left,
+            top = _ref.top;
+          var startLeft = el.scrollLeft;
+          var startTop = el.scrollTop;
+          if (startLeft === left && startTop === top) {
+            return results;
+          }
+          return [].concat(results, [new Promise(function (resolve) {
+            return smoothScroll(el, left, top, overrides.duration, overrides.ease, function () {
+              return resolve({
+                el: el,
+                left: [startLeft, left],
+                top: [startTop, top]
+              });
+            });
+          })]);
+        }, []));
+      }
+    });
+  }
+  return Promise.resolve(scrollIntoView(target, options));
+}
+var smoothScrollIntoView = scroll;
+var scrollIntoViewIfNeed = smoothScrollIntoView;
+
+const anchorInjectionKey = Symbol("PizzaAnchor");
+
+const __default__$2 = defineComponent({
+  name: "Anchor"
+});
+var script$3 = /* @__PURE__ */ defineComponent({
+  ...__default__$2,
+  props: {
+    showRail: { type: Boolean, required: false, default: true },
+    showBackground: { type: Boolean, required: false, default: true },
+    size: { type: String, required: false, default: "default" },
+    smooth: { type: Boolean, required: false, default: true },
+    offsetTarget: { type: [String, null], required: false }
+  },
+  emits: {
+    select: (_hash, _preHash) => true
+  },
+  setup(__props, { emit }) {
+    const props = __props;
+    const clsPrefix = getClsPrefix("anchor");
+    const currentLink = ref("");
+    const isScrolling = ref(false);
+    const links = reactive({});
+    const scrollContainerEle = ref();
+    const barRef = ref();
+    const scrollIntoView = (hash) => {
+      const element = getElement(hash);
+      if (!element)
+        return;
+      isScrolling.value = true;
+      const behaviorType = props.smooth ? "smooth" : "auto";
+      scrollIntoViewIfNeed(element, { block: "start", behavior: behaviorType }).then(() => {
+        isScrolling.value = false;
+      });
+    };
+    const handleAnchorChange = (hash) => {
+      if (hash !== currentLink.value)
+        currentLink.value = hash;
+    };
+    const addLink = (hash, node) => {
+      if (!hash)
+        return;
+      links[hash] = node;
+    };
+    const handleClick = (_e, hash) => {
+      if (hash) {
+        scrollIntoView(hash);
+        handleAnchorChange(hash);
+      }
+      emit("select", hash, currentLink.value);
+    };
+    const setContainer = () => {
+      if (props.offsetTarget)
+        scrollContainerEle.value = getElement(props.offsetTarget);
+      else
+        scrollContainerEle.value = document.documentElement;
+    };
+    const getFirstInViewportEle = () => {
+      if (!scrollContainerEle.value)
+        return void 0;
+      const containerRect = scrollContainerEle.value.getBoundingClientRect();
+      for (const hash of Object.keys(links)) {
+        const element = getElement(hash);
+        if (element) {
+          const { top } = element.getBoundingClientRect();
+          const offsetTop = scrollContainerEle.value === document.documentElement ? top : top - containerRect.top;
+          if (offsetTop >= -5 && offsetTop <= containerRect.height / 2)
+            return element;
+        }
+      }
+      return void 0;
+    };
+    const handleScroll = throttle(() => {
+      if (isScrolling.value)
+        return;
+      const element = getFirstInViewportEle();
+      if (element && element.id) {
+        const hash = `#${element.id}`;
+        handleAnchorChange(hash);
+      }
+    });
+    const bindScrollEvent = () => {
+      if (scrollContainerEle.value)
+        document.addEventListener("scroll", handleScroll, true);
+    };
+    const unbindScrollEvent = () => {
+      if (scrollContainerEle.value)
+        document.removeEventListener("scroll", handleScroll, true);
+    };
+    watch(currentLink, () => {
+      const link = links[currentLink.value];
+      if (props.showRail && link && barRef.value) {
+        barRef.value.style.top = `${link.firstElementChild.offsetTop}px`;
+        barRef.value.style.height = `${link.firstElementChild.offsetHeight}px`;
+      }
+    });
+    onMounted(() => {
+      setContainer();
+      const hash = decodeURIComponent(window.location.hash);
+      if (hash) {
+        scrollIntoView(hash);
+        handleAnchorChange(hash);
+      } else {
+        handleScroll();
+      }
+      bindScrollEvent();
+    });
+    onBeforeUnmount(() => {
+      unbindScrollEvent();
+    });
+    provide(
+      anchorInjectionKey,
+      reactive({
+        currentLink,
+        showRail: props.showRail,
+        handleClick,
+        addLink
+      })
+    );
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", {
+        class: normalizeClass(`${unref(clsPrefix)}`)
+      }, [
+        __props.showRail ? (openBlock(), createElementBlock("div", {
+          key: 0,
+          class: normalizeClass(`${unref(clsPrefix)}-rail`)
+        }, [
+          createElementVNode("div", {
+            ref_key: "barRef",
+            ref: barRef,
+            class: normalizeClass([`${unref(clsPrefix)}-rail-bar`, currentLink.value !== null && `${unref(clsPrefix)}-rail-bar--active`])
+          }, null, 2)
+        ], 2)) : createCommentVNode("v-if", true),
+        createElementVNode("ul", {
+          class: normalizeClass(`${unref(clsPrefix)}-wrap`)
+        }, [
+          renderSlot(_ctx.$slots, "default")
+        ], 2)
+      ], 2);
+    };
+  }
+});
+
+script$3.__file = "components/anchor/src/anchor.vue";
+
+const _hoisted_1 = ["href"];
+const __default__$1 = defineComponent({
+  name: "AnchorLink"
+});
+var script$2 = /* @__PURE__ */ defineComponent({
+  ...__default__$1,
+  props: {
+    title: { type: String, required: true },
+    href: { type: String, required: false }
+  },
+  setup(__props) {
+    const props = __props;
+    const clsPrefix = getClsPrefix("anchor");
+    const linkCls = `${clsPrefix}-link`;
+    const linkRef = ref();
+    const context = inject(anchorInjectionKey, void 0);
+    onMounted(() => {
+      if (props.href && linkRef.value)
+        context?.addLink(props.href, linkRef.value);
+    });
+    const handleClick = (e) => context?.handleClick(e, props.href);
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("li", {
+        ref_key: "linkRef",
+        ref: linkRef,
+        class: normalizeClass(`${linkCls}-item`)
+      }, [
+        createElementVNode("a", {
+          href: __props.href,
+          class: normalizeClass([linkCls, {
+            [`${linkCls}-active-line`]: unref(context)?.currentLink === __props.href && unref(context)?.showRail,
+            [`${linkCls}-active`]: unref(context)?.currentLink === __props.href && !unref(context)?.showRail
+          }]),
+          onClick: handleClick
+        }, toDisplayString(__props.title), 11, _hoisted_1),
+        renderSlot(_ctx.$slots, "default")
+      ], 2);
+    };
+  }
+});
+
+script$2.__file = "components/anchor/src/anchor-link.vue";
+
+const PAnchor = withInstall(script$3);
+const PAnchorLink = withInstall(script$2);
+({
+  ...script$3,
+  Link: script$2,
+  install: app => {
+    [PAnchor.install, PAnchorLink.install].forEach(installFn => installFn && installFn(app));
+  }
+});
+
+const __default__ = defineComponent({
+  name: "Affix"
+});
+var script$1 = /* @__PURE__ */ defineComponent({
+  ...__default__,
+  props: {
+    offsetTop: { type: Number, required: false, default: 0 },
+    offsetBottom: { type: Number, required: false },
+    scrollTarget: { type: [String, null], required: false },
+    position: { type: String, required: false, default: "fixed" }
+  },
+  setup(__props) {
+    const props = __props;
+    const clsPrefix = getClsPrefix("affix");
+    const affixRef = ref();
+    const container = ref();
+    const fixedStyles = ref();
+    ref(false);
+    const handleScroll = throttle(() => {
+      if (!affixRef.value)
+        return;
+      const { offsetTop, offsetBottom, position } = props;
+      const offsetType = isUndefined(offsetBottom) ? "top" : "bottom";
+      const affixRect = affixRef.value.getBoundingClientRect();
+      const containerRect = container.value instanceof HTMLElement ? container.value.getBoundingClientRect() : { top: 0, bottom: window.innerHeight };
+      const positionType = position === "absolute" ? "absolute" : "fixed";
+      let isFixed = false;
+      let newFixedStyles = {};
+      const newPlaceholderStyles = {
+        width: `${affixRef.value.offsetWidth}px`,
+        height: `${affixRef.value.offsetHeight}px`
+      };
+      if (offsetType === "top") {
+        isFixed = affixRect.top - containerRect.top < (offsetTop || 0);
+        newFixedStyles = isFixed ? {
+          position: positionType,
+          top: positionType === "fixed" ? `${containerRect.top + (offsetTop || 0)}px` : `${offsetTop || 0}px`
+        } : {};
+      } else {
+        isFixed = containerRect.bottom - affixRect.bottom < (offsetBottom || 0);
+        newFixedStyles = isFixed ? {
+          position: positionType,
+          bottom: positionType === "fixed" ? `${window.innerHeight - containerRect.bottom + (offsetBottom || 0)}px` : `${offsetBottom || 0}px`
+        } : {};
+      }
+      fixedStyles.value = {
+        ...newFixedStyles,
+        ...isFixed ? newPlaceholderStyles : {}
+      };
+    }, 200);
+    const init = () => {
+      const { scrollTarget } = props;
+      container.value = scrollTarget && scrollTarget !== document && getElement(scrollTarget) || document;
+      if (container.value) {
+        container.value.addEventListener("scroll", handleScroll);
+        handleScroll();
+      }
+    };
+    onMounted(() => {
+      init();
+    });
+    onBeforeUnmount(() => {
+      if (container.value)
+        container.value.removeEventListener("scroll", handleScroll);
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", {
+        ref_key: "affixRef",
+        ref: affixRef
+      }, [
+        createElementVNode("div", {
+          style: normalizeStyle(fixedStyles.value),
+          class: normalizeClass(unref(clsPrefix))
+        }, [
+          renderSlot(_ctx.$slots, "default")
+        ], 6)
+      ], 512);
+    };
+  }
+});
+
+script$1.__file = "components/affix/src/affix.vue";
+
+const PAffix = withInstall(script$1);
+
+var script = defineComponent({
+  name: "ConfigProvider",
+  props: {
+    mode: {
+      type: String,
+      default: "light"
+    },
+    global: {
+      type: Boolean,
+      default: false
+    },
+    clsPrefix: {
+      type: String,
+      default: defaultClsPrefix
+    }
+  },
+  setup(props) {
+    const config = reactive(toRefs(props));
+    if (props.global) {
+      const instance = getCurrentInstance();
+      if (instance)
+        instance.appContext.app.provide(injectKey, config);
+    } else {
+      provide(injectKey, config);
+    }
+  }
+});
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return renderSlot(_ctx.$slots, "default");
+}
+
+script.render = render;
+script.__file = "components/config-provider/src/config-provider.vue";
+
+const PConfigProvider = withInstall(script);
+
+var components = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  PAnchor: PAnchor,
+  PAnchorLink: PAnchorLink,
+  PAffix: PAffix,
+  PConfigProvider: PConfigProvider
+});
+
+const install = app => {
+  for (const key of Object.keys(components)) {
+    const name = key;
+    app.use(components[name]);
+  }
+};
+
+export { PAffix, PAnchor, install as default, useConfig };
