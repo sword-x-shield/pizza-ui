@@ -14,9 +14,9 @@ export default defineConfig({
       },
     },
   },
-  optimizeDeps: {
-    include: [resolve(__dirname, './src/components/monaco-editor/index'), '@volar/vue-language-service'],
-  },
+  // optimizeDeps: {
+  //   include: [resolve(__dirname, './src/components/monaco-editor/index'), '@volar/vue-language-service'],
+  // },
   base: '',
   build: {
     lib: {

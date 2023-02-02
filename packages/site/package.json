@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "pnpm run --parallel --filter '@pizza/*' --filter pizza-ui --filter=!@pizza/example-block build && vite",
+    "dev:site": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -15,8 +16,9 @@
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
-    "@pizza/site-parser": "workspace:^0.0.1",
+    "@pizza/site-parser": "workspace:*",
     "@vitejs/plugin-vue": "^3.2.0",
-    "vite": "^4.0.2"
+    "sass": "^1.57.0",
+    "vite": "^4.0.4"
   }
 }

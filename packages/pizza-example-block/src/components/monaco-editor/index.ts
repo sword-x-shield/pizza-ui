@@ -1,6 +1,6 @@
 import assign from 'nano-assign';
 import { PropType, defineComponent, getCurrentInstance, h, nextTick, onBeforeUnmount, onMounted, shallowRef, watch } from 'vue';
-import { editor } from 'monaco-editor-core';
+import { Uri, editor } from 'monaco-editor-core';
 import { monaco, wire } from './monacoEditor';
 
 type MonacoEditor = typeof monaco
@@ -25,7 +25,7 @@ export default defineComponent({
      */
     theme: {
       type: String,
-      default: 'vs',
+      default: 'github-light',
     },
     /**
      * 语言 options.language
@@ -83,9 +83,8 @@ export default defineComponent({
           original: originalModel,
           modified: modifiedModel,
         });
-      }
-      else {
-        const model = monaco.editor.createModel(props.modelValue, props.language);
+      } else {
+        const model = monaco.editor.createModel(props.modelValue, props.language, Uri.parse(`file:///${new Date().getTime()}.vue`));
 
         editorRef.value = monaco.editor.create(instance.proxy!.$el, {
           ...options,
@@ -98,8 +97,7 @@ export default defineComponent({
       const editor = getModifiedEditor();
       editor.onDidChangeModelContent((event: any) => {
         const value = editor.getValue();
-        if (props.modelValue !== value)
-          emit('update:modelValue', value, event);
+        if (props.modelValue !== value) emit('update:modelValue', value, event);
       });
 
       emit('editor-did-mount', editorRef.value);
@@ -117,16 +115,14 @@ export default defineComponent({
     watch(() => props.modelValue, (newValue: string) => {
       if (editorRef.value) {
         const editor = getModifiedEditor();
-        if (newValue !== editor.getValue())
-          editor.setValue(newValue);
+        if (newValue !== editor.getValue()) editor.setValue(newValue);
       }
     });
 
     watch(() => props.original, (newValue) => {
       if (editorRef.value && props.diffEditor) {
         const editor = getOriginalEditor();
-        if (newValue !== editor.getValue())
-          editor.setValue(newValue);
+        if (newValue !== editor.getValue()) editor.setValue(newValue);
       }
     });
 
@@ -138,11 +134,10 @@ export default defineComponent({
     });
 
     watch(() => props.theme, (newVal) => {
-      if (editorRef.value)
-        monacoEditor.value!.editor.setTheme(newVal);
+      if (editorRef.value) monacoEditor.value!.editor.setTheme(newVal);
     });
 
-    onMounted(() => {
+    onMounted(async () => {
       monacoEditor.value = monaco;
       nextTick(() => {
         initMonaco(monacoEditor.value!);

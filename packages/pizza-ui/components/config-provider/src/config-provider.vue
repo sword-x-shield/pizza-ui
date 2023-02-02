@@ -32,10 +32,8 @@ export default defineComponent({
 
     if (props.global) {
       const instance = getCurrentInstance();
-      if (instance)
-        instance.appContext.app.provide(injectKey, config);
-    }
-    else {
+      if (instance) instance.appContext.app.provide(injectKey, config);
+    } else {
       provide(injectKey, config);
     }
   },

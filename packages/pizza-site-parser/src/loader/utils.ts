@@ -1,5 +1,9 @@
+import path from 'node:path';
 import { marked } from 'marked';
+import { ComponentDoc } from 'vue-docgen-api';
 import type { ComponentPartsType } from './type';
+import { getApiTemplate, parseProps } from './api-gen';
+import { slotTagHandler } from './api-gen/slot-tag-handler';
 
 const scriptRE = /<script[^>]*>([\s\S]*)<\/script>/;
 const scriptContentRE = /(?<=<script[^>]*>)([\s\S]*)(?=<\/script>)/;
@@ -78,8 +82,7 @@ export function createRenderer() {
       return `<p>${text}</p>`;
     },
     link(href, title, text) {
-      if (/^(http:|https:)/.test(href as string))
-        return `<a href="${href}" target="_blank">${text}</a>`;
+      if (/^(http:|https:)/.test(href as string)) return `<a href="${href}" target="_blank">${text}</a>`;
 
       return `<router-link to="${href}" #="{ navigate, href }" custom><a :href="href" @click="navigate">${text}</a></router-link>`;
     },
@@ -122,26 +125,101 @@ export function genVueComponent(parts: ComponentPartsType, fileName?: string, re
   let src = demoBlock;
   src = src.replace(relativeUrlReg, relativeUrl);
 
-  if (parts.fileName)
-    src = src.replace(fileNameReg, parts.fileName);
+  if (parts.fileName) src = src.replace(fileNameReg, parts.fileName);
 
-  if (parts.content)
-    src = src.replace(contentReg, parts.content);
+  if (parts.content) src = src.replace(contentReg, parts.content);
 
-  if (parts.title)
-    src = src.replace(titleReg, parts.title);
+  if (parts.title) src = src.replace(titleReg, parts.title);
 
-  if (parts.code)
-    src = src.replace(codeReg, encodeURIComponent(parts.code));
+  if (parts.code) src = src.replace(codeReg, encodeURIComponent(parts.code));
 
-  if (parts.script)
-    src = src.replace(scriptReg, parts.script);
+  if (parts.script) src = src.replace(scriptReg, parts.script);
 
-  if (parts.language)
-    src = src.replace(languageTypeReg, parts.language);
+  if (parts.language) src = src.replace(languageTypeReg, parts.language);
 
-  if (parts.style)
-    src = src.replace(styleReg, parts.style);
+  if (parts.style) src = src.replace(styleReg, parts.style);
 
   return src.trim();
 }
+
+export async function replaceDocPlaceholder(options: {
+    dir: string
+    code: string
+    placeholderMatchers: RegExp
+    lang: 'zh' | 'en'
+    parser(filePath: string, options?: Record<string, any>): Promise<ComponentDoc | ComponentDoc[]> | ComponentDoc | ComponentDoc[]
+
+  }) {
+  const { dir, code, placeholderMatchers, parser, lang } = options;
+
+  let result = code;
+
+  const matches = Array.from(result.matchAll(placeholderMatchers));
+
+  for (const matchItem of matches) {
+    try {
+      const props = parseProps(matchItem[0]);
+
+      const { src } = props;
+
+      if (!src)
+        throw new Error(`missing src props at ${dir}`);
+
+      const srcPath = path.resolve(dir, src);
+
+      const componentDoc = srcPath.endsWith('.vue')
+        ? await parser(srcPath, {
+          addScriptHandlers: [slotTagHandler],
+        })
+        // TODO: 解析 function 调用式的组件
+        : null;
+
+      result = result.replace(matchItem[0], getApiTemplate(componentDoc, lang));
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  return result;
+}
+
+export function toKebabCase(str: string) {
+  return str.replace(/[A-Z]/g, (match, offset) => {
+    return `${offset > 0 ? '-' : ''}${match.toLocaleLowerCase()}`;
+  });
+}
+
+/**
+ * 去掉包裹字符串的引号
+ * @param {str} string
+ * @returns {string}
+ */
+export function unquote(str: string) {
+  return str && str.replace(/^['"]|['"]$/g, '');
+}
+
+/**
+ * 清理字符串前后的空格，竖线和 \n
+ * @param {str} string
+ * @returns {string}
+ */
+export function trimStr(str: string) {
+  return str && str.replace(/^(\s|\||\r?\n)*|(\s|\||\r?\n)*$/g, '');
+}
+
+/**
+ * 清理字符串中不符合预期的字符，如 \n
+ * @param {str} string
+ * @returns {string}
+ */
+export function cleanStr(str: string) {
+  return str && str.replace(/\r?\n/g, '');
+}
+
+/**
+ * 替换换行和竖线使其能在markdown中显示
+ * @param str
+ */
+export const escapeCharacter = (str: string) => {
+  return str.replace(/\r?\n/g, '<br>').replace(/\|/g, '\\|');
+};

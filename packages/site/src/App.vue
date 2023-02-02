@@ -21,5 +21,6 @@ function toggleMode() {
 </template>
 
 <style>
+@import './style/index.css';
 @import './style/global.css';
 </style>

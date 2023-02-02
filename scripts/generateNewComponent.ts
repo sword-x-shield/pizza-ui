@@ -9,8 +9,7 @@ function toKebabCase(str: string) {
     return `-${match.toLowerCase()}`;
   });
 
-  if (kebabCaseName.slice(0, 1) === '-')
-    kebabCaseName = kebabCaseName.slice(1);
+  if (kebabCaseName.slice(0, 1) === '-') kebabCaseName = kebabCaseName.slice(1);
 
   return kebabCaseName;
 }
