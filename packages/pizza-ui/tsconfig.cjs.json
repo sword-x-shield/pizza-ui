@@ -8,6 +8,7 @@
     "target": "ES6",
     "jsx": "react",
     "baseUrl": ".",
+    "types": ["unplugin-vue-define-options/macros-global"],
     "paths": {
       "@pizza-ui/*": ["./*"]
     }

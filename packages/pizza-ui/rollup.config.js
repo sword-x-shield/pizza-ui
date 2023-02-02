@@ -7,14 +7,20 @@ import { babel } from '@rollup/plugin-babel';
 import alias from '@rollup/plugin-alias';
 import vuePlugin from 'rollup-plugin-vue';
 import _esbuild from 'rollup-plugin-esbuild';
+import defineOptions from 'unplugin-vue-define-options/rollup';
 const esbuild = _esbuild.default || _esbuild;
 
 const extensions = ['.mjs', '.js', '.json', '.ts'];
-const commonPlugins = [
+const commonPlugins = ({
+  minify,
+} = {
+  minify: true,
+}) => ([
   resolve({ extensions }),
   alias({
     entries: [{ find: '@pizza-ui', replacement: path.resolve(__dirname, '.') }],
   }),
+  defineOptions(),
   vuePlugin(),
   esbuild({
     tsconfig: path.resolve(__dirname, '../../tsconfig.json'),
@@ -33,8 +39,8 @@ const commonPlugins = [
     },
     preventAssignment: true,
   }),
-  terser(),
-];
+  minify && terser(),
+]);
 
 function bundleUmd() {
   return {
@@ -48,7 +54,7 @@ function bundleUmd() {
       },
       sourcemap: false,
     },
-    plugins: commonPlugins,
+    plugins: commonPlugins(),
     external: ['vue'],
   };
 }
@@ -61,7 +67,9 @@ function bundleEsm() {
       format: 'esm',
       sourcemap: false,
     },
-    plugins: commonPlugins,
+    plugins: commonPlugins({
+      minify: false,
+    }),
     external: ['vue'],
   };
 }

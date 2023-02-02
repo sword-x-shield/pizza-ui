@@ -22,8 +22,6 @@ function goToUse() {
 </template>
 
 <style scoped>
-@import '../../style/index.css';
-
 .home-container {
   display: flex;
   flex-direction: column;

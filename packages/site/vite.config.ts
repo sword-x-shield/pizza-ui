@@ -2,6 +2,8 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import createVuePlugin from '@vitejs/plugin-vue';
 import { pizzaSitePlugin } from '@pizza/site-parser';
+import DefineOptions from 'unplugin-vue-define-options';
+import Inspect from 'vite-plugin-inspect';
 
 const vuePlugin = createVuePlugin({
   include: [/\.vue$/, /\.md$/],
@@ -10,6 +12,8 @@ const vuePlugin = createVuePlugin({
 export default defineConfig({
   plugins: [
     pizzaSitePlugin(),
+    DefineOptions.vite(),
+    Inspect(),
     vuePlugin,
   ],
   resolve: {

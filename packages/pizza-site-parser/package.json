@@ -30,10 +30,12 @@
     "build": "tsup"
   },
   "dependencies": {
+    "@vue/compiler-core": "^3.2.45",
     "fs-extra": "^10.1.0",
     "gray-matter": "^4.0.3",
     "marked": "^4.2.2",
-    "uppercamelcase": "^3.0.0"
+    "uppercamelcase": "^3.0.0",
+    "vue-docgen-api": "^4.56.4"
   },
   "devDependencies": {
     "@types/marked": "^4.0.7",

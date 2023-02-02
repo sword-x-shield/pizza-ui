@@ -1,10 +1,13 @@
-import { resolve } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import fs from 'fs-extra';
 import { marked } from 'marked';
 import uppercamelcase from 'uppercamelcase';
+import { parse as parseComponent } from 'vue-docgen-api';
 import matter from 'gray-matter';
-import { createRenderer, fetchCode } from './utils';
+import { createRenderer, fetchCode, replaceDocPlaceholder } from './utils';
 import type { ExampleListType } from './type';
+
+const API_REG = /<API (.*)(<\/API>|\/>)/g;
 
 const mdRenderer = createRenderer();
 
@@ -133,13 +136,26 @@ ${
 }
 
 export async function parserEntryMarkdown(code: string, url: string) {
-  const forceShowAnchor = !!~code.search('<!--anchor:on-->');
-  const hasApi = !!~code.search('## API');
-  const colSpan = ~code.search('<!--single-column-->') ? 1 : 2;
-  const tokens = marked.lexer(code);
+  let resultCode = code;
+
+  const forceShowAnchor = !!~resultCode.search('<!--anchor:on-->');
+  const hasApi = !!~resultCode.search('## API');
+  const colSpan = ~resultCode.search('<!--single-column-->') ? 1 : 2;
+
+  // 替换占位符
+  resultCode = await replaceDocPlaceholder({
+    dir: join(dirname(url), '../src'),
+    code: resultCode,
+    parser: parseComponent,
+    placeholderMatchers: API_REG,
+    lang: 'zh',
+  });
+
+  const tokens = marked.lexer(resultCode);
   // 解析示例
   const examplesIndex = tokens.findIndex(token => token.type === 'code' && token.lang === 'example');
   let examplesList: ExampleListType = [];
+
   if (~examplesIndex) {
     examplesList = await parserExampleList((tokens[examplesIndex] as marked.Tokens.Code).text, url);
     tokens.splice(examplesIndex, 1, {
@@ -148,6 +164,7 @@ export async function parserEntryMarkdown(code: string, url: string) {
       text: genExampleTemplate(examplesList, colSpan),
     } as unknown as marked.Tokens.HTML);
   }
+
   const scriptCode = await genScript(examplesList, [], forceShowAnchor);
   const templateCode = await genTemplate(tokens, examplesList, hasApi);
 

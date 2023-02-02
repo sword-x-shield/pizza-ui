@@ -12,10 +12,6 @@ rail.vue
 
 ## API
 
-### Anchor Props
+<API src='anchor.vue'></API>
 
-| 名称 | 类型 | 默认值 | 说明 | 版本 |
-| --- | --- | --- | --- | --- |
-| show-rail | `boolean` | `true` | 是否展示轨道 |  |
-| smooth | `boolean` | `false` | 是否开始流畅滚动 |  |
-| offsetTarget | `string | HTMLElement` | `document` | 滚动目标容器 |  |
+<API src='anchor-link.vue'></API>
