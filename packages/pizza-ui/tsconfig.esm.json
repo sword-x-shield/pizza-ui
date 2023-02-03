@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig.base.json",
-  "exclude": ["./**/*.spec.*","./components/**/example"],
+  "exclude": ["./**/*.spec.*", "./components/**/example"],
   "include": ["./components"],
   "compilerOptions": {
     "rootDir": ".",
