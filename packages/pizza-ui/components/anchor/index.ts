@@ -1,4 +1,4 @@
-import { withInstall } from '@pizza-ui/utils';
+import { withInstall } from '@pizza-ui/components/_utils';
 import { App } from 'vue';
 import type{ Component, Plugin } from 'vue';
 

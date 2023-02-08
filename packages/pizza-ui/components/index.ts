@@ -9,7 +9,7 @@ const install = (app: App) => {
 };
 
 export * from './components';
-export { useConfig } from '../composables/use-config';
+export { useConfig } from '../components/_composables/use-config';
 
 export default {
   install,

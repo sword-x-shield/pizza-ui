@@ -6,7 +6,7 @@
 import { onBeforeUnmount, onMounted, provide, reactive, ref, watch } from 'vue';
 import scrollIntoViewIfNeed, { SmoothBehaviorOptions } from 'smooth-scroll-into-view-if-needed';
 import { throttle } from 'lodash-es';
-import { getClsPrefix, getElement } from '@pizza-ui/utils';
+import { getClsPrefix, getElement } from '@pizza-ui/components/_utils';
 import { anchorInjectionKey } from './context';
 
 const props = withDefaults(defineProps<{

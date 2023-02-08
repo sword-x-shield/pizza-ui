@@ -92,7 +92,7 @@ describe('${kebabCaseComponentName}.vue', () => {
   const genExportTemplate = (newComponentPath: string) => {
     fse.outputFileSync(
       path.join(newComponentPath, 'index.ts'),
-      `import { withInstall } from '@pizza-ui/utils';\n
+      `import { withInstall } from '@pizza-ui/components/_utils';\n
 import ${upperComponentName} from './src/${kebabCaseComponentName}.vue';\n
 export const P${upperComponentName} = withInstall(${upperComponentName});\n
 export default P${upperComponentName};\n`,

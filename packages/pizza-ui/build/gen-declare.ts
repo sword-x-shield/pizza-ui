@@ -12,7 +12,7 @@ const resolvePath = (relativePath: string) => {
 
 const files = glob.sync('**/index.ts', {
   cwd: resolvePath('components'),
-}).filter(v => v.split('/').length === 2).map(v => uppercamelcase(v.split('/')[0]));
+}).filter(v => v.split('/').length === 2 && !v.includes('_')).map(v => uppercamelcase(v.split('/')[0]));
 
 async function genDeclare() {
   const components: Record<string, string> = {};

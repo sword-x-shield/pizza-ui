@@ -11,6 +11,21 @@ import defineOptions from 'unplugin-vue-define-options/rollup';
 const esbuild = _esbuild.default || _esbuild;
 
 const extensions = ['.mjs', '.js', '.json', '.ts', '.vue'];
+const externalPlugin = () => ({
+  name: 'vite:external-node_modules',
+  async resolveId(source, importer) {
+    const result = await this.resolve(source, importer, {
+      skipSelf: true,
+      custom: { 'node-resolve': {} },
+    });
+
+    if (result && /node_modules/.test(result.id))
+      return false;
+
+    return null;
+  },
+});
+
 const commonPlugins = ({
   minify,
 } = {
@@ -20,6 +35,7 @@ const commonPlugins = ({
   alias({
     entries: [{ find: '@pizza-ui', replacement: path.resolve(__dirname, '.') }],
   }),
+  externalPlugin(),
   defineOptions(),
   vuePlugin(),
   esbuild({
@@ -57,7 +73,6 @@ function bundleUmd() {
     plugins: commonPlugins({
       minify: false,
     }),
-    external: ['vue'],
   };
 }
 
@@ -76,7 +91,6 @@ function bundleUmdMin() {
     plugins: commonPlugins({
       minify: false,
     }),
-    external: ['vue'],
   };
 }
 
@@ -89,32 +103,19 @@ function bundleOrigin() {
         dir: 'es',
         entryFileNames: '[name].js',
         preserveModules: true,
-        preserveModulesRoot: 'pizza-ui',
+        preserveModulesRoot: 'components',
       },
       {
         format: 'commonjs',
         dir: 'lib',
         entryFileNames: '[name].js',
         preserveModules: true,
+        preserveModulesRoot: 'components',
       },
     ],
-    plugins: [
-      resolve({ extensions }),
-      alias({
-        entries: [{ find: '@pizza-ui', replacement: path.resolve(__dirname, './') }],
-      }),
-      vuePlugin(),
-      esbuild({
-        tsconfig: path.resolve(__dirname, '../../tsconfig.json'),
-        target: 'esnext',
-        sourceMap: true,
-      }),
-      babel({
-        extensions,
-        babelHelpers: 'bundled',
-      }),
-      commonjs(),
-    ],
+    plugins: commonPlugins({
+      minify: false,
+    }),
   };
 }
 

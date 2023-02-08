@@ -1,4 +1,4 @@
-import { useConfig } from '@pizza-ui/composables';
+import { useConfig } from '@pizza-ui/components/_composables';
 
 interface PizzaOption {
   componentPrefix: string
