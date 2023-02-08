@@ -25,6 +25,9 @@ const externalPlugin = () => ({
     return null;
   },
 });
+const treeShakeSetting = () => ({
+  moduleSideEffects: ['vue', 'loadsh-es', 'smooth-scroll-into-view-if-needed'],
+});
 
 const commonPlugins = ({
   minify,
@@ -70,6 +73,7 @@ function bundleUmd() {
       },
       sourcemap: true,
     },
+    treeshake: treeShakeSetting(),
     plugins: commonPlugins({
       minify: false,
     }),
@@ -88,6 +92,7 @@ function bundleUmdMin() {
       },
       sourcemap: true,
     },
+    treeshake: treeShakeSetting(),
     plugins: commonPlugins({
       minify: false,
     }),
@@ -116,6 +121,7 @@ function bundleOrigin() {
     plugins: commonPlugins({
       minify: false,
     }),
+    treeshake: treeShakeSetting(),
   };
 }
 
