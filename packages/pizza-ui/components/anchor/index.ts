@@ -1,13 +1,13 @@
 import { withInstall } from '@pizza-ui/components/_utils';
-import { App } from 'vue';
-import type{ Component, Plugin } from 'vue';
+import type{ App, Component, Plugin } from 'vue';
 
 import Anchor from './src/anchor.vue';
 import AnchorLink from './src/anchor-link.vue';
 
-export const PAnchor = withInstall(Anchor);
+const PAnchor = withInstall(Anchor);
 export const PAnchorLink = withInstall(AnchorLink);
-const _Anchor: Component & Plugin = {
+
+export const _Anchor: Component & Plugin = {
   ...Anchor,
   Link: AnchorLink,
   install: (app: App) => {
