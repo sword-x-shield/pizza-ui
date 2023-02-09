@@ -4,7 +4,7 @@
  * 默认插槽
  */
 import { inject, onMounted, ref } from 'vue';
-import { getClsPrefix } from '@pizza-ui/utils';
+import { getClsPrefix } from '@pizza-ui/components/_utils';
 import { anchorInjectionKey } from './context';
 
 const props = defineProps<{

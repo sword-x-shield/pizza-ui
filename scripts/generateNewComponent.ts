@@ -76,10 +76,23 @@ describe('${kebabCaseComponentName}.vue', () => {
     );
   };
 
+  const genStyleTemplate = (newComponentPath: string) => {
+    fse.outputFileSync(path.join(newComponentPath, 'style/index.ts'), 'import \'./index.scss\';');
+    fse.outputFileSync(path.join(newComponentPath, 'style/index.scss'), `
+  @import '../../../_styles/index.scss';
+
+  $anchor-prefix-cls: #{$prefix}-${componentName};
+
+  .#{$anchor-prefix-cls} {
+
+  }
+    `);
+  };
+
   const genExportTemplate = (newComponentPath: string) => {
     fse.outputFileSync(
       path.join(newComponentPath, 'index.ts'),
-      `import { withInstall } from '@pizza-ui/utils';\n
+      `import { withInstall } from '@pizza-ui/components/_utils';\n
 import ${upperComponentName} from './src/${kebabCaseComponentName}.vue';\n
 export const P${upperComponentName} = withInstall(${upperComponentName});\n
 export default P${upperComponentName};\n`,
@@ -89,6 +102,7 @@ export default P${upperComponentName};\n`,
   const genTemplateList = [
     genVueTemplate,
     genTestTemplate,
+    genStyleTemplate,
     genExportTemplate,
   ];
 

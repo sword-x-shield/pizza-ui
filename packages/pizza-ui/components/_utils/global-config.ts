@@ -1,10 +1,10 @@
-import { useConfig } from '@pizza-ui/composables';
+import { useConfig } from '@pizza-ui/components/_composables';
 
 interface PizzaOption {
   componentPrefix: string
 }
 
-const componentPrefix = 'P';
+export const componentPrefix = 'P';
 
 export const getClsPrefix = (componentName?: string): string => {
   const { clsPrefix } = useConfig();

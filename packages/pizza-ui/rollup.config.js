@@ -5,12 +5,30 @@ import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
 import { babel } from '@rollup/plugin-babel';
 import alias from '@rollup/plugin-alias';
-import vuePlugin from 'rollup-plugin-vue';
+import vuePlugin from '@vitejs/plugin-vue';
 import _esbuild from 'rollup-plugin-esbuild';
 import defineOptions from 'unplugin-vue-define-options/rollup';
 const esbuild = _esbuild.default || _esbuild;
 
-const extensions = ['.mjs', '.js', '.json', '.ts'];
+const extensions = ['.mjs', '.js', '.json', '.ts', '.vue'];
+const externalPlugin = () => ({
+  name: 'vite:external-node_modules',
+  async resolveId(source, importer) {
+    const result = await this.resolve(source, importer, {
+      skipSelf: true,
+      custom: { 'node-resolve': {} },
+    });
+
+    if (result && /node_modules/.test(result.id))
+      return false;
+
+    return null;
+  },
+});
+const treeShakeSetting = () => ({
+  moduleSideEffects: ['vue', 'loadsh-es', 'smooth-scroll-into-view-if-needed'],
+});
+
 const commonPlugins = ({
   minify,
 } = {
@@ -20,6 +38,7 @@ const commonPlugins = ({
   alias({
     entries: [{ find: '@pizza-ui', replacement: path.resolve(__dirname, '.') }],
   }),
+  externalPlugin(),
   defineOptions(),
   vuePlugin(),
   esbuild({
@@ -52,26 +71,58 @@ function bundleUmd() {
       globals: {
         vue: 'Vue',
       },
-      sourcemap: false,
+      sourcemap: true,
     },
-    plugins: commonPlugins(),
-    external: ['vue'],
-  };
-}
-
-function bundleEsm() {
-  return {
-    input: path.resolve('./components/index.ts'),
-    output: {
-      file: 'dist/pizza-ui.esm.js',
-      format: 'esm',
-      sourcemap: false,
-    },
+    treeshake: treeShakeSetting(),
     plugins: commonPlugins({
       minify: false,
     }),
-    external: ['vue'],
   };
 }
 
-export default [bundleUmd(), bundleEsm()];
+function bundleUmdMin() {
+  return {
+    input: path.resolve('./components/index.ts'),
+    output: {
+      file: 'dist/pizza-ui.min.js',
+      format: 'umd',
+      name: 'pizza-ui',
+      globals: {
+        vue: 'Vue',
+      },
+      sourcemap: true,
+    },
+    treeshake: treeShakeSetting(),
+    plugins: commonPlugins({
+      minify: false,
+    }),
+  };
+}
+
+function bundleOrigin() {
+  return {
+    input: path.relative(process.cwd(), './components/index.ts'),
+    output: [
+      {
+        format: 'es',
+        dir: 'es',
+        entryFileNames: '[name].js',
+        preserveModules: true,
+        preserveModulesRoot: 'components',
+      },
+      {
+        format: 'commonjs',
+        dir: 'lib',
+        entryFileNames: '[name].js',
+        preserveModules: true,
+        preserveModulesRoot: 'components',
+      },
+    ],
+    plugins: commonPlugins({
+      minify: false,
+    }),
+    treeshake: treeShakeSetting(),
+  };
+}
+
+export default [bundleUmd(), bundleUmdMin(), bundleOrigin()];

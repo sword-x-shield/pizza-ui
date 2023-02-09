@@ -1,8 +1,10 @@
-declare module '*.vue' {
-  import { DefineComponent } from 'vue';
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
-  const component: DefineComponent<{}, {}, any>;
-  export default component;
+declare module 'vue' {
+  export interface GlobalComponents {
+    PAffix: typeof import('pizza-ui')['PAffix']
+    PAnchor: typeof import('pizza-ui')['PAnchor']
+    PButton: typeof import('pizza-ui')['PButton']
+    PConfigProvider: typeof import('pizza-ui')['PConfigProvider']
+  }
 }
 
-declare module '*.less';
+export {}

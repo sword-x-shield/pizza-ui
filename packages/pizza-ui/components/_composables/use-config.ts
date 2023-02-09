@@ -1,5 +1,5 @@
 import { inject } from 'vue';
-import { injectKey } from '../components/config-provider/context';
+import { injectKey } from '../config-provider/context';
 
 export const defaultClsPrefix = 'p';
 

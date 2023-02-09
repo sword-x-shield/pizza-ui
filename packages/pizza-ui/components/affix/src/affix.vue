@@ -2,7 +2,7 @@
 import type { CSSProperties } from 'vue';
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { isUndefined, throttle } from 'lodash-es';
-import { getClsPrefix, getElement } from '@pizza-ui/utils';
+import { getClsPrefix, getElement } from '@pizza-ui/components/_utils';
 
 export type AffixPosition = 'fixed' | 'absolute'
 
