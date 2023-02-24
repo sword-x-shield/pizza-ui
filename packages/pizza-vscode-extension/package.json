@@ -7,7 +7,7 @@
   "description": "pizza ui extension for vscode",
   "scripts": {
     "dev": "tsx build/index.ts",
-    "build": "tsx build/index.ts pro",
+    "build": "tsx build/index.ts build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
