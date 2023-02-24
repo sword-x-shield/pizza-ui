@@ -1,0 +1,52 @@
+{
+  "name": "pizza-vscode-extension",
+  "version": "0.0.1",
+  "main": "./dist/extension.js",
+  "icon": "./assets/logo.png",
+  "displayName": "pizza-vscode-extension",
+  "description": "pizza ui extension for vscode",
+  "scripts": {
+    "dev": "tsx build/index.ts",
+    "build": "tsx build/index.ts pro",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vscode extension",
+    "pizza ui"
+  ],
+  "author": "sword-x-shield",
+  "license": "ISC",
+  "engines": {
+    "vscode": "^1.56.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "configuration": {
+    "type": "object",
+    "title": "Pizza Extension Configuration",
+    "properties": {
+      "pizza.useChineseLanguage": {
+        "type": "boolean",
+        "default": false,
+        "description": "Use chinese language"
+      }
+    }
+  },
+  "activationEvents": [
+    "onLanguage:vue",
+    "onLanguage:javascript",
+    "onLanguage:typescript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescriptreact"
+  ],
+  "devDependencies": {
+    "@types/vscode": "^1.75.1",
+    "@vscode/vsce": "^2.17.0",
+    "tsx": "^3.12.0",
+    "vite": "^4.1.4"
+  },
+  "dependencies": {
+    "uppercamelcase": "^3.0.0"
+  }
+}
