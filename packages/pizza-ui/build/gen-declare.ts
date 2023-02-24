@@ -10,9 +10,9 @@ const resolvePath = (relativePath: string) => {
   return path.resolve(root, relativePath);
 };
 
-const files = glob.sync('**/index.ts', {
+const files = glob.sync('**/src/**.vue', {
   cwd: resolvePath('components'),
-}).filter(v => v.split('/').length === 2 && !v.includes('_')).map(v => uppercamelcase(v.split('/')[0]));
+}).map(v => uppercamelcase((v.split('/').pop() as string).replace('.vue', '')));
 
 async function genDeclare() {
   const components: Record<string, string> = {};
