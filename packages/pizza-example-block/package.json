@@ -1,0 +1,47 @@
+{
+  "name": "@pizza/example-block",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "pizza example container",
+  "author": "sword-x-shield",
+  "license": "ISC",
+  "keywords": [
+    "ui",
+    "block"
+  ],
+  "exports": {
+    ".": {
+      "require": "./dist/pizza-example-block.umd.cjs",
+      "import": "./dist/pizza-example-block.js"
+    },
+    "./dist/style.css": "./dist/style.css"
+  },
+  "main": "./dist/pizza-example-block.umd.cjs",
+  "module": "./dist/pizza-example-block.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch --mode dev"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.25"
+  },
+  "dependencies": {
+    "monaco-editor-core": "^0.33.0",
+    "monaco-themes": "^0.4.3",
+    "monaco-volar": "^0.0.6",
+    "nano-assign": "^1.0.1",
+    "onigasm": "^2.2.5",
+    "pizza-ui": "workspace:*",
+    "sucrase": "^3.29.0"
+  },
+  "devDependencies": {
+    "@types/prismjs": "^1.26.0",
+    "@vitejs/plugin-vue": "^3.2.0",
+    "sass": "^1.57.0",
+    "vite-plugin-dts": "^1.7.1"
+  }
+}

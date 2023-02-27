@@ -1,0 +1,5 @@
+$shadow-elevated:  0 0 1px rgba(0, 0, 0, .3), 0 4px 14px rgba(0, 0, 0, .1);
+
+@mixin shadow-elevated {
+    box-shadow: $shadow-elevated;
+}

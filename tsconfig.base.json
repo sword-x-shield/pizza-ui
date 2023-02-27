@@ -19,8 +19,10 @@
     "noImplicitAny": true,
     "baseUrl": ".",
     "rootDir": ".",
+    "types": ["unplugin-vue-define-options/macros-global"],
     "paths": {
-      "@pizza-ui/*": ["packages/pizza-ui/*"]
+      "@pizza-ui/*": ["packages/pizza-ui/*"],
+      "pizza-ui": ["packages/pizza-ui/components"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },

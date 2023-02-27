@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "exclude": ["./**/*.spec.*", "./components/**/example"],
+  "include": ["./components"],
+  "compilerOptions": {
+    "rootDir": "./components",
+    "outDir": "./es",
+    "module": "ES6",
+    "target": "ES6",
+    "baseUrl": ".",
+    "types": ["unplugin-vue-define-options/macros-global"],
+    "paths": {
+      "@pizza-ui/*": ["./*"]
+    }
+  }
+}
