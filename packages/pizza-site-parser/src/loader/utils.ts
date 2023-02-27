@@ -142,6 +142,42 @@ export function genVueComponent(parts: ComponentPartsType, fileName?: string, re
   return src.trim();
 }
 
+export async function parseComponentDocsFromTag(options: {
+  dir: string
+  apiTagSource: string
+  parser(filePath: string, options?: Record<string, any>): Promise<ComponentDoc | ComponentDoc[]> | ComponentDoc | ComponentDoc[]
+}): Promise<ComponentDoc[]> {
+  const { dir, apiTagSource, parser } = options;
+
+  const componentDocs: ComponentDoc[] = [];
+
+  try {
+    const props = parseProps(apiTagSource);
+
+    const { src } = props;
+
+    if (!src)
+      throw new Error(`missing src props at ${dir}`);
+
+    const srcPath = path.resolve(dir, src);
+
+    const componentDoc = srcPath.endsWith('.vue')
+      ? await parser(srcPath, {
+        addScriptHandlers: [slotTagHandler],
+      })
+    // TODO: 解析 function 调用式的组件
+      : null;
+
+    const componentDocArr = Array.isArray(componentDoc) ? componentDoc : [componentDoc];
+
+    componentDocs.push(...componentDocArr);
+  } catch (err) {
+    console.log(err);
+  }
+
+  return componentDocs;
+}
+
 export async function replaceDocPlaceholder(options: {
     dir: string
     code: string
@@ -158,21 +194,11 @@ export async function replaceDocPlaceholder(options: {
 
   for (const matchItem of matches) {
     try {
-      const props = parseProps(matchItem[0]);
-
-      const { src } = props;
-
-      if (!src)
-        throw new Error(`missing src props at ${dir}`);
-
-      const srcPath = path.resolve(dir, src);
-
-      const componentDoc = srcPath.endsWith('.vue')
-        ? await parser(srcPath, {
-          addScriptHandlers: [slotTagHandler],
-        })
-        // TODO: 解析 function 调用式的组件
-        : null;
+      const componentDoc = await parseComponentDocsFromTag({
+        apiTagSource: matchItem[0],
+        parser,
+        dir,
+      });
 
       result = result.replace(matchItem[0], getApiTemplate(componentDoc, lang));
     } catch (err) {

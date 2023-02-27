@@ -10,3 +10,7 @@ export {
   PLiveInjectionsPlugin,
   PSiteParserPlugin,
 };
+
+// expose api
+export { parseComponentDocsFromTag } from './loader/utils';
+export { API_REG } from './loader/api-gen/utils';
