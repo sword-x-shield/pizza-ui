@@ -119,7 +119,7 @@ importers:
       '@types/glob': ^8.0.0
       '@types/lodash-es': ^4.17.6
       '@types/uppercamelcase': ^3.0.0
-      '@vitejs/plugin-vue': 2.3.3
+      '@vitejs/plugin-vue': 2.3.4
       clean-css: ^5.3.1
       esbuild: ^0.16.2
       fs-extra: ^10.1.0
@@ -154,7 +154,7 @@ importers:
       '@types/glob': 8.0.0
       '@types/lodash-es': 4.17.6
       '@types/uppercamelcase': 3.0.0
-      '@vitejs/plugin-vue': 2.3.3_vite@4.0.4+vue@3.2.45
+      '@vitejs/plugin-vue': 2.3.4_vite@4.0.4+vue@3.2.45
       clean-css: 5.3.1
       esbuild: 0.16.2
       fs-extra: 10.1.0
@@ -3016,8 +3016,8 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@vitejs/plugin-vue/2.3.3_vite@4.0.4+vue@3.2.45:
-    resolution: {integrity: sha512-SmQLDyhz+6lGJhPELsBdzXGc+AcaT8stgkbiTFGpXPe8Tl1tJaBw1A6pxDqDuRsVkD8uscrkx3hA7QDOoKYtyw==}
+  /@vitejs/plugin-vue/2.3.4_vite@4.0.4+vue@3.2.45:
+    resolution: {integrity: sha512-IfFNbtkbIm36O9KB8QodlwwYvTEsJb4Lll4c2IwB3VHc2gie2mSPtSzL0eYay7X2jd/2WX02FjSGTWR6OPr/zg==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       vite: ^2.5.10
