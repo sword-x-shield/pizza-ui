@@ -16,3 +16,5 @@ function getPropsMap(attrs: AttributeNode[]) {
 
   return map;
 }
+
+export const API_REG = /<API (.*)(<\/API>|\/>)/g;

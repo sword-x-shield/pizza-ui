@@ -1,27 +1,34 @@
 {
   "name": "pizza-vscode-extension",
+  "displayName": "pizza-vscode-extension",
   "version": "0.0.1",
+  "description": "pizza ui extension for vscode",
+  "author": "sword-x-shield",
+  "license": "ISC",
+  "keywords": [
+    "vscode extension",
+    "pizza ui"
+  ],
+  "categories": [
+    "Other"
+  ],
   "main": "./dist/extension.js",
   "icon": "./assets/logo.png",
-  "displayName": "pizza-vscode-extension",
-  "description": "pizza ui extension for vscode",
+  "engines": {
+    "vscode": "^1.56.0"
+  },
+  "activationEvents": [
+    "onLanguage:vue",
+    "onLanguage:javascript",
+    "onLanguage:typescript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescriptreact"
+  ],
   "scripts": {
     "dev": "tsx build/index.ts",
     "build": "tsx build/index.ts build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "vscode extension",
-    "pizza ui"
-  ],
-  "author": "sword-x-shield",
-  "license": "ISC",
-  "engines": {
-    "vscode": "^1.56.0"
-  },
-  "categories": [
-    "Other"
-  ],
   "configuration": {
     "type": "object",
     "title": "Pizza Extension Configuration",
@@ -33,20 +40,13 @@
       }
     }
   },
-  "activationEvents": [
-    "onLanguage:vue",
-    "onLanguage:javascript",
-    "onLanguage:typescript",
-    "onLanguage:javascriptreact",
-    "onLanguage:typescriptreact"
-  ],
+  "dependencies": {
+    "uppercamelcase": "^3.0.0"
+  },
   "devDependencies": {
     "@types/vscode": "^1.75.1",
     "@vscode/vsce": "^2.17.0",
     "tsx": "^3.12.0",
     "vite": "^4.1.4"
-  },
-  "dependencies": {
-    "uppercamelcase": "^3.0.0"
   }
 }
