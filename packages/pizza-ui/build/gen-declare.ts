@@ -2,7 +2,7 @@ import path from 'path';
 import process from 'process';
 import uppercamelcase from 'uppercamelcase';
 import fs from 'fs-extra';
-import glob from 'glob';
+import fg from 'fast-glob';
 
 const componentPrefix = 'P';
 const root = process.cwd();
@@ -10,7 +10,7 @@ const resolvePath = (relativePath: string) => {
   return path.resolve(root, relativePath);
 };
 
-const files = glob.sync('**/src/**.vue', {
+const files = fg.sync('**/src/**.vue', {
   cwd: resolvePath('components'),
 }).map(v => uppercamelcase((v.split('/').pop() as string).replace('.vue', '')));
 

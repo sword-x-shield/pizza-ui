@@ -45,7 +45,7 @@
     "vue": "^3.2.45"
   },
   "lint-staged": {
-    "*.{vue,ts,tsx}": [
+    "*.{vue,ts,tsx,json}": [
       "pnpm run lint",
       "git add"
     ]

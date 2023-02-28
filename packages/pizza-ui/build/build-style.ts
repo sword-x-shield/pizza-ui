@@ -1,5 +1,5 @@
 import path from 'path';
-import glob from 'glob';
+import fg from 'fast-glob';
 import fs from 'fs-extra';
 import sass from 'sass';
 import CleanCSS from 'clean-css';
@@ -9,7 +9,7 @@ const resolvePath = (relativePath: string) => {
   return path.resolve(root, relativePath);
 };
 
-const files = glob.sync('**/*.scss', {
+const files = fg.sync('**/*.scss', {
   cwd: resolvePath('components'),
 });
 

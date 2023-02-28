@@ -6,8 +6,7 @@ import { parse as parseComponent } from 'vue-docgen-api';
 import matter from 'gray-matter';
 import { createRenderer, fetchCode, replaceDocPlaceholder } from './utils';
 import type { ExampleListType } from './type';
-
-const API_REG = /<API (.*)(<\/API>|\/>)/g;
+import { API_REG } from './api-gen';
 
 const mdRenderer = createRenderer();
 
