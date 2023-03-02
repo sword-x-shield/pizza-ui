@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@types/prismjs": "^1.26.0",
-    "@vitejs/plugin-vue": "^3.2.0",
+    "@vitejs/plugin-vue": "^4.0.0",
     "sass": "^1.57.0",
     "vite-plugin-dts": "^1.7.1"
   }
