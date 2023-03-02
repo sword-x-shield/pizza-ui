@@ -28,7 +28,7 @@
 
 ## 🚀 安装
 
-**We recommend using yran or pnpm to install**，it not only makes development easier，but also allow you to take advantage of the rich ecosystem of Javascript packages and tooling.
+**我们推荐使用yran或pnpm来安装**，它不仅使开发更容易，而且还允许你利用Javascript包和工具的丰富生态系统。
 
 ```bash
 $ yarn add pizza-ui
@@ -40,7 +40,7 @@ $ pnpm add pizza-ui
 
 
 ## 🤝 参与贡献
-We welcome contributions from anyone! If you would like to contribute to pizza-ui, please read our [contributing guidelines](./CONTRIBUTING.md) before submitting a pull request.
+我们欢迎任何人的贡献！如果您想为 pizza-ui 做出贡献，请在提交拉取请求之前阅读我们的[贡献指南](./CONTRIBUTING.md)。
 
 
 ## 📄 License
