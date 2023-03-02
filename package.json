@@ -21,8 +21,8 @@
   },
   "devDependencies": {
     "@chuhoman/eslint-config": "^0.0.9",
-    "@commitlint/cli": "^12.1.4",
-    "@commitlint/config-conventional": "^12.1.4",
+    "@commitlint/cli": "^17.0.0",
+    "@commitlint/config-conventional": "^17.0.0",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^18.11.18",
     "@vitejs/plugin-vue": "^3.2.0",
