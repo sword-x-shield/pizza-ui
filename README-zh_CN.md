@@ -4,21 +4,21 @@
 
 <div align="center">
 
-It's a headless( maybe ) UI Library based on Vue. 🍕 
+一个基于 Vue 的 headless( 也许 ) UI 库 🍕 
 
 </div>
 
-English | [简体中文](./README-zh_CN.md)
+[English](./README.md) | 简体中文
 
-## 📦 Features
+## 📦 特性
 
-- A set of high-quality Vue components out of the box.
-- headless component (on the way.. 👀)
+- 开箱即用的高质量 Vue 组件
+- headless 组件 (正在路上.. 👀)
 
 
-## 🔧 Environment Support
+## 🔧 支持环境
 
-- Modern browsers
+- 现代浏览器
 - Vue 3
 - [Electron](https://electronjs.org/)
 
@@ -26,9 +26,9 @@ English | [简体中文](./README-zh_CN.md)
 | --- | --- | --- | --- | --- | --- |
 | Edge | last 2 versions | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
 
-## 🚀 Install
+## 🚀 安装
 
-**We recommend using yran or pnpm to install**，it not only makes development easier，but also allow you to take advantage of the rich ecosystem of Javascript packages and tooling.
+**我们推荐使用yran或pnpm来安装**，它不仅使开发更容易，而且还允许你利用Javascript包和工具的丰富生态系统。
 
 ```bash
 $ yarn add pizza-ui
@@ -39,8 +39,8 @@ $ pnpm add pizza-ui
 ```
 
 
-## 🤝 Contributing
-We welcome contributions from anyone! If you would like to contribute to pizza-ui, please read our [contributing guidelines](./CONTRIBUTING.md) before submitting a pull request.
+## 🤝 参与贡献
+我们欢迎任何人的贡献！如果您想为 pizza-ui 做出贡献，请在提交拉取请求之前阅读我们的[贡献指南](./CONTRIBUTING.md)。
 
 
 ## 📄 License
