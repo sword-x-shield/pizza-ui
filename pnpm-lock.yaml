@@ -112,7 +112,7 @@ importers:
       '@pizza/site-parser': workspace:*
       '@rollup/plugin-alias': ^4.0.2
       '@rollup/plugin-babel': ^6.0.3
-      '@rollup/plugin-commonjs': ^23.0.4
+      '@rollup/plugin-commonjs': ^24.0.0
       '@rollup/plugin-node-resolve': ^15.0.1
       '@rollup/plugin-replace': ^5.0.1
       '@rollup/plugin-terser': ^0.2.0
@@ -149,7 +149,7 @@ importers:
       '@pizza/site-parser': link:../pizza-site-parser
       '@rollup/plugin-alias': 4.0.2_rollup@3.6.0
       '@rollup/plugin-babel': 6.0.3_w72uq6tdmlatpawplpcdf6gq6e
-      '@rollup/plugin-commonjs': 23.0.4_rollup@3.6.0
+      '@rollup/plugin-commonjs': 24.0.1_rollup@3.6.0
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.6.0
       '@rollup/plugin-replace': 5.0.1_rollup@3.6.0
       '@rollup/plugin-terser': 0.2.0_rollup@3.6.0
@@ -2270,7 +2270,7 @@ packages:
     dependencies:
       '@npmcli/name-from-folder': 1.0.1
       glob: 8.0.3
-      minimatch: 5.1.0
+      minimatch: 5.1.6
       read-package-json-fast: 2.0.3
     dev: true
 
@@ -2556,8 +2556,8 @@ packages:
       rollup: 3.6.0
     dev: true
 
-  /@rollup/plugin-commonjs/23.0.2_rollup@3.5.0:
-    resolution: {integrity: sha512-e9ThuiRf93YlVxc4qNIurvv+Hp9dnD+4PjOqQs5vAYfcZ3+AXSrcdzXnVjWxcGQOa6KGJFcRZyUI3ktWLavFjg==}
+  /@rollup/plugin-commonjs/23.0.4_rollup@3.5.0:
+    resolution: {integrity: sha512-bOPJeTZg56D2MCm+TT4psP8e8Jmf1Jsi7pFUMl8BN5kOADNzofNHe47+84WVCt7D095xPghC235/YKuNDEhczg==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^2.68.0||^3.0.0
@@ -2574,8 +2574,8 @@ packages:
       rollup: 3.5.0
     dev: true
 
-  /@rollup/plugin-commonjs/23.0.4_rollup@3.6.0:
-    resolution: {integrity: sha512-bOPJeTZg56D2MCm+TT4psP8e8Jmf1Jsi7pFUMl8BN5kOADNzofNHe47+84WVCt7D095xPghC235/YKuNDEhczg==}
+  /@rollup/plugin-commonjs/24.0.1_rollup@3.6.0:
+    resolution: {integrity: sha512-15LsiWRZk4eOGqvrJyu3z3DaBu5BhXIMeWnijSRvd8irrrg9SHpQ1pH+BUK4H6Z9wL9yOxZJMTLU+Au86XHxow==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^2.68.0||^3.0.0
@@ -2588,7 +2588,7 @@ packages:
       estree-walker: 2.0.2
       glob: 8.0.3
       is-reference: 1.2.1
-      magic-string: 0.26.7
+      magic-string: 0.27.0
       rollup: 3.6.0
     dev: true
 
@@ -2766,7 +2766,7 @@ packages:
     resolution: {integrity: sha512-RMSSvSfs9kb0VzkvQ2NWobwnj7TxCA9vI/IjR9bDHqgAyVbu2T0DN4wiKVqomyDWqO7dPr/tErSfq7urQ1Q37g==}
     dependencies:
       fast-glob: 3.2.12
-      minimatch: 5.1.0
+      minimatch: 5.1.6
       mkdirp: 1.0.4
       path-browserify: 1.0.1
     dev: true
@@ -5545,7 +5545,7 @@ packages:
   /filelist/1.0.4:
     resolution: {integrity: sha512-w1cEuf3S+DrLCQL7ET6kz+gmlJdbq9J7yXCSjK/OZCPA+qEN1WyF4ZAf0YYJa4/shHJra2t/d/r8SV4Ji+x+8Q==}
     dependencies:
-      minimatch: 5.1.0
+      minimatch: 5.1.6
     dev: true
 
   /fill-range/7.0.1:
@@ -5835,7 +5835,7 @@ packages:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.0.5
+      minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
     dev: true
@@ -6113,7 +6113,7 @@ packages:
     resolution: {integrity: sha512-yemi4pMf51WKT7khInJqAvsIGzoqYXblnsz0ql8tM+yi1EKYTY1evX4NAbJrLL/Aanr2HyZeluqU+Oi7MGHokw==}
     engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
     dependencies:
-      minimatch: 5.1.0
+      minimatch: 5.1.6
     dev: true
 
   /ignore/5.2.0:
@@ -7135,13 +7135,6 @@ packages:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
     dependencies:
       brace-expansion: 1.1.11
-
-  /minimatch/5.1.0:
-    resolution: {integrity: sha512-9TPBGGak4nHfGZsPBohm9AWg6NoT7QTCehS3BIJABslyZbzxfV78QM2Y6+i741OPZIafFAaiiEMh5OyIrJPgtg==}
-    engines: {node: '>=10'}
-    dependencies:
-      brace-expansion: 2.0.1
-    dev: true
 
   /minimatch/5.1.6:
     resolution: {integrity: sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==}
@@ -9514,7 +9507,7 @@ packages:
     hasBin: true
     dependencies:
       '@rollup/plugin-alias': 4.0.2_rollup@3.5.0
-      '@rollup/plugin-commonjs': 23.0.2_rollup@3.5.0
+      '@rollup/plugin-commonjs': 23.0.4_rollup@3.5.0
       '@rollup/plugin-json': 5.0.1_rollup@3.5.0
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.5.0
       '@rollup/plugin-replace': 5.0.1_rollup@3.5.0
