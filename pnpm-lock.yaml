@@ -179,10 +179,12 @@ importers:
     specifiers:
       '@types/vscode': ^1.75.1
       '@vscode/vsce': ^2.17.0
+      pizza-ui: workspace:*
       tsx: ^3.12.0
       uppercamelcase: ^3.0.0
       vite: ^4.1.4
     dependencies:
+      pizza-ui: link:../pizza-ui
       uppercamelcase: 3.0.0
     devDependencies:
       '@types/vscode': 1.75.1
