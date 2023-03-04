@@ -45,16 +45,15 @@ const componentsProvider: CompletionItemProvider = {
     const document = editor.document;
     const position = editor.selection.active;
     const line = document.getText(new Range(new Position(position.line, 0), new Position(position.line, position.character)));
-    const shouldRemovedCharacters = line.trimStart();
+    const lastLeftAngleBracketsIndex = line.lastIndexOf('<');
+    const shouldRemovedCharacters = line.slice(lastLeftAngleBracketsIndex).trimStart();
 
     const name = kebabCase(item.label as string).slice(2);
     const descriptor: ComponentDescriptor = componentSnippets[name];
 
     const templateText = new SnippetString(descriptor.body
       ? `${descriptor.body.map((l, index) => {
-        // TODO: 待优化，这里处理了单行多标签情况，误打误撞了属于是
-        const lArr = l.split('<');
-        return index === 0 ? lArr[lArr.length - 1].replace(shouldRemovedCharacters, '') : l;
+        return index === 0 ? l.replace(shouldRemovedCharacters, '') : l;
       }).join('\n')}`
       : '');
 
