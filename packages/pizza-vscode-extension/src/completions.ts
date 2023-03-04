@@ -45,8 +45,7 @@ const componentsProvider: CompletionItemProvider = {
     const document = editor.document;
     const position = editor.selection.active;
     const line = document.getText(new Range(new Position(position.line, 0), new Position(position.line, position.character)));
-    const lastLeftAngleBracketsIndex = line.lastIndexOf('<');
-    const shouldRemovedCharacters = line.slice(lastLeftAngleBracketsIndex).trimStart();
+    const shouldRemovedCharacters = line.slice(line.lastIndexOf('<')).trimStart();
 
     const name = kebabCase(item.label as string).slice(2);
     const descriptor: ComponentDescriptor = componentSnippets[name];
@@ -56,8 +55,6 @@ const componentsProvider: CompletionItemProvider = {
         return index === 0 ? l.replace(shouldRemovedCharacters, '') : l;
       }).join('\n')}`
       : '');
-
-    console.log(templateText);
 
     item.insertText = templateText;
 
