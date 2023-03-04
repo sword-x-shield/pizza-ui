@@ -19,7 +19,11 @@ import { type ComponentDescriptor } from './componentsMap';
 const documentSelector = ['vue', 'typescript', 'javascript', 'javascriptreact', 'typescriptreact'];
 
 const componentsProvider: CompletionItemProvider = {
-  provideCompletionItems(document: TextDocument, position: Position) {
+  provideCompletionItems(document, position) {
+    const linePrefix = document.lineAt(position).text.substring(0, position.character);
+    if (!linePrefix.trimStart().startsWith('<'))
+      return [];
+
     const completionItems: CompletionItem[] = [];
 
     Object.keys(componentSnippets).forEach((key) => {
@@ -33,7 +37,7 @@ const componentsProvider: CompletionItemProvider = {
 
     return completionItems;
   },
-  resolveCompletionItem(item: CompletionItem, token) {
+  resolveCompletionItem(item: CompletionItem) {
     const editor = window.activeTextEditor;
     if (!editor)
       return item;
@@ -41,16 +45,20 @@ const componentsProvider: CompletionItemProvider = {
     const document = editor.document;
     const position = editor.selection.active;
     const line = document.getText(new Range(new Position(position.line, 0), new Position(position.line, position.character)));
-    const shouldRemovedCharacters = line.trimStart().startsWith('<') ? line.trimStart() : '';
+    const shouldRemovedCharacters = line.trimStart();
 
     const name = kebabCase(item.label as string).slice(2);
     const descriptor: ComponentDescriptor = componentSnippets[name];
 
     const templateText = new SnippetString(descriptor.body
       ? `${descriptor.body.map((l, index) => {
-        return index === 0 ? l.replace(shouldRemovedCharacters, '') : l;
+        // TODO: 待优化，这里处理了单行多标签情况，误打误撞了属于是
+        const lArr = l.split('<');
+        return index === 0 ? lArr[lArr.length - 1].replace(shouldRemovedCharacters, '') : l;
       }).join('\n')}`
       : '');
+
+    console.log(templateText);
 
     item.insertText = templateText;
 
