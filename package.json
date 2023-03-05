@@ -15,16 +15,19 @@
   "scripts": {
     "prepare": "husky install",
     "test": "vitest",
-    "gen-comp": "tsx scripts/generateNewComponent.ts",
+    "gen-comp": "tsx scripts/cli/gen-component.ts",
     "dev": "pnpm run --filter pizza-site-project dev",
     "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx,.md,.json --fix --cache"
   },
   "devDependencies": {
     "@chuhoman/eslint-config": "^0.0.9",
+    "@clack/prompts": "^0.6.1",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
     "@types/fs-extra": "^11.0.0",
+    "@types/lodash-es": "^4.17.6",
     "@types/node": "^18.11.18",
+    "@types/uppercamelcase": "^3.0.0",
     "@vitejs/plugin-vue": "^3.2.0",
     "@vue/test-utils": "^2.2.1",
     "chalk": "^5.1.2",
@@ -34,6 +37,7 @@
     "husky": "^8.0.1",
     "lerna": "~6.0.3",
     "lint-staged": "^13.0.3",
+    "lodash-es": "^4.17.21",
     "tsx": "^3.12.0",
     "typescript": "~4.9.4",
     "unbuild": "^1.0.1",
