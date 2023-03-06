@@ -1,0 +1,7 @@
+@import '../../../_styles/index.scss';
+
+$anchor-prefix-cls: #{$prefix}-<%= componentName %>;
+
+.#{$anchor-prefix-cls} {
+
+}

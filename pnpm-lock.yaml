@@ -5,10 +5,13 @@ importers:
   .:
     specifiers:
       '@chuhoman/eslint-config': ^0.0.9
+      '@clack/prompts': ^0.6.1
       '@commitlint/cli': ^12.1.4
       '@commitlint/config-conventional': ^12.1.4
       '@types/fs-extra': ^11.0.0
+      '@types/lodash-es': ^4.17.6
       '@types/node': ^18.11.18
+      '@types/uppercamelcase': ^3.0.0
       '@vitejs/plugin-vue': ^3.2.0
       '@vue/test-utils': ^2.2.1
       chalk: ^5.1.2
@@ -18,6 +21,7 @@ importers:
       husky: ^8.0.1
       lerna: ~6.0.3
       lint-staged: ^13.0.3
+      lodash-es: ^4.17.21
       tsx: ^3.12.0
       typescript: ~4.9.4
       unbuild: ^1.0.1
@@ -29,10 +33,13 @@ importers:
       vue: ^3.2.45
     devDependencies:
       '@chuhoman/eslint-config': 0.0.9_wy4udjehnvkneqnogzx5kughki
+      '@clack/prompts': 0.6.1
       '@commitlint/cli': 12.1.4
       '@commitlint/config-conventional': 12.1.4
       '@types/fs-extra': 11.0.1
+      '@types/lodash-es': 4.17.6
       '@types/node': 18.11.18
+      '@types/uppercamelcase': 3.0.0
       '@vitejs/plugin-vue': 3.2.0_vite@4.0.4+vue@3.2.45
       '@vue/test-utils': 2.2.4_vue@3.2.45
       chalk: 5.1.2
@@ -42,6 +49,7 @@ importers:
       husky: 8.0.2
       lerna: 6.0.3
       lint-staged: 13.0.4
+      lodash-es: 4.17.21
       tsx: 3.12.1
       typescript: 4.9.4
       unbuild: 1.0.1
@@ -109,6 +117,7 @@ importers:
   packages/pizza-ui:
     specifiers:
       '@babel/core': ^7.20.5
+      '@clack/prompts': ^0.6.1
       '@pizza/site-parser': workspace:*
       '@rollup/plugin-alias': ^4.0.2
       '@rollup/plugin-babel': ^6.0.3
@@ -146,6 +155,7 @@ importers:
       vue: 3.2.45
     devDependencies:
       '@babel/core': 7.20.5
+      '@clack/prompts': 0.6.1
       '@pizza/site-parser': link:../pizza-site-parser
       '@rollup/plugin-alias': 4.0.2_rollup@3.6.0
       '@rollup/plugin-babel': 6.0.3_w72uq6tdmlatpawplpcdf6gq6e
@@ -523,6 +533,23 @@ packages:
       - supports-color
       - typescript
     dev: true
+
+  /@clack/core/0.3.0:
+    resolution: {integrity: sha512-ujw1888RciTArxUvwLOf24XSygRX7F4qiCPI7WLH3zCTZJuqKPMcTS7Wqjz0x/AuMpwGPlzhKln4+sCuQqYxzA==}
+    dependencies:
+      picocolors: 1.0.0
+      sisteransi: 1.0.5
+    dev: true
+
+  /@clack/prompts/0.6.1:
+    resolution: {integrity: sha512-7KuMST/5zB7KpvfR00kcnbOaXmfN6tkJmkLpAyV2Iv2SJ7oxFbhNFvR5OQJynSKDhU8oOp/eFMK6Q0k/DXsq8A==}
+    dependencies:
+      '@clack/core': 0.3.0
+      picocolors: 1.0.0
+      sisteransi: 1.0.5
+    dev: true
+    bundledDependencies:
+      - is-unicode-supported
 
   /@commitlint/cli/12.1.4:
     resolution: {integrity: sha512-ZR1WjXLvqEffYyBPT0XdnSxtt3Ty1TMoujEtseW5o3vPnkA1UNashAMjQVg/oELqfaiAMnDw8SERPMN0e/0kLg==}
@@ -3049,7 +3076,7 @@ packages:
       vite: ^3.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.0.4_sass@1.57.0
+      vite: 4.0.4_@types+node@18.11.18
       vue: 3.2.45
     dev: true
 
@@ -6872,7 +6899,6 @@ packages:
 
   /lodash-es/4.17.21:
     resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
-    dev: false
 
   /lodash.get/4.4.2:
     resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
@@ -8842,6 +8868,10 @@ packages:
       '@polka/url': 1.0.0-next.21
       mrmime: 1.0.1
       totalist: 3.0.0
+    dev: true
+
+  /sisteransi/1.0.5:
+    resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
     dev: true
 
   /slash/3.0.0:
