@@ -30,7 +30,9 @@ function toKebabCase(str: string) {
     return `-${match.toLowerCase()}`;
   });
 
-  if (kebabCaseName.slice(0, 1) === '-') kebabCaseName = kebabCaseName.slice(1);
+  if (kebabCaseName.slice(0, 1) === '-') {
+    kebabCaseName = kebabCaseName.slice(1);
+  }
 
   return kebabCaseName;
 }
@@ -108,8 +110,12 @@ async function init() {
       text({
         message: '请输入组件名',
         validate(componentName) {
-          if (!componentName) return '[组件名]必填！！请输入组件名';
-          if (/^\d+$/.test(componentName)) return '请使用非纯数字的字符串作为组件名';
+          if (!componentName) {
+            return '[组件名]必填！！请输入组件名';
+          }
+          if (/^\d+$/.test(componentName)) {
+            return '请使用非纯数字的字符串作为组件名';
+          }
 
           const kebabCaseComponentName = toKebabCase(componentName);
           const newComponentDir = path.resolve(
@@ -118,8 +124,9 @@ async function init() {
             kebabCaseComponentName,
           );
 
-          if (fse.existsSync(newComponentDir))
+          if (fse.existsSync(newComponentDir)) {
             return `已存在 ${kebabCaseComponentName} 组件`;
+          }
         },
       }),
   }, {

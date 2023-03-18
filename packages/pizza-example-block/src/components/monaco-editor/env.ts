@@ -11,12 +11,14 @@ export function setupMonacoEnv(takeoverMode = false) {
   languages.onLanguage('vue', setup);
 
   const languageLiseners = ['javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'json'];
-  if (takeoverMode)
+  if (takeoverMode) {
     languageLiseners.forEach(lang => languages.onLanguage(lang, setup));
+  }
 
   async function setup() {
-    if (initialized)
+    if (initialized) {
       return;
+    }
 
     initialized = true;
 
@@ -26,8 +28,9 @@ export function setupMonacoEnv(takeoverMode = false) {
     const getWorker = (self as any).MonacoEnvironment.getWorker;
 
     (self as any).MonacoEnvironment.getWorker = (_: any, label: string) => {
-      if (label === 'vue')
+      if (label === 'vue') {
         return new VueWorker();
+      }
 
       return getWorker();
     };

@@ -15,21 +15,24 @@ async function transformTS(src: string) {
 export async function compileFile(code: string, id: string) {
   const { errors, descriptor } = compiler.parse(code);
 
-  if (errors.length)
+  if (errors.length) {
     throw errors;
+  }
 
   if (
     descriptor.styles.some(s => s.lang)
     || (descriptor.template && descriptor.template.lang)
-  )
+  ) {
     throw new Error('lang="x" pre-processors for <template> or <style> are currently not supported.');
+  }
 
   const scriptLang
     = (descriptor.script && descriptor.script.lang)
     || (descriptor.scriptSetup && descriptor.scriptSetup.lang);
   const isTS = scriptLang === 'ts';
-  if (scriptLang && !isTS)
+  if (scriptLang && !isTS) {
     throw new Error('Only lang="ts" is supported for <script> blocks.');
+  }
 
   // TODO: 支持 ssr
   let clientCode = '';
@@ -38,8 +41,9 @@ export async function compileFile(code: string, id: string) {
   const clientScriptResult = await doCompileScript(descriptor, id, {
     isTS,
   });
-  if (!clientScriptResult)
+  if (!clientScriptResult) {
     return;
+  }
 
   const [clientScript, bindings] = clientScriptResult;
   clientCode += clientScript;
@@ -58,21 +62,24 @@ export async function compileFile(code: string, id: string) {
         isTS,
       },
     );
-    if (!clientTemplateResult)
+    if (!clientTemplateResult) {
       return;
+    }
 
     clientCode += clientTemplateResult;
   }
 
   const hasScoped = descriptor.styles.some(s => s.scoped);
-  if (hasScoped)
+  if (hasScoped) {
     clientCode += `\n${id}.__scopeId = ${JSON.stringify(`data-v-${id}`)}`;
+  }
 
   // styles
   let css = '';
   for (const style of descriptor.styles) {
-    if (style.module)
+    if (style.module) {
       throw new Error('<style module> is not supported in the playground.');
+    }
 
     const styleResult = await compiler.compileStyleAsync({
       source: style.content,
@@ -85,8 +92,9 @@ export async function compileFile(code: string, id: string) {
     if (styleResult.errors.length) {
       // postcss uses pathToFileURL which isn't polyfilled in the browser
       // ignore these errors for now
-      if (!styleResult.errors[0].message.includes('pathToFileURL'))
+      if (!styleResult.errors[0].message.includes('pathToFileURL')) {
         throw styleResult.errors;
+      }
 
       // proceed even if css compile errors
     } else {
@@ -142,8 +150,9 @@ async function doCompileScript(
             expressionPlugins,
           )}`;
 
-      if ((descriptor.script || descriptor.scriptSetup)!.lang === 'ts')
+      if ((descriptor.script || descriptor.scriptSetup)!.lang === 'ts') {
         code = await transformTS(code);
+      }
 
       return [code, compiledScript.bindings];
     } catch (e: any) {
@@ -179,8 +188,9 @@ async function doCompileTemplate(
       mode: 'module',
     },
   });
-  if (templateResult.errors.length)
+  if (templateResult.errors.length) {
     throw new Error(templateResult.errors.join(' '));
+  }
 
   const fnName = ssr ? 'ssrRender' : 'render';
 
@@ -190,8 +200,9 @@ async function doCompileTemplate(
       `$1 ${fnName}`,
     )}` + `\n${id}.${fnName} = ${fnName}`;
 
-  if ((descriptor.script || descriptor.scriptSetup)?.lang === 'ts')
+  if ((descriptor.script || descriptor.scriptSetup)?.lang === 'ts') {
     code = await transformTS(code);
+  }
 
   return code;
 }

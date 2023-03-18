@@ -19,8 +19,9 @@ const externalPlugin = () => ({
       custom: { 'node-resolve': {} },
     });
 
-    if (result && /node_modules/.test(result.id))
+    if (result && /node_modules/.test(result.id)) {
       return false;
+    }
 
     return null;
   },

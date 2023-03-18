@@ -27,8 +27,11 @@ async function parserExampleList(code: string, url: string) {
 
   for (const id of originList) {
     let fileName;
-    if (id.includes('.vue')) fileName = `${id.slice(0, -4)}.example.vue`;
-    else fileName = `${id}.example.md`;
+    if (id.includes('.vue')) {
+      fileName = `${id.slice(0, -4)}.example.vue`;
+    } else {
+      fileName = `${id}.example.md`;
+    }
 
     const variable = `${uppercamelcase(id)}Example`;
     const { title } = await getExampleContentByFile(fileName, url);
