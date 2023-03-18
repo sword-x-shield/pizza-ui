@@ -117,6 +117,9 @@ const editorTheme = computed(() => {
           minimap: {
             autohide: true,
           },
+          scrollbar: {
+            alwaysConsumeMouseWheel: false,
+          },
         }"
       />
 
