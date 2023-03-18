@@ -32,12 +32,13 @@
   ],
   "scripts": {
     "dev": "pnpm run gen-declare && rollup -c --watch --bundleConfigAsCjs && pnpm run gen-types",
-    "build": "rimraf dist lib es && pnpm run gen-declare && pnpm run build:component && pnpm run build:style && pnpm gen-json",
+    "build": "rimraf dist lib es && pnpm run gen-declare && pnpm run build:component && pnpm run build:style && pnpm gen-json && pnpm run volar-inject",
     "build:component": "rimraf dist lib es && rollup -c --bundleConfigAsCjs && pnpm run gen-types",
     "build:style": "tsx build/build-style",
     "gen-types": "vue-tsc --declaration --emitDeclarationOnly --project ./tsconfig.esm.json",
     "gen-declare": "tsx build/gen-declare",
     "gen-json": "tsx build/gen-json",
+    "volar-inject": "tsx build/volar-inject",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
