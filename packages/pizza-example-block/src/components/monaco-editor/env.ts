@@ -10,13 +10,9 @@ export function setupMonacoEnv(takeoverMode = false) {
   languages.register({ id: 'vue', extensions: ['.vue'] });
   languages.onLanguage('vue', setup);
 
-  if (takeoverMode) {
-    languages.onLanguage('javascript', setup);
-    languages.onLanguage('typescript', setup);
-    languages.onLanguage('javascriptreact', setup);
-    languages.onLanguage('typescriptreact', setup);
-    languages.onLanguage('json', setup);
-  }
+  const languageLiseners = ['javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'json'];
+  if (takeoverMode)
+    languageLiseners.forEach(lang => languages.onLanguage(lang, setup));
 
   async function setup() {
     if (initialized)
@@ -42,14 +38,7 @@ export function setupMonacoEnv(takeoverMode = false) {
       createData: {},
     });
     const languageId = takeoverMode
-      ? [
-        'vue',
-        'javascript',
-        'typescript',
-        'javascriptreact',
-        'typescriptreact',
-        'json',
-      ]
+      ? languageLiseners.concat('vue')
       : ['vue'];
     const getSyncUris = () => editor.getModels().map(model => model.uri);
     volar.editor.activateMarkers(
