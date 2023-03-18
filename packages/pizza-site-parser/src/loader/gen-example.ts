@@ -29,7 +29,9 @@ async function getContentOfExample(code: string, filePath: string): Promise<Comp
   // get language
   const script = await fetchCode(code, 'script');
   let languageType = 'js';
-  if (script.includes('lang="ts"')) languageType = 'ts';
+  if (script.includes('lang="ts"')) {
+    languageType = 'ts';
+  }
 
   // get template
   const template = await fetchCode(code, 'template');

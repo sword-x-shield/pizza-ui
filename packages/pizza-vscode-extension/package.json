@@ -41,6 +41,7 @@
     }
   },
   "dependencies": {
+    "pizza-ui": "workspace:*",
     "uppercamelcase": "^3.0.0"
   },
   "devDependencies": {

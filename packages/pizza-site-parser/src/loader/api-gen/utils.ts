@@ -11,8 +11,9 @@ export function parseProps(content: string) {
 
 function getPropsMap(attrs: AttributeNode[]) {
   const map: Record<string, string | undefined> = {};
-  for (const { name, value } of attrs)
+  for (const { name, value } of attrs) {
     map[name] = value?.content;
+  }
 
   return map;
 }

@@ -5,8 +5,9 @@ import getDoclets from 'vue-docgen-api/dist/utils/getDoclets.js';
 export function slotTagHandler(documentation: Documentation, path: any) {
   const slotComments = path.leadingComments.filter(token => token.type === 'CommentBlock' && token.value.includes('@slot')).filter(Boolean);
   // if no doc block return
-  if (!slotComments || !slotComments.length)
+  if (!slotComments || !slotComments.length) {
     return Promise.resolve();
+  }
 
   for (const slotComment of slotComments) {
     const jsDoc = getDoclets.default(parseDocblock(slotComment.value));
@@ -17,8 +18,9 @@ export function slotTagHandler(documentation: Documentation, path: any) {
         const slotDescriptor = documentation.getSlotDescriptor(name);
         slotDescriptor.description = jsDoc.description;
         const bindingsTag = jsDoc.tags.filter((t: any) => t.title === 'binding');
-        if (bindingsTag)
+        if (bindingsTag) {
           slotDescriptor.bindings = bindingsTag;
+        }
 
         const customTags = jsDoc.tags.filter((t: any) => t.title !== 'binding' && t.title !== 'slot');
         if (customTags.length) {

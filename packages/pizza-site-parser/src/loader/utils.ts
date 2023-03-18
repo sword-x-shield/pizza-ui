@@ -49,7 +49,9 @@ export function createRenderer() {
   const renderer = new marked.Renderer();
   const overrides: Partial<marked.Renderer> = {
     table(header, body) {
-      if (body) body = `<tbody>${body}</tbody>`;
+      if (body) {
+        body = `<tbody>${body}</tbody>`;
+      }
       return (
         '<div class="md-table-wrapper"><table single-column class="md-table">\n'
         + `<thead>\n${
@@ -82,7 +84,9 @@ export function createRenderer() {
       return `<p>${text}</p>`;
     },
     link(href, title, text) {
-      if (/^(http:|https:)/.test(href as string)) return `<a href="${href}" target="_blank">${text}</a>`;
+      if (/^(http:|https:)/.test(href as string)) {
+        return `<a href="${href}" target="_blank">${text}</a>`;
+      }
 
       return `<router-link to="${href}" #="{ navigate, href }" custom><a :href="href" @click="navigate">${text}</a></router-link>`;
     },
@@ -125,19 +129,33 @@ export function genVueComponent(parts: ComponentPartsType, fileName?: string, re
   let src = demoBlock;
   src = src.replace(relativeUrlReg, relativeUrl);
 
-  if (parts.fileName) src = src.replace(fileNameReg, parts.fileName);
+  if (parts.fileName) {
+    src = src.replace(fileNameReg, parts.fileName);
+  }
 
-  if (parts.content) src = src.replace(contentReg, parts.content);
+  if (parts.content) {
+    src = src.replace(contentReg, parts.content);
+  }
 
-  if (parts.title) src = src.replace(titleReg, parts.title);
+  if (parts.title) {
+    src = src.replace(titleReg, parts.title);
+  }
 
-  if (parts.code) src = src.replace(codeReg, encodeURIComponent(parts.code));
+  if (parts.code) {
+    src = src.replace(codeReg, encodeURIComponent(parts.code));
+  }
 
-  if (parts.script) src = src.replace(scriptReg, parts.script);
+  if (parts.script) {
+    src = src.replace(scriptReg, parts.script);
+  }
 
-  if (parts.language) src = src.replace(languageTypeReg, parts.language);
+  if (parts.language) {
+    src = src.replace(languageTypeReg, parts.language);
+  }
 
-  if (parts.style) src = src.replace(styleReg, parts.style);
+  if (parts.style) {
+    src = src.replace(styleReg, parts.style);
+  }
 
   return src.trim();
 }
@@ -156,8 +174,9 @@ export async function parseComponentDocsFromTag(options: {
 
     const { src } = props;
 
-    if (!src)
+    if (!src) {
       throw new Error(`missing src props at ${dir}`);
+    }
 
     const srcPath = path.resolve(dir, src);
 

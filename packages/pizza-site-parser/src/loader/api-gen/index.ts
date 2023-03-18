@@ -15,7 +15,9 @@ export function getApiTemplate(componentDoc: ComponentDoc | ComponentDoc[], lang
     const { displayName, props, events, methods, slots, tags } = item;
 
     const getTmpl = (suffix: 'Props' | 'Events' | 'Methods' | 'Slots', content: string) => {
-      if (!content) return '';
+      if (!content) {
+        return '';
+      }
       let title = displayName;
 
       title = tags?.noBrackets
@@ -29,8 +31,9 @@ export function getApiTemplate(componentDoc: ComponentDoc | ComponentDoc[], lang
       }
 
       let description = '';
-      if (suffix === 'Props' && tags?.[lang])
+      if (suffix === 'Props' && tags?.[lang]) {
         description = (tags[lang][0] as any)?.description;
+      }
 
       return `### ${title}${description ? `\n${description}` : ''}\n${content}`;
     };
