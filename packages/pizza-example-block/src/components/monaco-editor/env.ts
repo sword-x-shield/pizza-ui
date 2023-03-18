@@ -1,4 +1,4 @@
-import * as monaco from 'monaco-editor-core';
+import { editor, languages } from 'monaco-editor-core';
 import VueWorker from 'monaco-volar/vue.worker?worker';
 import EditorWorker from 'monaco-editor-core/esm/vs/editor/editor.worker?worker';
 import * as volar from '@volar/monaco';
@@ -7,8 +7,8 @@ import type { LanguageService } from '@volar/vue-language-service';
 export function setupMonacoEnv(takeoverMode = false) {
   let initialized = false;
 
-  monaco.languages.register({ id: 'vue', extensions: ['.vue'] });
-  monaco.languages.onLanguage('vue', setup);
+  languages.register({ id: 'vue', extensions: ['.vue'] });
+  languages.onLanguage('vue', setup);
 
   if (takeoverMode) {
     languages.onLanguage('javascript', setup);
@@ -30,14 +30,13 @@ export function setupMonacoEnv(takeoverMode = false) {
     const getWorker = (self as any).MonacoEnvironment.getWorker;
 
     (self as any).MonacoEnvironment.getWorker = (_: any, label: string) => {
-      console.error(label);
       if (label === 'vue')
         return new VueWorker();
 
       return getWorker();
     };
 
-    const worker = monaco.editor.createWebWorker<LanguageService>({
+    const worker = editor.createWebWorker<LanguageService>({
       moduleId: 'vs/language/vue/vueWorker',
       label: 'vue',
       createData: {},
@@ -52,20 +51,20 @@ export function setupMonacoEnv(takeoverMode = false) {
         'json',
       ]
       : ['vue'];
-    const getSyncUris = () => monaco.editor.getModels().map(model => model.uri);
+    const getSyncUris = () => editor.getModels().map(model => model.uri);
     volar.editor.activateMarkers(
       worker,
       languageId,
       'vue',
       getSyncUris,
-      monaco.editor,
+      editor,
     );
-    volar.editor.activateAutoInsertion(worker, languageId, getSyncUris, monaco.editor);
+    volar.editor.activateAutoInsertion(worker, languageId, getSyncUris, editor);
     await volar.languages.registerProvides(
       worker,
       languageId,
       getSyncUris,
-      monaco.languages,
+      languages,
     );
   }
 }
