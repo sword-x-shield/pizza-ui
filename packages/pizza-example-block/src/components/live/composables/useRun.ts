@@ -25,16 +25,19 @@ export function useRun(props: Readonly<LiveProps>, options: UseRunOptions = {}) 
 
   let scriptElement: HTMLScriptElement;
   let styleElement: HTMLStyleElement;
+  let preObjectURL: string;
 
   const { errors, formatErrorMsg, cleanError, handleError } = useError<CompilerError>();
   // TODO: 应该要收集所有 script / style 标签，离开当前组件页面时清空
   function createModuleScript(blob: Blob) {
-    if (scriptElement)
+    if (scriptElement) {
       document.body.removeChild(scriptElement);
+      URL.revokeObjectURL(preObjectURL);
+    }
 
     scriptElement = document.createElement('script');
     scriptElement.setAttribute('type', 'module');
-    scriptElement.src = URL.createObjectURL(blob);
+    scriptElement.src = preObjectURL = URL.createObjectURL(blob);
     document.body.appendChild(scriptElement);
   }
 
