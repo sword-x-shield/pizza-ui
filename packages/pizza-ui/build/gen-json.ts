@@ -86,7 +86,9 @@ async function writeWebTypesFile(components: ComponentDoc[], {
   }
 
   const html = contents.contributions.html!;
-  if (html.tags?.length === 0) html.tags = undefined;
+  if (html.tags?.length === 0) {
+    html.tags = undefined;
+  }
 
   const writeStream = createWriteStream(destFilePath);
   writeStream.write(JSON.stringify(contents, null, 2));

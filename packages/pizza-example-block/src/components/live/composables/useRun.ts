@@ -115,10 +115,11 @@ export function useRun(props: Readonly<LiveProps>, options: UseRunOptions = {}) 
 
         return js;
       } catch (error) {
-        if (Array.isArray(error))
+        if (Array.isArray(error)) {
           handleError(error[0]);
-        else
+        } else {
           handleError(error);
+        }
 
         return '';
       }

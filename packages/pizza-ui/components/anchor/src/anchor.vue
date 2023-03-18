@@ -59,7 +59,9 @@ const barRef = ref<HTMLElement>();
 
 const scrollIntoView = (hash: string) => {
   const element = getElement(hash);
-  if (!element) return;
+  if (!element) {
+    return;
+  }
   isScrolling.value = true;
   const behaviorType = props.smooth ? 'smooth' : 'auto';
   scrollIntoViewIfNeed(element, { block: 'start', behavior: behaviorType as SmoothBehaviorOptions['behavior'] }).then(() => {
@@ -68,11 +70,15 @@ const scrollIntoView = (hash: string) => {
 };
 
 const handleAnchorChange = (hash: string) => {
-  if (hash !== currentLink.value) currentLink.value = hash;
+  if (hash !== currentLink.value) {
+    currentLink.value = hash;
+  }
 };
 
 const addLink = (hash: string, node: HTMLElement) => {
-  if (!hash) return;
+  if (!hash) {
+    return;
+  }
   links[hash] = node;
 };
 
@@ -85,12 +91,17 @@ const handleClick = (_e: MouseEvent, hash?: string) => {
 };
 
 const setContainer = () => {
-  if (props.offsetTarget) scrollContainerEle.value = getElement(props.offsetTarget);
-  else scrollContainerEle.value = document.documentElement;
+  if (props.offsetTarget) {
+    scrollContainerEle.value = getElement(props.offsetTarget);
+  } else {
+    scrollContainerEle.value = document.documentElement;
+  }
 };
 
 const getFirstInViewportEle = () => {
-  if (!scrollContainerEle.value) return undefined;
+  if (!scrollContainerEle.value) {
+    return undefined;
+  }
 
   const containerRect = scrollContainerEle.value.getBoundingClientRect();
 
@@ -101,14 +112,18 @@ const getFirstInViewportEle = () => {
       const offsetTop = scrollContainerEle.value === document.documentElement
         ? top
         : top - containerRect.top;
-      if (offsetTop >= -5 && offsetTop <= containerRect.height / 2) return element;
+      if (offsetTop >= -5 && offsetTop <= containerRect.height / 2) {
+        return element;
+      }
     }
   }
   return undefined;
 };
 
 const handleScroll = throttle(() => {
-  if (isScrolling.value) return;
+  if (isScrolling.value) {
+    return;
+  }
   const element = getFirstInViewportEle();
   if (element && element.id) {
     const hash = `#${element.id}`;
@@ -117,11 +132,15 @@ const handleScroll = throttle(() => {
 });
 
 const bindScrollEvent = () => {
-  if (scrollContainerEle.value) document.addEventListener('scroll', handleScroll, true);
+  if (scrollContainerEle.value) {
+    document.addEventListener('scroll', handleScroll, true);
+  }
 };
 
 const unbindScrollEvent = () => {
-  if (scrollContainerEle.value) document.removeEventListener('scroll', handleScroll, true);
+  if (scrollContainerEle.value) {
+    document.removeEventListener('scroll', handleScroll, true);
+  }
 };
 
 watch(currentLink, () => {

@@ -27,7 +27,9 @@ const fixedStyles = ref<CSSProperties>();
 const fixedStatus = ref(false);
 
 const handleScroll = throttle(() => {
-  if (!affixRef.value) return;
+  if (!affixRef.value) {
+    return;
+  }
   const { offsetTop, offsetBottom, position } = props;
   const offsetType = isUndefined(offsetBottom) ? 'top' : 'bottom';
   const affixRect = affixRef.value.getBoundingClientRect();
@@ -81,7 +83,9 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-  if (container.value) container.value.removeEventListener('scroll', handleScroll);
+  if (container.value) {
+    container.value.removeEventListener('scroll', handleScroll);
+  }
 });
 </script>
 

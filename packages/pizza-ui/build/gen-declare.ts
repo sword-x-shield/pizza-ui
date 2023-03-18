@@ -22,7 +22,9 @@ async function genDeclare() {
   });
 
   const lines = Object.entries(components).map(([name, v]) => {
-    if (!/^\w+$/.test(name)) name = `'${name}'`;
+    if (!/^\w+$/.test(name)) {
+      name = `'${name}'`;
+    }
 
     return `${componentPrefix}${name}: ${v}`;
   });

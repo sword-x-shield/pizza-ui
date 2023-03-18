@@ -12,8 +12,9 @@ export function getParentDirName(path: string, { deep = 1 }) {
   let _deep = deep;
   let dirName = path;
 
-  while (_deep-- > 0)
+  while (_deep-- > 0) {
     dirName = dirname(dirName);
+  }
 
   return basename(dirName);
 }

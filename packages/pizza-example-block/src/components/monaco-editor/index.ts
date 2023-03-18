@@ -97,7 +97,9 @@ export default defineComponent({
       const editor = getModifiedEditor();
       editor.onDidChangeModelContent((event: any) => {
         const value = editor.getValue();
-        if (props.modelValue !== value) emit('update:modelValue', value, event);
+        if (props.modelValue !== value) {
+          emit('update:modelValue', value, event);
+        }
       });
 
       emit('editor-did-mount', editorRef.value);
@@ -115,14 +117,18 @@ export default defineComponent({
     watch(() => props.modelValue, (newValue: string) => {
       if (editorRef.value) {
         const editor = getModifiedEditor();
-        if (newValue !== editor.getValue()) editor.setValue(newValue);
+        if (newValue !== editor.getValue()) {
+          editor.setValue(newValue);
+        }
       }
     });
 
     watch(() => props.original, (newValue) => {
       if (editorRef.value && props.diffEditor) {
         const editor = getOriginalEditor();
-        if (newValue !== editor.getValue()) editor.setValue(newValue);
+        if (newValue !== editor.getValue()) {
+          editor.setValue(newValue);
+        }
       }
     });
 
@@ -134,7 +140,9 @@ export default defineComponent({
     });
 
     watch(() => props.theme, (newVal) => {
-      if (editorRef.value) monacoEditor.value!.editor.setTheme(newVal);
+      if (editorRef.value) {
+monacoEditor.value!.editor.setTheme(newVal);
+      }
     });
 
     onMounted(async () => {

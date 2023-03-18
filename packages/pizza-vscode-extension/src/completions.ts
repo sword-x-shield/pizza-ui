@@ -21,8 +21,9 @@ const documentSelector = ['vue', 'typescript', 'javascript', 'javascriptreact', 
 const componentsProvider: CompletionItemProvider = {
   provideCompletionItems(document, position) {
     const linePrefix = document.lineAt(position).text.substring(0, position.character);
-    if (!linePrefix.trimStart().startsWith('<'))
+    if (!linePrefix.trimStart().startsWith('<')) {
       return [];
+    }
 
     const completionItems: CompletionItem[] = [];
 
@@ -39,8 +40,9 @@ const componentsProvider: CompletionItemProvider = {
   },
   resolveCompletionItem(item: CompletionItem) {
     const editor = window.activeTextEditor;
-    if (!editor)
+    if (!editor) {
       return item;
+    }
 
     const document = editor.document;
     const position = editor.selection.active;
