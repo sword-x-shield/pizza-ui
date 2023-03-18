@@ -72,7 +72,6 @@ function bundleUmd() {
       globals: {
         vue: 'Vue',
       },
-      sourcemap: true,
     },
     treeshake: treeShakeSetting(),
     plugins: commonPlugins({
@@ -91,11 +90,46 @@ function bundleUmdMin() {
       globals: {
         vue: 'Vue',
       },
-      sourcemap: true,
+    },
+    treeshake: treeShakeSetting(),
+    plugins: commonPlugins({
+      minify: true,
+    }),
+  };
+}
+
+function bundleEsm() {
+  return {
+    input: path.resolve('./components/index.ts'),
+    output: {
+      file: 'dist/pizza-ui.esm.js',
+      format: 'es',
+      name: 'pizza-ui',
+      globals: {
+        vue: 'Vue',
+      },
     },
     treeshake: treeShakeSetting(),
     plugins: commonPlugins({
       minify: false,
+    }),
+  };
+}
+
+function bundleEsmMin() {
+  return {
+    input: path.resolve('./components/index.ts'),
+    output: {
+      file: 'dist/pizza-ui.esm.min.js',
+      format: 'es',
+      name: 'pizza-ui',
+      globals: {
+        vue: 'Vue',
+      },
+    },
+    treeshake: treeShakeSetting(),
+    plugins: commonPlugins({
+      minify: true,
     }),
   };
 }
@@ -126,4 +160,4 @@ function bundleOrigin() {
   };
 }
 
-export default [bundleUmd(), bundleUmdMin(), bundleOrigin()];
+export default [bundleUmd(), bundleUmdMin(), bundleEsm(), bundleEsmMin(), bundleOrigin()];

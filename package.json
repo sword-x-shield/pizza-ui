@@ -16,6 +16,7 @@
     "prepare": "husky install",
     "test": "vitest",
     "gen-comp": "tsx scripts/cli/gen-component.ts",
+    "build": "pnpm run -r build",
     "dev": "pnpm run --filter pizza-site-project dev",
     "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx,.md,.json --fix --cache"
   },
