@@ -16,7 +16,7 @@ export function PLiveInjectionsPlugin(options: IInjectOptions = {}): PluginOptio
       imports: {
         // TODO: 动态获取 vue 版本; 处理 pizza-ui
         'vue': 'https://unpkg.com/@vue/runtime-dom@3.2.45/dist/runtime-dom.esm-browser.js',
-        'pizza-ui/': env === 'development' ? 'http://localhost:5173/pizza-ui' : 'https://sword-x-shield.github.io/pizza-ui/pizza-ui',
+        'pizza-ui/': env === 'development' ? 'http://localhost:5173/pizza-ui' : 'https://sword-x-shield.github.io/pizza-ui/pizza-ui/',
       },
     },
   };
