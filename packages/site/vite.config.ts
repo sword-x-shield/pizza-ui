@@ -10,6 +10,7 @@ const vuePlugin = createVuePlugin({
 }) as any;
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/pizza-ui',
   plugins: [
     pizzaSitePlugin(),
     DefineOptions.vite(),
