@@ -4,7 +4,7 @@ import { useConfig } from 'pizza-ui';
 import copySvg from './Icons/copy.vue';
 import codeSvg from './Icons/code.vue';
 import refreshSvg from './Icons/refresh.vue';
-import playgroundSvg from './icons/playground.vue';
+import playgroundSvg from './Icons/playground.vue';
 import MonacoEditor from './components/monaco-editor/index';
 import { useCopyCode, useError } from './composables';
 import PLivePreview from './components/live/index.vue';
