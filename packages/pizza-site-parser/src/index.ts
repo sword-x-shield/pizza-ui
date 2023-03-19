@@ -1,9 +1,13 @@
 import type { PluginOption } from 'vite';
-import { PLiveInjectionsPlugin } from './plugins/live-injections';
+import { IInjectOptions, PLiveInjectionsPlugin } from './plugins/live-injections';
 import { PSiteParserPlugin } from './plugins/site-parser';
 
-export function pizzaSitePlugin(): PluginOption[] {
-  return [PSiteParserPlugin(), PLiveInjectionsPlugin()];
+export interface IPizzaSitePluginOption {
+  liveInjectOption: IInjectOptions
+}
+export function pizzaSitePlugin(options?: IPizzaSitePluginOption): PluginOption[] {
+  const { liveInjectOption } = options;
+  return [PSiteParserPlugin(), PLiveInjectionsPlugin(liveInjectOption)];
 }
 
 export {

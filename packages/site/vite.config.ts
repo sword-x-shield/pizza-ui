@@ -5,14 +5,19 @@ import { pizzaSitePlugin } from '@pizza/site-parser';
 import DefineOptions from 'unplugin-vue-define-options';
 import Inspect from 'vite-plugin-inspect';
 
+const nowEnv = process.env.NODE_ENV;
 const vuePlugin = createVuePlugin({
   include: [/\.vue$/, /\.md$/],
 }) as any;
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/pizza-ui',
+  base: nowEnv === 'development' ? './' : '/pizza-ui',
   plugins: [
-    pizzaSitePlugin(),
+    pizzaSitePlugin({
+      liveInjectOption: {
+        env: process.env.NODE_ENV,
+      },
+    }),
     DefineOptions.vite(),
     Inspect(),
     vuePlugin,

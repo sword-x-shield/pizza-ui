@@ -5,13 +5,18 @@ const globalPizzaLiveAppCode = `(() => {
         window.__p_apps__ = {};
       })();`;
 
-export function PLiveInjectionsPlugin(options = {}): PluginOption {
+export interface IInjectOptions {
+  env?: string
+}
+
+export function PLiveInjectionsPlugin(options: IInjectOptions = {}): PluginOption {
+  const { env } = options;
   const defaultOptions = {
     importmap: {
       imports: {
         // TODO: 动态获取 vue 版本; 处理 pizza-ui
         'vue': 'https://unpkg.com/@vue/runtime-dom@3.2.45/dist/runtime-dom.esm-browser.js',
-        'pizza-ui/': 'http://localhost:5173/pizza-ui/',
+        'pizza-ui/': env === 'development' ? 'http://localhost:5173/pizza-ui' : 'https://sword-x-shield.github.io/pizza-ui/pizza-ui/pizza-ui.esm.js',
       },
     },
   };
