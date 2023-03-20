@@ -26,3 +26,5 @@ yarn-error.log*
 
 # local env files
 .eslintcache
+
+packages/site/public/pizza-ui/pizza-ui.esm.js
