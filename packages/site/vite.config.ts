@@ -11,11 +11,11 @@ const vuePlugin = createVuePlugin({
 }) as any;
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: nowEnv === 'development' ? './' : '/pizza-ui',
+  base: '/pizza-ui',
   plugins: [
     pizzaSitePlugin({
       liveInjectOption: {
-        env: process.env.NODE_ENV,
+        env: nowEnv,
       },
     }),
     DefineOptions.vite(),
