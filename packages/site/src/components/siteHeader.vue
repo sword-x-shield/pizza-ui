@@ -19,13 +19,12 @@ function goToGithub() {
 <template>
   <div class="site-header__container">
     <div class="site-header__left">
-      <div tag="div" class="site-header__logo" @click="router.push('/')">
-        <img src="../assets/Pizza.png" width="35" height="35" style="padding: 5px;">
-        <span>Pizza UI</span>
+      <div tag="div" class="site-header__logo" @click="router.push('/pizza-ui')">
+        <img src="../assets/pizza-logo.png" width="110" height="40" style="padding: 5px;">
       </div>
       <div class="site-header__menu">
         <button>文档</button>
-        <button @click=" router.push('/components')">
+        <button @click=" router.push('/pizza-ui/components')">
           组件
         </button>
         <input type="input" placeholder="搜索">
