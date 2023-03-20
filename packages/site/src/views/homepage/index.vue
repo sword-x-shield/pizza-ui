@@ -10,7 +10,7 @@ function goToUse() {
 <template>
   <div class="home-container">
     <a href="https://github.com/sword-x-shield/pizza-ui" target="_blank">
-      <img src="../../assets/pizza.png" alt="Pizza logo">
+      <img src="../../assets/pizza-background.png" alt="Pizza logo">
     </a>
     <h1>Pizza UI</h1>
     <h2>It's a useless ui library!!!</h2>
