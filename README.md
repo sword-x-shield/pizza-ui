@@ -28,7 +28,7 @@ English | [简体中文](./README-zh_CN.md)
 
 ## 🚀 Install
 
-**We recommend using yran or pnpm to install**，it not only makes development easier，but also allow you to take advantage of the rich ecosystem of Javascript packages and tooling.
+**We recommend using yarn or pnpm to install**，it not only makes development easier，but also allow you to take advantage of the rich ecosystem of Javascript packages and tooling.
 
 ```bash
 $ yarn add pizza-ui
