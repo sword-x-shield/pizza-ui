@@ -1,9 +1,6 @@
-# This is a basic workflow to help you get started with Actions
-name: deploy
+name: ci
 
-# Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches:
       - main
@@ -20,13 +17,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: Install & Build # 執行指令
+      - name: Install & Build
         run: |
           npm i -g pnpm
           pnpm install
           pnpm run build 
           
-      # Runs a single command using the runners shell
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
