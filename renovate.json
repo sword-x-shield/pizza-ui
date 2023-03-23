@@ -4,7 +4,7 @@
     "config:base"
   ],
   "prConcurrentLimit": 3,
-  "baseBranches": ["dev"],
+  "baseBranches": ["main"],
   "packageRules": [
     {
       "groupName": "all non-major dependencies",
