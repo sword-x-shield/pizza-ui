@@ -4,6 +4,11 @@ import createVuePlugin from '@vitejs/plugin-vue';
 import { pizzaSitePlugin } from '@pizza/site-parser';
 import DefineOptions from 'unplugin-vue-define-options';
 import Inspect from 'vite-plugin-inspect';
+import { warmup } from 'vite-plugin-warmup';
+
+const wramupPlugin = warmup({
+  clientFiles: ['./src/**/*', './index.html'],
+});
 
 const nowEnv = process.env.NODE_ENV;
 const vuePlugin = createVuePlugin({
@@ -13,6 +18,7 @@ const vuePlugin = createVuePlugin({
 export default defineConfig({
   base: '/pizza-ui',
   plugins: [
+    wramupPlugin,
     pizzaSitePlugin({
       liveInjectOption: {
         env: nowEnv,
