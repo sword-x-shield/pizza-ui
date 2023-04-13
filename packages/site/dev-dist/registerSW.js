@@ -1,1 +1,0 @@
-if('serviceWorker' in navigator) navigator.serviceWorker.register('/pizza-uidev-sw.js?dev-sw', { scope: '/pizza-ui', type: 'classic' })
