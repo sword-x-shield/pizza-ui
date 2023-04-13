@@ -5,12 +5,41 @@ import { pizzaSitePlugin } from '@pizza/site-parser';
 import DefineOptions from 'unplugin-vue-define-options';
 import Inspect from 'vite-plugin-inspect';
 import { warmup } from 'vite-plugin-warmup';
+import { VitePWA } from 'vite-plugin-pwa';
 
+const nowEnv = process.env.NODE_ENV;
 const wramupPlugin = warmup({
   clientFiles: ['./src/**/*', './index.html'],
 });
 
-const nowEnv = process.env.NODE_ENV;
+const pwaPlugin = VitePWA({
+  includeAssets: ['logo.ico'],
+  base: '/pizza-ui',
+  manifest: {
+    name: 'Pizza Ui',
+    short_name: 'Pizza',
+    description: 'Vue3 UI Library',
+    theme_color: '#ffffff',
+    icons: [
+      {
+        src: 'pwa-192x192.png',
+        sizes: '192x192',
+        type: 'image/png',
+      },
+      {
+        src: 'pwa-512x512.png',
+        sizes: '512x512',
+        type: 'image/png',
+      },
+    ],
+  },
+  devOptions: {
+    enabled: nowEnv === 'development',
+    type: 'module',
+    navigateFallback: 'index.html',
+  },
+});
+
 const vuePlugin = createVuePlugin({
   include: [/\.vue$/, /\.md$/],
 }) as any;
@@ -27,6 +56,7 @@ export default defineConfig({
     DefineOptions.vite(),
     Inspect(),
     vuePlugin,
+    pwaPlugin,
   ],
   resolve: {
     alias: [
