@@ -59,10 +59,12 @@ export default defineConfig({
     pwaPlugin,
   ],
   resolve: {
+    conditions: ['dev'],
     alias: [
       { find: '@/views', replacement: path.resolve('./src/views') },
       { find: '@/components', replacement: path.resolve('./src/components') },
-      { find: /^@pizza\/(.*)/, replacement: path.resolve('../pizza-$1/src') },
+      // match pizza-ui internal paths
+      { find: /^@pizza-ui/, replacement: path.resolve('../pizza-ui') },
     ],
   },
   optimizeDeps: {
