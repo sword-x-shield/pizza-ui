@@ -2,6 +2,8 @@
   "extends": "../../tsconfig.base.json",
   "exclude": ["./**/*.spec.*", "./es", "./lib"],
   "compilerOptions": {
+    "moduleResolution": "bundler",
+    "customConditions": ["development"],
     "rootDir": ".",
     "outDir": "./es",
     "module": "ES6",

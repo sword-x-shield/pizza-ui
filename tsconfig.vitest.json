@@ -2,6 +2,7 @@
   "extends": "./tsconfig.web.json",
   "compilerOptions": {
     "composite": true,
+    "customConditions": ["development"],
     "lib": ["esnext", "DOM", "DOM.Iterable"],
     "types": ["node", "jsdom", "unplugin-vue-define-options/macros-global", "vitest/globals"],
     "skipLibCheck": true

@@ -6,7 +6,7 @@
     "jsx": "preserve",
     "jsxFactory": "h",
     "importHelpers": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "experimentalDecorators": true,
     "allowJs": false,
     "skipLibCheck": true,

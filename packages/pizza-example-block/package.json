@@ -11,6 +11,8 @@
   ],
   "exports": {
     ".": {
+      "development": "./src/index",
+      "types": "./dist/index.d.ts",
       "require": "./dist/pizza-example-block.umd.cjs",
       "import": "./dist/pizza-example-block.js"
     },

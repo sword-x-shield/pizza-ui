@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
+    // "customConditions": ["development"],
     "composite": true,
     "jsx": "preserve",
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]

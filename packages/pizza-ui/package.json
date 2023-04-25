@@ -37,7 +37,7 @@
     "build:style": "tsx build/build-style",
     "gen-types": "vue-tsc --declaration --emitDeclarationOnly --project ./tsconfig.esm.json",
     "gen-declare": "tsx build/gen-declare",
-    "gen-json": "tsx build/gen-json",
+    "gen-json": "tsx --conditions=development build/gen-json",
     "volar-inject": "tsx build/volar-inject",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
