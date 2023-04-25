@@ -9,7 +9,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 const nowEnv = process.env.NODE_ENV;
 const wramupPlugin = warmup({
-  clientFiles: ['./src/**/*', './index.html'],
+  clientFiles: ['./src/**/*.vue', './index.html'],
 });
 
 const pwaPlugin = VitePWA({

@@ -3,7 +3,7 @@
   "exclude": ["./**/*.spec.*", "./es", "./lib"],
   "compilerOptions": {
     "moduleResolution": "bundler",
-    "customConditions": ["development"],
+    "customConditions": ["dev"],
     "rootDir": ".",
     "outDir": "./es",
     "module": "ES6",

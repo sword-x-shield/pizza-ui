@@ -2,14 +2,14 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "target": "ES2018",
+    "module": "ESNext",
     "outDir": "./dist",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "baseUrl": ".",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "skipLibCheck": true,
     "types": ["node"],
-    "module": "CommonJS",
     "rootDir": "."
   },
   "include": ["src/**/*"],

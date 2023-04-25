@@ -11,12 +11,15 @@
   ],
   "exports": {
     ".": {
-      "development": "./src/index",
+      "dev": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "require": "./dist/pizza-example-block.umd.cjs",
       "import": "./dist/pizza-example-block.js"
     },
-    "./dist/style.css": "./dist/style.css"
+    "./*": [
+      "./*",
+      "./*.d.ts"
+    ]
   },
   "main": "./dist/pizza-example-block.umd.cjs",
   "module": "./dist/pizza-example-block.js",
@@ -24,6 +27,19 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "require": "./dist/pizza-example-block.umd.cjs",
+        "import": "./dist/pizza-example-block.js"
+      },
+      "./*": [
+        "./*",
+        "./*.d.ts"
+      ]
+    }
+  },
   "scripts": {
     "build": "vite build",
     "dev": "vite build --watch --mode dev"

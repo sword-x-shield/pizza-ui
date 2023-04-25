@@ -5,6 +5,14 @@ export default defineConfig({
   splitting: false,
   sourcemap: false,
   clean: true,
-  dts: true,
   format: ['cjs', 'esm'],
+  watch: !!process.env.DEV,
+  dts: process.env.DEV
+    ? false
+    : {
+      compilerOptions: {
+        composite: false,
+        customConditions: [],
+      },
+    },
 });

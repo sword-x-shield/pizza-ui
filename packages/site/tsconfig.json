@@ -11,7 +11,7 @@
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
-    // "moduleResolution": "bundler",
+    "moduleResolution": "bundler",
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
