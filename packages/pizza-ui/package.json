@@ -20,6 +20,31 @@
     "lib/**/style/*",
     "*.scss"
   ],
+  "exports": {
+    ".": {
+      "dev": "./components/index.ts",
+      "types": "./es/index.d.ts",
+      "require": "./lib/index.js",
+      "import": "./es/index.js"
+    },
+    "./*": [
+      "./*",
+      "./*.d.ts"
+    ]
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "types": "./es/index.d.ts",
+        "require": "./lib/index.js",
+        "import": "./es/index.js"
+      },
+      "./*": [
+        "./*",
+        "./*.d.ts"
+      ]
+    }
+  },
   "main": "lib/index.js",
   "module": "es/index.js",
   "unpkg": "dist/pizza-ui.min.js",
@@ -37,7 +62,7 @@
     "build:style": "tsx build/build-style",
     "gen-types": "vue-tsc --declaration --emitDeclarationOnly --project ./tsconfig.esm.json",
     "gen-declare": "tsx build/gen-declare",
-    "gen-json": "tsx build/gen-json",
+    "gen-json": "tsx --conditions=dev build/gen-json",
     "volar-inject": "tsx build/volar-inject",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

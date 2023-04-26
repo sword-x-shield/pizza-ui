@@ -10,7 +10,8 @@ export function slotTagHandler(documentation: Documentation, path: any) {
   }
 
   for (const slotComment of slotComments) {
-    const jsDoc = getDoclets.default(parseDocblock(slotComment.value));
+    const _getDoclets = (getDoclets as any).default ?? getDoclets;
+    const jsDoc = _getDoclets(parseDocblock(slotComment.value));
     if (jsDoc.tags) {
       const slotTag = jsDoc.tags.find((a: any) => a.title === 'slot');
       if (slotTag) {
