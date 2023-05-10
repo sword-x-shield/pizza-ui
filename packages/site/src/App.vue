@@ -12,7 +12,9 @@ const isDark = computed<boolean>({
   set() {
     mode.value = isDark.value ? 'light' : 'dark';
     const body = document.body;
+    const root = document.documentElement;
     body.setAttribute('pizza-theme', mode.value);
+    root.setAttribute('pizza-theme', mode.value);
   },
 });
 
