@@ -91,7 +91,7 @@
     "fast-glob": "^3.2.12",
     "fs-extra": "^11.0.0",
     "local-pkg": "^0.4.3",
-    "rimraf": "^4.1.2",
+    "rimraf": "^5.0.0",
     "rollup": "^3.6.0",
     "rollup-plugin-esbuild": "^5.0.0",
     "rollup-plugin-vue": "^6.0.0",
