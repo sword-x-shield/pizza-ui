@@ -1,5 +1,7 @@
 <script lang="ts" setup>
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import siteSearchButton from './siteSearchButton.vue';
 
 withDefaults(defineProps<{
   mode: 'light' | 'dark'
@@ -14,6 +16,14 @@ const router = useRouter();
 function goToGithub() {
   window.open('https://github.com/sword-x-shield/pizza-ui');
 }
+
+const metaKey = ref('\'Meta\'');
+onMounted(() => {
+  // meta key detect (same logic as in @docsearch/js)
+  metaKey.value = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)
+    ? '\'⌘\''
+    : '\'Ctrl\'';
+});
 </script>
 
 <template>
@@ -22,12 +32,12 @@ function goToGithub() {
       <div tag="div" class="site-header__logo" @click="router.push('/pizza-ui')">
         <img src="../assets/pizza-logo.png" width="110" height="40" style="padding: 5px;">
       </div>
-      <div class="site-header__menu">
+      <div class="site-header__menu" :style="{ '--p-meta-key': metaKey }">
         <button>文档</button>
         <button @click=" router.push('/pizza-ui/components')">
           组件
         </button>
-        <input type="input" placeholder="搜索">
+        <siteSearchButton placeholder="Search" style="flex: 1;" />
       </div>
     </div>
     <div class="site-header__right">
