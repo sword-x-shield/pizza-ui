@@ -49,7 +49,7 @@ onMounted(() => {
           Playground
         </button>
         <div>0.0.1</div>
-        <div class="mode__trigger" @click="emit('toggle-mode')">
+        <div class="mode__trigger" @click="emit('toggle-mode', $event)">
           {{ mode === 'dark' ? '🌛' : '🌝' }}
         </div>
       </div>

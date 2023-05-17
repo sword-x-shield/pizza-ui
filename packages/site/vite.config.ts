@@ -1,11 +1,13 @@
 import path from 'path';
 import { defineConfig } from 'vite';
 import createVuePlugin from '@vitejs/plugin-vue';
-import { pizzaSitePlugin } from '@pizza/site-parser';
 import DefineOptions from 'unplugin-vue-define-options';
 import Inspect from 'vite-plugin-inspect';
 import { warmup } from 'vite-plugin-warmup';
 import { VitePWA } from 'vite-plugin-pwa';
+// enable pizza-site-parser hmr
+// https://github.com/vitejs/vite/issues/5370#issuecomment-1339022262
+import { pizzaSitePlugin } from '../pizza-site-parser/dist/index';
 
 const nowEnv = process.env.NODE_ENV;
 const wramupPlugin = warmup({
