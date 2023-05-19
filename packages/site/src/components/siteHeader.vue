@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { onKeyStroke } from '@vueuse/core';
 import siteSearchButton from './siteSearchButton.vue';
+import siteSearchBox from './siteSearchBox.vue';
 
 withDefaults(defineProps<{
   mode: 'light' | 'dark'
@@ -24,6 +26,34 @@ onMounted(() => {
     ? '\'⌘\''
     : '\'Ctrl\'';
 });
+
+function isEditingContent(event: KeyboardEvent): boolean {
+  const element = event.target as HTMLElement;
+  const tagName = element.tagName;
+
+  return (
+    element.isContentEditable
+    || tagName === 'INPUT'
+    || tagName === 'SELECT'
+    || tagName === 'TEXTAREA'
+  );
+}
+
+const showSearch = ref(false);
+onKeyStroke('k', (event) => {
+  if (event.ctrlKey || event.metaKey) {
+    event.preventDefault();
+    showSearch.value = true;
+    console.log(111);
+  }
+});
+
+onKeyStroke('/', (event) => {
+  if (!isEditingContent(event)) {
+    event.preventDefault();
+    showSearch.value = true;
+  }
+});
 </script>
 
 <template>
@@ -37,7 +67,8 @@ onMounted(() => {
         <button @click=" router.push('/pizza-ui/components')">
           组件
         </button>
-        <siteSearchButton placeholder="Search" style="flex: 1;" />
+        <siteSearchButton placeholder="Search" style="flex: 1;" @click="showSearch = true" />
+        <siteSearchBox v-if="showSearch" placeholder="Search" @close="showSearch = false" />
       </div>
     </div>
     <div class="site-header__right">

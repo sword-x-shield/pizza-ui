@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@pizza/example-block": "workspace:*",
+    "@vueuse/core": "^10.1.2",
+    "minisearch": "^6.1.0",
     "pizza-ui": "workspace:*",
     "vue": "^3.2.41",
     "vue-router": "^4.1.6"
