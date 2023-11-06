@@ -34,7 +34,7 @@ async function genDeclare() {
   }
 }
 
-export {}
+export {};
 `;
   await fs.writeFile(path.resolve(root, 'global.d.ts'), code, 'utf-8');
 }
