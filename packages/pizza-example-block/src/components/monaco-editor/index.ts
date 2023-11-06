@@ -3,7 +3,7 @@ import { PropType, defineComponent, getCurrentInstance, h, nextTick, onBeforeUnm
 import { Uri, editor } from 'monaco-editor-core';
 import { monaco, wire } from './monacoEditor';
 
-type MonacoEditor = typeof monaco
+type MonacoEditor = typeof monaco;
 
 export default defineComponent({
   name: 'MonacoEditor',
@@ -141,7 +141,7 @@ export default defineComponent({
 
     watch(() => props.theme, (newVal) => {
       if (editorRef.value) {
-monacoEditor.value!.editor.setTheme(newVal);
+        monacoEditor.value!.editor.setTheme(newVal);
       }
     });
 

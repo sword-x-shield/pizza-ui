@@ -19,13 +19,13 @@ export type Description = string;
  */
 export type DocUrl = string;
 export interface ComplexType {
-    /**
-     * List of import statements required to resolve symbol in the type expression.
-     */
-    imports: string[]
-    expression: string
-  }
   /**
+   * List of import statements required to resolve symbol in the type expression.
+   */
+  imports: string[]
+  expression: string
+}
+/**
  * Specify type according to selected language for type syntax. The type can be specified by a string expression, an object with list of imports and an expression, or an array of possible types.
  */
 export type Type = string | ComplexType | (string | ComplexType)[];
@@ -33,126 +33,126 @@ export type HtmlAttributeDefault = string;
 export type HtmlAttributeRequired = boolean;
 export type HtmlAttributeValue =
   | {
-      kind: string
-    }
+    kind: string
+  }
   | {
-      kind: string
-      required?: boolean
-    }
+    kind: string
+    required?: boolean
+  }
   | {
-      kind: string
-      required?: boolean
-    }
+    kind: string
+    required?: boolean
+  }
   | {
-      kind: string
-      required?: boolean
-    }
+    kind: string
+    required?: boolean
+  }
   | {
-      kind: string
-      items: [] | [string]
-      required?: boolean
-    }
+    kind: string
+    items: [] | [string]
+    required?: boolean
+  }
   | {
-      kind: string
-      type: Type
-      required?: boolean
-    };
+    kind: string
+    type: Type
+    required?: boolean
+  };
 
 /**
  * Allows to specify the source of the entity. For Vue.js component this may be for instance a class.
  */
 export type Source =
   | {
-      /**
-       * Path to the file, relative to the web-types JSON.
-       */
-      file: string
-      /**
-       * Offset in the file under which the source symbol, like class name, is located.
-       */
-      offset: number
-    }
+    /**
+     * Path to the file, relative to the web-types JSON.
+     */
+    file: string
+    /**
+     * Offset in the file under which the source symbol, like class name, is located.
+     */
+    offset: number
+  }
   | {
-      /**
-       * Name of module, which exports the symbol. May be omitted, in which case it's assumed to be the name of the library.
-       */
-      module?: string
-      /**
-       * Name of the exported symbol.
-       */
-      symbol: string
-    };
+    /**
+     * Name of module, which exports the symbol. May be omitted, in which case it's assumed to be the name of the library.
+     */
+    module?: string
+    /**
+     * Name of the exported symbol.
+     */
+    symbol: string
+  };
 /**
  * A RegEx pattern to match whole content. Syntax should work with at least ECMA, Java and Python implementations.
  */
 export type Pattern =
   | string
   | {
-      [k: string]: unknown
-      regex?: string
-      'case-sensitive'?: boolean
-    };
+    [k: string]: unknown
+    regex?: string
+    'case-sensitive'?: boolean
+  };
 
 export interface TypedEntity {
-      name: Name
-      description?: Description
-      'doc-url'?: DocUrl
-      type?: Type
-    }
+  name: Name
+  description?: Description
+  'doc-url'?: DocUrl
+  type?: Type
+}
 export interface HtmlTagEvent {
-    name: Name
-    description?: Description
-    'doc-url'?: DocUrl
-    arguments?: TypedEntity[]
-  }
+  name: Name
+  description?: Description
+  'doc-url'?: DocUrl
+  arguments?: TypedEntity[]
+}
 
 export interface HtmlTagSlot {
-    name: Name
-    pattern?: Pattern
-    description?: Description
-    'doc-url'?: DocUrl
-    /**
-     * Specify properties of the slot scope
-     */
-    'vue-properties'?: TypedEntity[]
-  }
+  name: Name
+  pattern?: Pattern
+  description?: Description
+  'doc-url'?: DocUrl
+  /**
+   * Specify properties of the slot scope
+   */
+  'vue-properties'?: TypedEntity[]
+}
 export interface HtmlTagVueModel {
-    prop?: string
-    event?: string
+  prop?: string
+  event?: string
 }
 /**
  * Provide information about directive argument
  */
 export interface HtmlAttributeVueArgument {
-    pattern?: Pattern
-    description?: Description
-    'doc-url'?: DocUrl
-    /**
-     * Whether directive requires an argument
-     */
-    required?: boolean
-  }
+  pattern?: Pattern
+  description?: Description
+  'doc-url'?: DocUrl
+  /**
+   * Whether directive requires an argument
+   */
+  required?: boolean
+}
 
 export interface HtmlAttributeVueModifier {
-    name: Name
-    pattern?: Pattern
-    description?: Description
-    'doc-url'?: DocUrl
+  name: Name
+  pattern?: Pattern
+  description?: Description
+  'doc-url'?: DocUrl
 }
 export interface HtmlTagAttribute {
-    name: Name
-    description?: Description
-    'doc-url'?: DocUrl
-    default?: HtmlAttributeDefault
-    required?: HtmlAttributeRequired
-    value?: HtmlAttributeValue
-    /**
-     * Deprecated. Use 'value' property instead. Specify only if type is 'boolean' for compatibility with WebStorm 2019.2.
-     */
-    type?: {
-      [k: string]: unknown
-    }
+  name: Name
+  description?: Description
+  'doc-url'?: DocUrl
+  default?: HtmlAttributeDefault
+  required?: HtmlAttributeRequired
+  value?: HtmlAttributeValue
+  /**
+   * Deprecated. Use 'value' property instead. Specify only if type is 'boolean' for compatibility with WebStorm 2019.2.
+   */
+  type?: {
+    [k: string]: unknown
   }
+}
 
 export interface HtmlTag {
   name: Name
@@ -171,44 +171,44 @@ export interface HtmlTag {
 }
 
 export interface HtmlAttribute {
-    name: Name
-    aliases?: Aliases
-    description?: Description
-    'doc-url'?: DocUrl
-    default?: HtmlAttributeDefault
-    required?: HtmlAttributeRequired
-    value?: HtmlAttributeValue
-    source?: Source
-    'vue-argument'?: HtmlAttributeVueArgument
-    'vue-modifiers'?: HtmlAttributeVueModifier[]
+  name: Name
+  aliases?: Aliases
+  description?: Description
+  'doc-url'?: DocUrl
+  default?: HtmlAttributeDefault
+  required?: HtmlAttributeRequired
+  value?: HtmlAttributeValue
+  source?: Source
+  'vue-argument'?: HtmlAttributeVueArgument
+  'vue-modifiers'?: HtmlAttributeVueModifier[]
 }
 export interface HtmlVueFilterArgument {
-    name: Name
-    description?: Description
-    'doc-url'?: DocUrl
-    type?: Type
-    optional?: boolean
-  }
+  name: Name
+  description?: Description
+  'doc-url'?: DocUrl
+  type?: Type
+  optional?: boolean
+}
 
 export interface HtmlVueFilter {
-    name: Name
-    aliases?: Aliases
-    description?: Description
-    'doc-url'?: DocUrl
-    source?: Source
-    /**
-     * Type of expression on the left hand-side of the pipe of operator
-     */
-    accepts?: string | ComplexType | (string | ComplexType)[]
-    /**
-     * Type of the result
-     */
-    returns?: string | ComplexType | (string | ComplexType)[]
-    /**
-     * List of arguments accepted by the filter. All arguments are non-optional by default.
-     */
-    arguments?: HtmlVueFilterArgument[]
-  }
+  name: Name
+  aliases?: Aliases
+  description?: Description
+  'doc-url'?: DocUrl
+  source?: Source
+  /**
+   * Type of expression on the left hand-side of the pipe of operator
+   */
+  accepts?: string | ComplexType | (string | ComplexType)[]
+  /**
+   * Type of the result
+   */
+  returns?: string | ComplexType | (string | ComplexType)[]
+  /**
+   * List of arguments accepted by the filter. All arguments are non-optional by default.
+   */
+  arguments?: HtmlVueFilterArgument[]
+}
 
 export interface Html {
   /**
@@ -225,7 +225,7 @@ export interface Html {
 }
 
 export interface JSONSchemaForWebTypes {
-    [k: string]: unknown
+  [k: string]: unknown
   /**
    * Framework, for which the components are provided by the library
    */

@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-setup-props-destructure -->
 <script lang='ts' setup>
 /**
  * @slot default
@@ -10,26 +11,26 @@ import { getClsPrefix, getElement } from '@pizza-ui/components/_utils';
 import { anchorInjectionKey } from './context';
 
 const props = withDefaults(defineProps<{
-    /**
-     * 是否展示轨道
-    */
-    showRail?: boolean
-    /**
-     * 是否展示背景
-     */
-    showBackground?: boolean
-    /**
-     * 尺寸
-     */
-    size?: string
-    /**
-     * 是否开启流畅滚动
-     */
-    smooth?: boolean
-    /**
-     * 滚动目标容器
-     */
-    offsetTarget?: string | HTMLElement
+  /**
+   * 是否展示轨道
+   */
+  showRail?: boolean
+  /**
+   * 是否展示背景
+   */
+  showBackground?: boolean
+  /**
+   * 尺寸
+   */
+  size?: string
+  /**
+   * 是否开启流畅滚动
+   */
+  smooth?: boolean
+  /**
+   * 滚动目标容器
+   */
+  offsetTarget?: string | HTMLElement
 }>(), {
   showRail: true,
   showBackground: true,
@@ -62,6 +63,7 @@ const scrollIntoView = (hash: string) => {
   if (!element) {
     return;
   }
+
   isScrolling.value = true;
   const behaviorType = props.smooth ? 'smooth' : 'auto';
   scrollIntoViewIfNeed(element, { block: 'start', behavior: behaviorType as SmoothBehaviorOptions['behavior'] }).then(() => {
@@ -79,6 +81,7 @@ const addLink = (hash: string, node: HTMLElement) => {
   if (!hash) {
     return;
   }
+
   links[hash] = node;
 };
 
@@ -124,6 +127,7 @@ const handleScroll = throttle(() => {
   if (isScrolling.value) {
     return;
   }
+
   const element = getFirstInViewportEle();
   if (element && element.id) {
     const hash = `#${element.id}`;
@@ -193,4 +197,3 @@ provide(
     </ul>
   </div>
 </template>
-

@@ -1,4 +1,4 @@
-import { basename, dirname, join, resolve } from 'path';
+import { basename, dirname, join, resolve } from 'node:path';
 import { getPackageInfo } from 'local-pkg';
 import fg from 'fast-glob';
 import { createWriteStream, emptyDir, readFile } from 'fs-extra';
@@ -8,7 +8,7 @@ import { getParentDirName, jsonOutput, pizzaUIPackage, templateRE } from './util
 import { Snippet } from './types/snippets';
 
 interface WebTypesConfig {
- /**
+  /**
   * 包版本，将写入 web-types
   */
   packageVersion: string
@@ -127,7 +127,7 @@ async function getComponentsSnippets() {
 
 async function writeSnippetsFile(componentsMap: {
   [name: string]: Snippet
-}, { destFilePath }: {destFilePath: string}) {
+}, { destFilePath }: { destFilePath: string }) {
   const writeStream = createWriteStream(destFilePath);
 
   writeStream.write(JSON.stringify(componentsMap, null, 2));

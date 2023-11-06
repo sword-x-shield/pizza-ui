@@ -1,6 +1,6 @@
 import { InjectionKey } from 'vue';
 
-export type ThemeMode = 'light' | 'dark'
+export type ThemeMode = 'light' | 'dark';
 interface ConfigProviderInjection {
   /**
    * 类名前缀

@@ -1,30 +1,30 @@
 {
   "compilerOptions": {
     "target": "ES2018",
-    "module": "esnext",
-    "strict": true,
     "jsx": "preserve",
     "jsxFactory": "h",
-    "importHelpers": true,
-    "moduleResolution": "bundler",
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "experimentalDecorators": true,
-    "allowJs": false,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "removeComments": false,
-    "sourceMap": false,
-    "declaration": true,
-    "noImplicitAny": true,
     "baseUrl": ".",
     "rootDir": ".",
-    "types": ["unplugin-vue-define-options/macros-global"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "paths": {
       "@pizza-ui/*": ["packages/pizza-ui/*"],
       "pizza-ui": ["packages/pizza-ui/components"]
     },
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+    "resolveJsonModule": true,
+    "types": ["unplugin-vue-define-options/macros-global"],
+    "allowJs": false,
+    "strict": true,
+    "noImplicitAny": true,
+    "declaration": true,
+    "importHelpers": true,
+    "removeComments": false,
+    "sourceMap": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "exclude": ["**/node_modules/**"]
 }

@@ -13,7 +13,7 @@ import {
 import componentSnippets from 'pizza-ui/json/pizza-ui-snippets.json';
 import uppercamelcase from 'uppercamelcase';
 import { kebabCase } from './utils';
-import { type ComponentDescriptor } from './componentsMap';
+import type { ComponentDescriptor } from './componentsMap';
 
 // The plugin will take effect when the file belongs to the following types
 const documentSelector = ['vue', 'typescript', 'javascript', 'javascriptreact', 'typescriptreact'];

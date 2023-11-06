@@ -26,4 +26,4 @@ export const liveProps = {
   },
 };
 
-export type LiveProps = ExtractPropTypes<typeof liveProps>
+export type LiveProps = ExtractPropTypes<typeof liveProps>;

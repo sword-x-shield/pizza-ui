@@ -120,7 +120,6 @@ export function useRun(props: Readonly<LiveProps>, options: UseRunOptions = {}) 
         } else {
           handleError(error);
         }
-
         return '';
       }
     }

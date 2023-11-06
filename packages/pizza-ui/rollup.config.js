@@ -1,4 +1,5 @@
-import path from 'path';
+import path from 'node:path';
+import process from 'node:process';
 import terser from '@rollup/plugin-terser';
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
@@ -8,6 +9,7 @@ import alias from '@rollup/plugin-alias';
 import vuePlugin from '@vitejs/plugin-vue';
 import _esbuild from 'rollup-plugin-esbuild';
 import defineOptions from 'unplugin-vue-define-options/rollup';
+
 const esbuild = _esbuild.default || _esbuild;
 
 const extensions = ['.mjs', '.js', '.json', '.ts', '.vue'];
@@ -54,7 +56,7 @@ const commonPlugins = ({
   commonjs(),
   replace({
     values: {
-      // eslint-disable-next-line quotes
+
       'process.env.NODE_ENV': `'development'`,
     },
     preventAssignment: true,

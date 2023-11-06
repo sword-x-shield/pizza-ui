@@ -1,3 +1,4 @@
+import process from 'node:process';
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
@@ -10,9 +11,9 @@ export default defineConfig({
   dts: process.env.DEV
     ? false
     : {
-      compilerOptions: {
-        composite: false,
-        customConditions: [],
+        compilerOptions: {
+          composite: false,
+          customConditions: [],
+        },
       },
-    },
 });

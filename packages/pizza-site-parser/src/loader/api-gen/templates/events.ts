@@ -32,15 +32,17 @@ const tmpl = (events: EventDescriptor[], lang: string) => {
             version = (item as Tag).content as string;
             continue;
           }
-          if (item.title === lang)
+          if (item.title === lang) {
             description = (item as Tag).content as string;
+          }
         }
       }
 
       let lineContent = `|${toKebabCase(name)}|${escapeCharacter(description || '')}|${escapeCharacter(propertiesTmpl(event.properties)) || '-'}|`;
 
-      if (hasVersion)
+      if (hasVersion) {
         lineContent += `${version}|`;
+      }
 
       return lineContent;
     })
@@ -53,7 +55,9 @@ const tmpl = (events: EventDescriptor[], lang: string) => {
 
 export default (events: EventDescriptor[], lang: string) => {
   const { content, hasVersion } = tmpl(events, lang);
-  if (!content) return '';
+  if (!content) {
+    return '';
+  }
 
   const header
     = lang === 'en'

@@ -1,16 +1,16 @@
 {
   "extends": "../../tsconfig.base.json",
-  "exclude": ["./**/*.spec.*", "./es", "./lib"],
   "compilerOptions": {
-    "moduleResolution": "bundler",
-    "customConditions": ["dev"],
-    "rootDir": ".",
-    "outDir": "./es",
-    "module": "ES6",
     "target": "ES6",
     "baseUrl": ".",
+    "rootDir": ".",
+    "customConditions": ["dev"],
+    "module": "ES6",
+    "moduleResolution": "bundler",
     "paths": {
       "@pizza-ui/*": ["./*"]
-    }
-  }
+    },
+    "outDir": "./es"
+  },
+  "exclude": ["./**/*.spec.*", "./es", "./lib"]
 }
