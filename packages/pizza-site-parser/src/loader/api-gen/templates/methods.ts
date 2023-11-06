@@ -19,15 +19,21 @@ const paramsTmpl = (params: MethodDescriptor['params']): string => {
 };
 
 const returnsTmpl = (returns: MethodDescriptor['returns']): string => {
-  if (!returns) return '';
+  if (!returns) {
+    return '';
+  }
 
   const { type, description } = returns;
 
-  if (!type) return '';
+  if (!type) {
+    return '';
+  }
 
   const getNames = (type: ParamType): string => {
     const { name, elements } = type;
-    if (!elements || !elements.length) return name || '';
+    if (!elements || !elements.length) {
+      return name || '';
+    }
 
     const names: string[] = [];
     elements.forEach((element) => {
@@ -51,8 +57,9 @@ const tmpl = (methods: MethodDescriptor[], lang: string) => {
     .map((method) => {
       const { name, tags } = method;
       let { description } = method;
-      if (tags?.[lang]?.length)
+      if (tags?.[lang]?.length) {
         description = (tags[lang][0] as ParamTag).description as string;
+      }
 
       const readableParams = paramsTmpl(method.params) || '-';
       const readableReturns = returnsTmpl(method.returns) || '-';
@@ -75,7 +82,9 @@ const tmpl = (methods: MethodDescriptor[], lang: string) => {
 
 export default (methods: MethodDescriptor[], lang: string) => {
   const { content, hasVersion } = tmpl(methods, lang);
-  if (!content) return '';
+  if (!content) {
+    return '';
+  }
 
   const header
     = lang === 'en'

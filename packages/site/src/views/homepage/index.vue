@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
 import siteFooter from '@/components/siteFooter.vue';
+
 const router = useRouter();
 function goToUse() {
   router.push('/pizza-ui/components');

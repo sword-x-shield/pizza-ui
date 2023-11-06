@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from 'vue-router';
+
 export const baseRoute: Array<RouteRecordRaw> = [
   {
     name: 'base',

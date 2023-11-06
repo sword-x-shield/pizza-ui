@@ -1,7 +1,8 @@
 // TODO: 后续还有命令的话，就用 cli 模式组织吧
-import path from 'path';
+import path from 'node:path';
+import process from 'node:process';
 
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'node:url';
 import uppercamelcase from 'uppercamelcase';
 import fse from 'fs-extra';
 import {
@@ -15,14 +16,14 @@ import chalk from 'chalk';
 import { template } from 'lodash-es';
 
 export interface ScaffoldOptions {
-    componentName: string
+  componentName: string
 }
 
 interface RenderTemplateFileOptions {
-    /** 模板文件 */
-    templateFile: string
-    /** 目标文件，如果无则取模板文件 */
-    targetFile?: string
+  /** 模板文件 */
+  templateFile: string
+  /** 目标文件，如果无则取模板文件 */
+  targetFile?: string
 }
 
 function toKebabCase(str: string) {
@@ -113,6 +114,7 @@ async function init() {
           if (!componentName) {
             return '[组件名]必填！！请输入组件名';
           }
+
           if (/^\d+$/.test(componentName)) {
             return '请使用非纯数字的字符串作为组件名';
           }

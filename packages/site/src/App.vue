@@ -2,7 +2,7 @@
 import { computed, nextTick, ref } from 'vue';
 import siteHeader from '@/components/siteHeader.vue';
 
-type ThemeMode = 'light' | 'dark'
+type ThemeMode = 'light' | 'dark';
 
 const mode = ref<ThemeMode>('light');
 const isDark = computed<boolean>({

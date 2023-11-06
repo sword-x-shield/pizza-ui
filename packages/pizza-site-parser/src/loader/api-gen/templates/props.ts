@@ -18,8 +18,9 @@ const tmpl = (
     .map((prop) => {
       const { name, type, values, defaultValue, required, tags } = prop;
       let { description } = prop;
-      if (tags?.[lang]?.length)
+      if (tags?.[lang]?.length) {
         description = (tags[lang][0] as ParamTag).description as string;
+      }
 
       // 支持通过名为 type 的 tag 重新定义字段的类型
       // tag 的 ts 类型有问题，所以忽略 ts 规则检查
@@ -34,8 +35,9 @@ const tmpl = (
         }`;
 
       const getDescription = () => {
-        if (!description && name === 'disabled')
+        if (!description && name === 'disabled') {
           return lang === 'zh' ? '是否禁用' : 'Whether to disable';
+        }
 
         return escapeCharacter(trimStr(description || ''));
       };
@@ -59,8 +61,9 @@ const tmpl = (
           return tags.defaultValue[0]?.description;
         }
 
-        if (defaultValue?.value === 'undefined')
+        if (defaultValue?.value === 'undefined') {
           return '-';
+        }
 
         const regForArrayDefaultValue = /^\(\)\s*=>\s*(\[[^]*\]*\])$/;
         if (
@@ -69,11 +72,13 @@ const tmpl = (
             || fixedType.includes('array'))
           && defaultValue?.func
           && regForArrayDefaultValue.test(defaultValue.value)
-        )
+        ) {
           return cleanStr(defaultValue.value.match(regForArrayDefaultValue)?.[1] || '');
+        }
 
-        if (fixedType === 'boolean')
+        if (fixedType === 'boolean') {
           return cleanStr(defaultValue?.value || 'false');
+        }
 
         return defaultValue?.value || '-';
       };
@@ -103,7 +108,9 @@ export default (
   lang = 'zh',
 ) => {
   const { content, hasVersion } = tmpl(props, options, lang);
-  if (!content) return '';
+  if (!content) {
+    return '';
+  }
 
   let header: [string, string] = ['', ''];
   if (lang === 'en') {

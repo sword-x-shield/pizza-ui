@@ -16,7 +16,6 @@ There are `primary` button, `default` button, `dashed` button, `text` button and
 
 <script setup lang="ts">
 function onClick() {
-  window.alert('我点击了------');
 }
 </script>
 

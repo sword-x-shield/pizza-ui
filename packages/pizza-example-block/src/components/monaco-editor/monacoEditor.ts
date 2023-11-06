@@ -24,4 +24,3 @@ export const wire = async (editor: any) => {
 initMonacoEditor();
 
 export { monaco };
-

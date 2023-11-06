@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-setup-props-destructure -->
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useConfig } from 'pizza-ui';

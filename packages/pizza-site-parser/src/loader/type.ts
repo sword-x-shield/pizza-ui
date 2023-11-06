@@ -14,4 +14,4 @@ export type ExampleListType = Array<{
   title: string
   tag: string
   fileName: string
-}>
+}>;

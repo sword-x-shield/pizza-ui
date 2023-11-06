@@ -1,5 +1,5 @@
 import { withInstall } from '@pizza-ui/components/_utils';
-import type{ App, Component, Plugin } from 'vue';
+import type { App, Component, Plugin } from 'vue';
 
 import Anchor from './src/anchor.vue';
 import AnchorLink from './src/anchor-link.vue';

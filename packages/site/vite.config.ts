@@ -1,10 +1,12 @@
-import path from 'path';
+import path from 'node:path';
+import process from 'node:process';
 import { defineConfig } from 'vite';
 import createVuePlugin from '@vitejs/plugin-vue';
 import DefineOptions from 'unplugin-vue-define-options';
 import Inspect from 'vite-plugin-inspect';
 import { warmup } from 'vite-plugin-warmup';
 import { VitePWA } from 'vite-plugin-pwa';
+
 // enable pizza-site-parser hmr
 // https://github.com/vitejs/vite/issues/5370#issuecomment-1339022262
 import { pizzaSitePlugin } from '../pizza-site-parser/dist/index';

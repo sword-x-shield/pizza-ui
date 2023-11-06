@@ -24,8 +24,9 @@ const tmpl = (slots: SlotDescriptor[], lang: string) => {
     .map((slot) => {
       const { name, bindings, tags } = slot;
       let { description } = slot;
-      if (tags?.[lang])
+      if (tags?.[lang]) {
         description = (tags[lang] as any).content as string;
+      }
 
       let lineContent = `|${toKebabCase(name)}|${escapeCharacter(description || '')}|${escapeCharacter(bindingsTmpl(bindings)) || '-'}|`;
 
@@ -46,7 +47,9 @@ const tmpl = (slots: SlotDescriptor[], lang: string) => {
 
 export default (slots: SlotDescriptor[], lang: string) => {
   const { content, hasVersion } = tmpl(slots, lang);
-  if (!content) return '';
+  if (!content) {
+    return '';
+  }
 
   const header
     = lang === 'en'

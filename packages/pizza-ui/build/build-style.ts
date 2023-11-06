@@ -1,4 +1,5 @@
-import path from 'path';
+import path from 'node:path';
+import process from 'node:process';
 import fg from 'fast-glob';
 import fs from 'fs-extra';
 import sass from 'sass';

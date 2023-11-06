@@ -1,4 +1,4 @@
-import { basename, dirname, resolve } from 'path';
+import { basename, dirname, resolve } from 'node:path';
 
 export const projRoot = resolve(__dirname, '..', '..', '..');
 export const pizzaUIRoot = resolve(projRoot, 'pizza-ui');

@@ -2,17 +2,16 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "target": "ES2018",
-    "module": "ESNext",
-    "outDir": "./dist",
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
     "baseUrl": ".",
+    "rootDir": ".",
+    "module": "ESNext",
     "moduleResolution": "bundler",
-    "skipLibCheck": true,
+    "resolveJsonModule": true,
     "types": ["node"],
-    "rootDir": "."
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "include": ["src/**/*"],
   "exclude": ["**/node_modules/**"]
 }
-

@@ -1,5 +1,5 @@
-import path from 'path';
-import process from 'process';
+import path from 'node:path';
+import process from 'node:process';
 import uppercamelcase from 'uppercamelcase';
 import fs from 'fs-extra';
 import fg from 'fast-glob';
@@ -34,7 +34,7 @@ async function genDeclare() {
   }
 }
 
-export {}
+export {};
 `;
   await fs.writeFile(path.resolve(root, 'global.d.ts'), code, 'utf-8');
 }

@@ -112,9 +112,9 @@ async function doCompileScript(
   descriptor: SFCDescriptor,
   id: string,
   options: {
-        ssr?: boolean
-        isTS?: boolean
-    } = {},
+    ssr?: boolean
+    isTS?: boolean
+  } = {},
 ): Promise<[string, BindingMetadata | undefined] | undefined> {
   const { ssr = false, isTS = true } = options;
 
@@ -168,9 +168,9 @@ async function doCompileTemplate(
   bindingMetadata: BindingMetadata | undefined,
   id: string,
   options: {
-        ssr?: boolean
-        isTS?: boolean
-    },
+    ssr?: boolean
+    isTS?: boolean
+  },
 ) {
   const { ssr = false, isTS = true } = options;
   const templateResult = compiler.compileTemplate({

@@ -52,6 +52,7 @@ export function createRenderer() {
       if (body) {
         body = `<tbody>${body}</tbody>`;
       }
+
       return (
         '<div class="md-table-wrapper"><table single-column class="md-table">\n'
         + `<thead>\n${
@@ -198,13 +199,13 @@ export async function parseComponentDocsFromTag(options: {
 }
 
 export async function replaceDocPlaceholder(options: {
-    dir: string
-    code: string
-    placeholderMatchers: RegExp
-    lang: 'zh' | 'en'
-    parser(filePath: string, options?: Record<string, any>): Promise<ComponentDoc | ComponentDoc[]> | ComponentDoc | ComponentDoc[]
+  dir: string
+  code: string
+  placeholderMatchers: RegExp
+  lang: 'zh' | 'en'
+  parser(filePath: string, options?: Record<string, any>): Promise<ComponentDoc | ComponentDoc[]> | ComponentDoc | ComponentDoc[]
 
-  }) {
+}) {
   const { dir, code, placeholderMatchers, parser, lang } = options;
 
   let result = code;

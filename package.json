@@ -18,10 +18,10 @@
     "gen-comp": "tsx scripts/cli/gen-component.ts",
     "build": "pnpm run -r build",
     "dev": "pnpm run --filter pizza-site-project dev",
-    "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx,.md,.json --fix --cache"
+    "lint": "eslint . --fix --cache"
   },
   "devDependencies": {
-    "@chuhoman/eslint-config": "^0.0.10",
+    "@chuhoman/eslint-config": "^1.0.2",
     "@clack/prompts": "^0.6.3",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
@@ -32,8 +32,7 @@
     "@vitejs/plugin-vue": "^3.2.0",
     "@vue/test-utils": "^2.2.1",
     "chalk": "^5.1.2",
-    "eslint": "^8.28.0",
-    "eslint-define-config": "^1.12.0",
+    "eslint": "^8.53.0",
     "fs-extra": "^11.0.1",
     "husky": "^8.0.1",
     "lerna": "~6.0.3",

@@ -2,6 +2,7 @@
 import { PropType, defineComponent, getCurrentInstance, provide, reactive, toRefs } from 'vue';
 import { defaultClsPrefix } from '@pizza-ui/components/_composables';
 import { ThemeMode, injectKey } from '../context';
+
 export default defineComponent({
   name: 'ConfigProvider',
   props: {

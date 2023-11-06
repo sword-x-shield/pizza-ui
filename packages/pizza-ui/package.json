@@ -50,10 +50,10 @@
   "unpkg": "dist/pizza-ui.min.js",
   "types": "es/index.d.ts",
   "files": [
-    "es",
-    "lib",
     "dist",
-    "json"
+    "es",
+    "json",
+    "lib"
   ],
   "scripts": {
     "dev": "pnpm run gen-declare && rollup -c --watch --bundleConfigAsCjs && pnpm run gen-types",

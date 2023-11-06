@@ -18,6 +18,7 @@ export function getApiTemplate(componentDoc: ComponentDoc | ComponentDoc[], lang
       if (!content) {
         return '';
       }
+
       let title = displayName;
 
       title = tags?.noBrackets
