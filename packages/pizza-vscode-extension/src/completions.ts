@@ -50,7 +50,7 @@ const componentsProvider: CompletionItemProvider = {
     const shouldRemovedCharacters = line.slice(line.lastIndexOf('<')).trimStart();
 
     const name = kebabCase(item.label as string).slice(2);
-    const descriptor: ComponentDescriptor = componentSnippets[name];
+    const descriptor: ComponentDescriptor = (componentSnippets as any)[name];
 
     const templateText = new SnippetString(descriptor.body
       ? `${descriptor.body.map((l, index) => {
