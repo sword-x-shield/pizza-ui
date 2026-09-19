@@ -23,8 +23,8 @@
   "devDependencies": {
     "@chuhoman/eslint-config": "^1.0.2",
     "@clack/prompts": "^0.6.3",
-    "@commitlint/cli": "^12.1.4",
-    "@commitlint/config-conventional": "^12.1.4",
+    "@commitlint/cli": "^21.0.0",
+    "@commitlint/config-conventional": "^21.0.0",
     "@types/fs-extra": "^11.0.0",
     "@types/lodash-es": "^4.17.7",
     "@types/node": "^18.15.3",
